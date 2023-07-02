@@ -1,7 +1,11 @@
-import { Typography } from "@mui/material";
+import Navbar from "./component/Navbar";
 
 function App() {
-  return <Typography variant="h1">Hello</Typography>;
+  return (
+    <>
+      <Navbar />
+    </>
+  );
 }
 
 export default App;
