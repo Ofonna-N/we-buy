@@ -20,22 +20,19 @@ import {
 } from "@mui/material";
 
 //hooks
-import useModeCtx from "../hooks/useModeCtx";
+import useModeCtx from "../../hooks/useModeCtx";
 
 // Icons
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
 import { useState } from "react";
+import NavLinkIconBtn from "./NavLinkIconBtn";
 
 const Navbar = () => {
   const darkModeCtx = useModeCtx();
   const theme = useTheme();
   const [toggled, setToggled] = useState(false);
-  const LinkBtn = styled(Button)(() => ({
-    color: "white",
-    textDecoration: "none",
-  }));
 
   const handleDrawerToggle = () => {
     setToggled((prev) => !prev);
@@ -107,12 +104,12 @@ const Navbar = () => {
               We Buy
             </Typography>
             <Box display={{ xs: "none", sm: "flex" }} gap={"1rem"}>
-              <LinkBtn href="#" startIcon={<ShoppingCartIcon />}>
+              <NavLinkIconBtn href="#" startIcon={<ShoppingCartIcon />}>
                 Cart
-              </LinkBtn>
-              <LinkBtn href="#" startIcon={<PersonIcon />}>
+              </NavLinkIconBtn>
+              <NavLinkIconBtn href="#" startIcon={<PersonIcon />}>
                 Sign In
-              </LinkBtn>
+              </NavLinkIconBtn>
             </Box>
             <FormControlLabel
               control={<Switch size="small" />}

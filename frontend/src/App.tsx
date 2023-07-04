@@ -1,4 +1,4 @@
-import Navbar from "./component/Navbar";
+import Navbar from "./component/navbar/Navbar";
 import ProductsListing from "./component/products/ProductsListing";
 
 function App() {
