@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 
-import Product from "../types/Product";
+import Product from "../../types/Product";
 
 type Props = {
   product: Product;
@@ -19,6 +19,12 @@ const ProductCard = ({ product }: Props) => {
       sx={{
         maxWidth: "17rem",
         marginInline: "auto",
+        "&": {
+          transition: "transform 0.15s",
+        },
+        "&:hover": {
+          transform: "scale(1.05)",
+        },
       }}
     >
       <CardActionArea href="#">
