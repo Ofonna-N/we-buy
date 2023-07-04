@@ -1,6 +1,6 @@
-import { PaletteMode } from "@mui/material";
+import { PaletteMode, useMediaQuery } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import React, { createContext, useMemo, useState } from "react";
+import React, { createContext, useEffect, useMemo, useState } from "react";
 
 const themeMode: { light: PaletteMode; dark: PaletteMode } = {
   light: "light",
@@ -14,8 +14,16 @@ type ModeCtx = {
 
 export const modeCtx = createContext({} as ModeCtx);
 
+const modeKey = "mode";
+
 const AppThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [mode, setMode] = useState<PaletteMode>("dark");
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const [mode, setMode] = useState<PaletteMode>(
+    (!(modeKey in localStorage) && prefersDarkMode) ||
+      localStorage.getItem(modeKey) === themeMode.dark
+      ? "dark"
+      : "light"
+  );
 
   const theme = useMemo(
     () =>
@@ -42,6 +50,10 @@ const AppThemeProvider = ({ children }: { children: React.ReactNode }) => {
       );
     },
   };
+
+  useEffect(() => {
+    localStorage.setItem(modeKey, mode);
+  }, [mode]);
 
   return (
     <modeCtx.Provider value={modeCtxValue}>
