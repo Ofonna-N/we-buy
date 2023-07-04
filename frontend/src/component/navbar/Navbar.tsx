@@ -1,13 +1,6 @@
-// mui components
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Drawer from "@mui/material/Drawer";
 import {
+  AppBar,
+  Box,
   Container,
   IconButton,
   List,
@@ -15,7 +8,11 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  styled,
+  FormControlLabel,
+  Switch,
+  Toolbar,
+  Typography,
+  Drawer,
   useTheme,
 } from "@mui/material";
 
@@ -27,6 +24,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
 import { useState } from "react";
+
+// local modules
 import NavLinkIconBtn from "./NavLinkIconBtn";
 
 const Navbar = () => {
