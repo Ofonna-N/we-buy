@@ -4,7 +4,11 @@ import {
   CardMedia,
   CardContent,
   Typography,
+  Box,
+  Rating,
+  Stack,
 } from "@mui/material";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
 
 import Product from "../../types/Product";
 
@@ -36,9 +40,34 @@ const ProductCard = ({ product }: Props) => {
         />
 
         <CardContent>
-          <Typography gutterBottom variant="subtitle2" component={"h3"}>
+          <Typography
+            variant="body1"
+            component={"h3"}
+            marginBottom={"10px"}
+            noWrap
+          >
             {product.name}
           </Typography>
+          <Stack
+            direction={"row"}
+            alignContent={"center"}
+            spacing={1}
+            mb={"5px"}
+          >
+            <Rating
+              name="card-rating"
+              value={product.rating}
+              readOnly
+              precision={0.5}
+              emptyIcon={
+                <StarBorderIcon sx={{ opacity: 0.55 }} fontSize="inherit" />
+              }
+              size="small"
+            />
+            <Typography fontSize={".85rem"}>
+              {product.numReviews} reviews
+            </Typography>
+          </Stack>
           <Typography
             component={"p"}
             sx={{
