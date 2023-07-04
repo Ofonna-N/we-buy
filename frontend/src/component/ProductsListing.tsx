@@ -1,11 +1,10 @@
-import { Card, CardActionArea, CardContent, CardHeader } from "@mui/material";
-import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
 import products from "../data/products";
+import ProductCard from "./ProductCard";
 
 const ProductsListing = () => {
   return (
@@ -30,39 +29,22 @@ const ProductsListing = () => {
         <Grid container spacing={2}>
           {products.map((product) => {
             return (
-              <Grid key={product._id} xs={12} sm={6} md={4} lg={3}>
-                <Card
-                  raised={true}
-                  sx={{ maxWidth: "17rem", marginInline: "auto" }}
-                >
-                  <CardActionArea href="#">
-                    <CardMedia
-                      src={product.image}
-                      component="img"
-                      alt="product Image"
-                      height={"240"}
-                    />
-
-                    <CardContent>
-                      <Typography
-                        gutterBottom
-                        variant="subtitle2"
-                        component={"h3"}
-                      >
-                        {product.name}
-                      </Typography>
-                      <Typography
-                        component={"p"}
-                        sx={{
-                          fontWeight: "200",
-                          fontSize: "1.5rem",
-                        }}
-                      >
-                        ${product.price}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Card>
+              <Grid
+                key={product._id}
+                xs={12}
+                sm={6}
+                md={4}
+                lg={3}
+                sx={{
+                  "& > .MuiCard-root": {
+                    transition: "transform 0.15s",
+                  },
+                  "& > .MuiCard-root:hover": {
+                    transform: "scale(1.05)",
+                  },
+                }}
+              >
+                <ProductCard product={product} />
               </Grid>
             );
           })}
