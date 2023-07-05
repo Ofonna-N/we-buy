@@ -4,7 +4,6 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  Box,
   Rating,
   Stack,
 } from "@mui/material";
