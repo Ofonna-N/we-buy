@@ -8,7 +8,7 @@ import {
   Stack,
 } from "@mui/material";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
-
+import { Link as RouterLink } from "react-router-dom";
 import Product from "../../types/Product";
 
 type Props = {
@@ -30,7 +30,7 @@ const ProductCard = ({ product }: Props) => {
         },
       }}
     >
-      <CardActionArea href="#">
+      <CardActionArea component={RouterLink} to={`/product/${product._id}`}>
         <CardMedia
           src={product.image}
           component="img"
