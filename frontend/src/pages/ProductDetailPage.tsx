@@ -16,6 +16,8 @@ const ProductDetailPage = () => {
 
   const product = products.find((product) => product._id === id);
 
+  if (!product) throw Error("Product unavalable");
+
   const productDetailCellProps = { xs: 12, md: 6 };
   return (
     <Container fixed>

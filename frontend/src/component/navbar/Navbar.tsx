@@ -14,8 +14,9 @@ import {
   Typography,
   Drawer,
   useTheme,
+  Link,
 } from "@mui/material";
-
+import { Link as RouterLink } from "react-router-dom";
 //hooks
 import useModeCtx from "../../hooks/useModeCtx";
 
@@ -75,7 +76,7 @@ const Navbar = () => {
     <>
       <AppBar position="relative">
         <Container fixed disableGutters>
-          <Toolbar component={"nav"}>
+          <Toolbar component={"nav"} sx={{ paddingBlock: "1rem" }}>
             <IconButton
               size="large"
               sx={{
@@ -90,18 +91,29 @@ const Navbar = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography
-              variant="h4"
-              component={"span"}
-              aria-label="logo"
-              role=""
+            <Link
+              component={RouterLink}
+              to={"/"}
+              variant="h3"
               sx={{
                 flexGrow: "1",
-                textAlign: { xs: "center", sm: "left" },
+                textAlign: {
+                  xs: "center",
+                  sm: "left",
+                  textDecoration: "none",
+                  color: "whitesmoke",
+                },
               }}
             >
               We Buy
-            </Typography>
+              {/* <Typography
+                variant="h4"
+                component={"span"}
+                aria-label="logo"
+                role=""
+              >
+              </Typography> */}
+            </Link>
             <Box display={{ xs: "none", sm: "flex" }} gap={"1rem"}>
               <NavLinkIconBtn href="#" startIcon={<ShoppingCartIcon />}>
                 Cart
