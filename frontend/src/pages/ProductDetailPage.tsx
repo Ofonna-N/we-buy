@@ -1,23 +1,26 @@
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import { useParams } from "react-router-dom";
-import products from "../data/products";
 import List from "@mui/material/List";
 import {
   Button,
+  CircularProgress,
   ListItem,
   ListItemText,
   Rating,
   Typography,
 } from "@mui/material";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
+import useProduct from "../hooks/api-hooks/useProduct";
 const ProductDetailPage = () => {
   const { id } = useParams();
 
-  const product = products.find((product) => product._id === id);
+  const { data: product, isLoading, error } = useProduct(Number(id));
 
-  if (!product) throw Error("Product unavalable");
+  if (isLoading)
+    return <CircularProgress sx={{ marginLeft: "2rem", marginTop: "3rem" }} />;
 
+  if (error.message) throw Error(error.message);
   const productDetailCellProps = { xs: 12, md: 6 };
   return (
     <Container fixed>
