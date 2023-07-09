@@ -5,7 +5,7 @@
   "scripts": {
     "client": "cd frontend && npm run dev",
     "server": "cd backend && npm run dev",
-    "app": "concurrently \"npm:client\" \"npm:server\""
+    "main": "concurrently \"npm:server\" \"npm:client\""
   },
   "author": "Ofonna Nweze",
   "license": "ISC",
