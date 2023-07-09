@@ -3,8 +3,13 @@
   "version": "1.0.0",
   "description": "Full stack e-commerce app built with React and Nodejs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "client": "cd frontend && npm run dev",
+    "server": "cd backend && npm run dev",
+    "app": "concurrently \"npm:client\" \"npm:server\""
   },
   "author": "Ofonna Nweze",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
 }
