@@ -33,6 +33,7 @@ const Navbar = () => {
   const darkModeCtx = useModeCtx();
   const theme = useTheme();
   const [toggled, setToggled] = useState(false);
+  const navBarHeight = "88.01px";
 
   const handleDrawerToggle = () => {
     setToggled((prev) => !prev);
@@ -153,8 +154,8 @@ const Navbar = () => {
               darkModeCtx.mode === "light"
                 ? theme.palette.primary.light
                 : theme.palette.grey[900],
-            height: "calc(100% - 56px)",
-            top: "56px",
+            height: `calc(100% - ${navBarHeight})`,
+            top: navBarHeight,
             width: "200px",
           },
         }}
@@ -164,8 +165,8 @@ const Navbar = () => {
               position: "relative",
               height: "calc(100%)",
             },
-            height: "calc(100% - 56px)",
-            top: "56px",
+            height: `calc(100% - ${navBarHeight})`,
+            top: navBarHeight,
           },
         }}
         onClose={handleDrawerToggle}

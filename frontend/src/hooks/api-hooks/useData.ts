@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import APIClient from "../../services/api-client";
 
 import { AxiosError } from "axios";
 
 const useData = <T>(endpoint: string) => {
-  const apiClient = new APIClient<T>(endpoint);
+  const apiClient = useMemo(() => new APIClient<T>(endpoint), [endpoint]);
 
   const [data, setData] = useState<T>({} as T);
   const [error, setError] = useState<AxiosError>({} as AxiosError);
@@ -16,7 +16,6 @@ const useData = <T>(endpoint: string) => {
       try {
         const dataRes = await apiClient.get({ signal: controller.signal });
         setData(dataRes.data.data);
-        setIsLoading(false);
         console.log(dataRes.data.data, "DATA");
       } catch (err) {
         const caughtError = err as AxiosError;
@@ -24,6 +23,7 @@ const useData = <T>(endpoint: string) => {
         console.log(err);
         setError(caughtError);
       }
+      setIsLoading(false);
     };
 
     getData();
@@ -32,7 +32,7 @@ const useData = <T>(endpoint: string) => {
       // console.log("aborting...");
       controller.abort();
     };
-  }, []);
+  }, [apiClient]);
 
   return { data, error, isLoading };
 };

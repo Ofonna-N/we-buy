@@ -21,6 +21,7 @@ const ProductDetailPage = () => {
     return <CircularProgress sx={{ marginLeft: "2rem", marginTop: "3rem" }} />;
 
   if (error.message) throw Error(error.message);
+
   const productDetailCellProps = { xs: 12, md: 6 };
   return (
     <Container fixed>

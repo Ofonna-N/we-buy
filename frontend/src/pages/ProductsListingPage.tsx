@@ -1,7 +1,15 @@
-import { Container, Typography } from "@mui/material";
+import { CircularProgress, Container, Typography } from "@mui/material";
 import ProductsListing from "../component/products/ProductsListing";
+import useProducts from "../hooks/api-hooks/useProducts";
 
 const ProductsListingPage = () => {
+  const { data: products, isLoading, error } = useProducts();
+
+  if (isLoading)
+    return <CircularProgress sx={{ marginLeft: "2rem", marginTop: "3rem" }} />;
+
+  if (error.message) throw new Error(error.message);
+
   return (
     <Container
       fixed
@@ -18,9 +26,9 @@ const ProductsListingPage = () => {
         }}
       >
         {" "}
-        Products Listing
+        All Products
       </Typography>
-      <ProductsListing />
+      <ProductsListing products={products} />
     </Container>
   );
 };
