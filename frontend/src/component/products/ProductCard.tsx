@@ -36,6 +36,7 @@ const ProductCard = ({ product }: Props) => {
           component="img"
           alt="product Image"
           height={"240"}
+          loading="lazy"
         />
 
         <CardContent>

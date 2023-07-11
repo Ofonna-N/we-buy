@@ -28,7 +28,12 @@ const ProductDetailPage = () => {
       <Grid container spacing={1} mt={"4rem"}>
         <Grid {...productDetailCellProps}>
           {/* <Paper></Paper> */}
-          <img src={product?.image} alt={product?.name} width={"100%"} />
+          <img
+            src={product?.image}
+            alt={product?.name}
+            width={"100%"}
+            loading="lazy"
+          />
         </Grid>
         <Grid {...productDetailCellProps}>
           <List>
