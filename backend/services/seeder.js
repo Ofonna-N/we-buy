@@ -8,18 +8,9 @@ const { Order } = require("../models/orderModel");
 const mockUsers = require("../data/mockUsers");
 const mockProducts = require("../data/mockProducts");
 
-const connect = async () => {
-  try {
-    await connectDB();
-  } catch (err) {
-    console.log(err);
-    process.exit(1);
-  }
-};
-
 const populateDb = async () => {
   try {
-    await connect();
+    await connectDB();
     console.log("populating...");
     await Product.deleteMany();
     await User.deleteMany();
@@ -43,7 +34,7 @@ const populateDb = async () => {
 
 const depopulateDb = async () => {
   try {
-    await connect();
+    await connectDB();
     console.log("depopulating...");
     await Product.deleteMany();
     await User.deleteMany();
