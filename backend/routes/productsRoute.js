@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const products = require("../data/products");
+const products = require("../data/mockProducts");
 
 router.get("/products", (req, res) => {
   return res.json({ data: products });

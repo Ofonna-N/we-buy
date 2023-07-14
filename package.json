@@ -5,14 +5,13 @@
   "scripts": {
     "client": "cd frontend && npm run dev",
     "server": "cd backend && npm run dev",
-    "main": "concurrently \"npm:server\" \"npm:client\""
+    "main": "concurrently \"npm:server\" \"npm:client\"",
+    "db:populate": "cd backend && node services/seeder.js",
+    "db:depopulate": "cd backend && node services/seeder.js -d"
   },
   "author": "Ofonna Nweze",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^8.2.0"
-  },
-  "dependencies": {
-    "mongoose": "^7.3.2"
   }
 }

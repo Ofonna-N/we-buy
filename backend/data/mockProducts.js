@@ -1,6 +1,6 @@
-const products = [
+const mockProducts = [
   {
-    _id: "1",
+    // _id: "1",
     name: "Airpods Wireless Bluetooth Headphones",
     image:
       "https://res.cloudinary.com/dflsjofsa/image/upload/v1688962526/webuy/airpods_br01gl.jpg",
@@ -14,7 +14,7 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: "2",
+    // _id: "2",
     name: "iPhone 11 Pro 256GB Memory",
     image:
       "https://res.cloudinary.com/dflsjofsa/image/upload/v1688963085/phone_kjkcu2.jpg",
@@ -28,7 +28,7 @@ const products = [
     numReviews: 8,
   },
   {
-    _id: "3",
+    // _id: "3",
     name: "Cannon EOS 80D DSLR Camera",
     image:
       "https://res.cloudinary.com/dflsjofsa/image/upload/v1688963126/camera_s0xjqs.jpg",
@@ -42,7 +42,7 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: "4",
+    // _id: "4",
     name: "Sony Playstation 4 Pro White Version",
     image:
       "https://res.cloudinary.com/dflsjofsa/image/upload/v1688963126/playstation_mxvwds.jpg",
@@ -56,7 +56,7 @@ const products = [
     numReviews: 12,
   },
   {
-    _id: "5",
+    // _id: "5",
     name: "Logitech G-Series Gaming Mouse",
     image:
       "https://res.cloudinary.com/dflsjofsa/image/upload/v1688963126/mouse_tvtpau.jpg",
@@ -70,7 +70,7 @@ const products = [
     numReviews: 10,
   },
   {
-    _id: "6",
+    // _id: "6",
     name: "Amazon Echo Dot 3rd Generation",
     image:
       "https://res.cloudinary.com/dflsjofsa/image/upload/v1688963125/alexa_r4eian.jpg",
@@ -85,4 +85,4 @@ const products = [
   },
 ];
 
-module.exports = products;
+module.exports = mockProducts;
