@@ -4,10 +4,7 @@ const mongoose = require("mongoose");
 async function connectDB() {
   try {
     await mongoose.connect(`${process.env.DB_URI}`);
-    console.log(
-      "connected to webuydb database: ",
-      `${process.env.DB_URI}/${database}`
-    );
+    console.log("connected to webuydb database: ");
   } catch (err) {
     console.log(err.message);
   }
