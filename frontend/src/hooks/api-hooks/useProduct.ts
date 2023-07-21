@@ -1,7 +1,7 @@
 import Product from "../../types/Product";
 import useData from "./useData";
 
-const useProduct = (id: number) => {
+const useProduct = (id: string) => {
   return useData<Product>("products/" + id);
 };
 

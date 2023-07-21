@@ -15,12 +15,12 @@ import useProduct from "../hooks/api-hooks/useProduct";
 const ProductDetailPage = () => {
   const { id } = useParams();
 
-  const { data: product, isLoading, error } = useProduct(Number(id));
+  const { data: product, isLoading, error } = useProduct(id || "");
 
   if (isLoading)
     return <CircularProgress sx={{ marginLeft: "2rem", marginTop: "3rem" }} />;
 
-  if (error.message) throw Error(error.message);
+  if (error) throw Error(error.message);
 
   const productDetailCellProps = { xs: 12, md: 6 };
   return (

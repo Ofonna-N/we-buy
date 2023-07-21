@@ -30,7 +30,7 @@ const ProductCard = ({ product }: Props) => {
         },
       }}
     >
-      <CardActionArea component={RouterLink} to={`/product/${product._id}`}>
+      <CardActionArea component={RouterLink} to={`/products/${product._id}`}>
         <CardMedia
           src={product.image}
           component="img"
