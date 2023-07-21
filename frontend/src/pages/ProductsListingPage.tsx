@@ -7,8 +7,9 @@ const ProductsListingPage = () => {
 
   if (isLoading)
     return <CircularProgress sx={{ marginLeft: "2rem", marginTop: "3rem" }} />;
+  // console.log("ERROR: ", error?.message);
 
-  if (error.message) throw new Error(error.message);
+  if (error) throw new Error(error.message);
 
   return (
     <Container
@@ -28,7 +29,7 @@ const ProductsListingPage = () => {
         {" "}
         All Products
       </Typography>
-      <ProductsListing products={products} />
+      <ProductsListing products={products || []} />
     </Container>
   );
 };
