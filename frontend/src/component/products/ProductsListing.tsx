@@ -5,7 +5,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import Product from "../../types/Product";
 
 type Props = {
-  products: Product[];
+  products: Product[] | undefined;
 };
 
 const ProductsListing = ({ products }: Props) => {
