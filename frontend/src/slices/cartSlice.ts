@@ -5,7 +5,14 @@ const persistedCartItem = localStorage.getItem("cart");
 
 const initialState = persistedCartItem
   ? (JSON.parse(persistedCartItem) as Cart)
-  : ({} as Cart);
+  : ({
+      cartItems: [] as CartItem[],
+      itemsPrice: 0,
+      qty: 0,
+      shippingPrice: 0,
+      taxPrice: 0,
+      totalPrice: 0,
+    } as Cart);
 
 type CartItemPayload = {
   cartItem: CartItem;
@@ -44,7 +51,7 @@ const cartSlice = createSlice({
       state.shippingPrice = toPriceDecimal(state.itemsPrice > 100 ? 0 : 9.99);
 
       //   tax price at 15%
-      state.taxPrice = toPriceDecimal(state.itemsPrice * 1.5);
+      state.taxPrice = toPriceDecimal(state.itemsPrice * 0.05);
 
       //   total price
       state.totalPrice = toPriceDecimal(
