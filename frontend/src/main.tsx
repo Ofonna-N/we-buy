@@ -7,15 +7,18 @@ import { RouterProvider } from "react-router-dom";
 import routes from "./routes.tsx";
 import { ReactQueryDevtools } from "react-query/devtools";
 import AppQueryClientProvider from "./providers/AppQueryClientProvider.tsx";
+import AppStoreProvider from "./providers/AppStoreProvider.tsx";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <AppQueryClientProvider>
       <ReactQueryDevtools />
-      <AppThemeProvider>
-        <CssBaseline />
-        <RouterProvider router={routes} />
-      </AppThemeProvider>
+      <AppStoreProvider>
+        <AppThemeProvider>
+          <CssBaseline />
+          <RouterProvider router={routes} />
+        </AppThemeProvider>
+      </AppStoreProvider>
     </AppQueryClientProvider>
   </React.StrictMode>
 );
