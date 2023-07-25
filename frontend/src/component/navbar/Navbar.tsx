@@ -46,7 +46,14 @@ const Navbar = () => {
   const sideMenuNavItems = [
     <ListItemButton>
       <ListItemIcon>
-        <ShoppingCartIcon />
+        <Badge
+          invisible={cartQty <= 0}
+          badgeContent={cartQty}
+          color={darkModeCtx.mode === "dark" ? "primary" : "secondary"}
+          max={99}
+        >
+          <ShoppingCartIcon />
+        </Badge>
       </ListItemIcon>
       <ListItemText primary="Cart" />
     </ListItemButton>,
