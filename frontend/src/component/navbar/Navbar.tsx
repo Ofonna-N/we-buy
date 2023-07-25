@@ -15,6 +15,7 @@ import {
   Drawer,
   useTheme,
   Link,
+  Badge,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 //hooks
@@ -28,12 +29,15 @@ import { useState } from "react";
 
 // local modules
 import NavLinkIconBtn from "./NavLinkIconBtn";
+import { useAppSelector } from "../../hooks/redux-hooks/appStoreHooks";
 
 const Navbar = () => {
   const darkModeCtx = useModeCtx();
   const theme = useTheme();
   const [toggled, setToggled] = useState(false);
   const navBarHeight = "88.01px";
+
+  const cartQty = useAppSelector((state) => state.cartSlice.qty);
 
   const handleDrawerToggle = () => {
     setToggled((prev) => !prev);
@@ -73,6 +77,7 @@ const Navbar = () => {
     </ListItemButton>,
   ];
 
+  // console.log("nav bar render...");
   return (
     <>
       <AppBar position="relative">
@@ -116,7 +121,21 @@ const Navbar = () => {
               </Typography> */}
             </Link>
             <Box display={{ xs: "none", sm: "flex" }} gap={"1rem"}>
-              <NavLinkIconBtn href="#" startIcon={<ShoppingCartIcon />}>
+              <NavLinkIconBtn
+                href="#"
+                startIcon={
+                  <Badge
+                    invisible={cartQty <= 0}
+                    badgeContent={cartQty}
+                    color={
+                      darkModeCtx.mode === "dark" ? "primary" : "secondary"
+                    }
+                    max={99}
+                  >
+                    <ShoppingCartIcon />
+                  </Badge>
+                }
+              >
                 Cart
               </NavLinkIconBtn>
               <NavLinkIconBtn href="#" startIcon={<PersonIcon />}>
