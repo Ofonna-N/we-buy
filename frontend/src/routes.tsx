@@ -3,6 +3,7 @@ import Layout from "./pages/Layout";
 import ProductsListingPage from "./pages/ProductsListingPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import ErrorPage from "./pages/ErrorPage";
+import PlaygroundPage from "./pages/PlaygroundPage";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: "/products/:id",
         element: <ProductDetailPage />,
+      },
+      {
+        path: "/Playground",
+        element: <PlaygroundPage />,
       },
     ],
   },
