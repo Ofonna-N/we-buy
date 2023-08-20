@@ -19,9 +19,9 @@ const ProductsListingPage = () => {
       }}
     >
       <Typography
-        variant="h4"
         component={"h2"}
-        mb={"2rem"}
+        fontSize={"1.8rem"}
+        mb={"0.5rem"}
         sx={{
           textAlign: { xs: "center", sm: "left" },
         }}

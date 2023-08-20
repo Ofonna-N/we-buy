@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import cartSlice from "./slices/cartSlice";
 import cartListener from "./middleware/store/cartListner";
+import appMenuSlice from "./slices/appMenuSlice";
 
 export const store = configureStore({
   reducer: {
     cartSlice,
+    appMenuSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().prepend(cartListener.middleware),
