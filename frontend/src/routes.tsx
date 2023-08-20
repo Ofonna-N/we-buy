@@ -4,6 +4,7 @@ import ProductsListingPage from "./pages/ProductsListingPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import ErrorPage from "./pages/ErrorPage";
 import PlaygroundPage from "./pages/PlaygroundPage";
+import CartPage from "./pages/CartPage";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
         element: <ProductDetailPage />,
       },
       {
-        path: "/Playground",
+        path: "/cart",
+        element: <CartPage />,
+      },
+      {
+        path: "/playground",
         element: <PlaygroundPage />,
       },
     ],

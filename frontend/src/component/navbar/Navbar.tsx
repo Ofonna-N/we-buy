@@ -78,7 +78,8 @@ const Navbar = () => {
           </Link>
           <Box display={{ xs: "none", sm: "flex" }} gap={"1rem"}>
             <NavLinkIconBtn
-              href="#"
+              // href="/cart"
+              to="/cart"
               startIcon={
                 <Badge
                   invisible={cartQty <= 0}
@@ -92,7 +93,7 @@ const Navbar = () => {
             >
               Cart
             </NavLinkIconBtn>
-            <NavLinkIconBtn href="#" startIcon={<PersonIcon />}>
+            <NavLinkIconBtn startIcon={<PersonIcon />} to="#">
               Sign In
             </NavLinkIconBtn>
           </Box>

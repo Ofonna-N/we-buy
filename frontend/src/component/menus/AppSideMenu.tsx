@@ -20,14 +20,19 @@ import useModeCtx from "../../hooks/useModeCtx";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
 import { appMenuAcitons } from "../../slices/appMenuSlice";
+import { Link as RouterLink } from "react-router-dom";
 //#endregion
 
 const AppSideMenu = () => {
   const darkModeCtx = useModeCtx();
   const cartQty = useAppSelector((state) => state.cartSlice.qty);
   const theme = useTheme();
+  const isToggled = useAppSelector((state) => state.appMenuSlice.isToggled);
+  const dispach = useAppDispatch();
+  const navBarHeight = "88.01px";
+
   const sideMenuNavItems = [
-    <ListItemButton>
+    <ListItemButton component={RouterLink} to="/cart">
       <ListItemIcon>
         <Badge
           invisible={cartQty <= 0}
@@ -66,9 +71,6 @@ const AppSideMenu = () => {
       </ListItemText>
     </ListItemButton>,
   ];
-  const isToggled = useAppSelector((state) => state.appMenuSlice.isToggled);
-  const dispach = useAppDispatch();
-  const navBarHeight = "88.01px";
 
   return (
     <Drawer
