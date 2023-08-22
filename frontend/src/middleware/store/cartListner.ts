@@ -7,6 +7,18 @@ const cartListener = createListenerMiddleware();
 cartListener.startListening({
   actionCreator: cartActions.addToCart,
   effect: async (_, listenerApi) => {
+    listenerApi.dispatch(cartActions.updateCartData());
+  },
+});
+cartListener.startListening({
+  actionCreator: cartActions.removeFromCart,
+  effect: async (_, listenerApi) => {
+    listenerApi.dispatch(cartActions.updateCartData());
+  },
+});
+cartListener.startListening({
+  actionCreator: cartActions.updateCartData,
+  effect: async (_, listenerApi) => {
     const state = listenerApi.getState() as RootState;
 
     // console.log("Cart: ", state.cartSlice);

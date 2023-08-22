@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import Cart, { CartItem } from "../types/Cart";
 
 const persistedCartItem = localStorage.getItem("cart");
@@ -14,19 +14,14 @@ const initialState = persistedCartItem
       totalPrice: 0,
     } as Cart);
 
-type CartItemPayload = {
-  cartItem: CartItem;
-};
-
 const toPriceDecimal = (num: number) => Number(num.toFixed(2));
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart(state, action: { payload: CartItemPayload }) {
+    addToCart(state, action: PayloadAction<{ cartItem: CartItem }>) {
       const cartItem = action.payload.cartItem; //Item passed in by the action dispacher
-
       const itemExist = state.cartItems.find(
         (ci) => ci.product._id === cartItem.product._id
       ); // check if item exists
@@ -38,7 +33,13 @@ const cartSlice = createSlice({
       } else {
         state.cartItems = [...state.cartItems, cartItem]; // if item doesn't exist, add item to array
       }
-
+    },
+    removeFromCart(state, action: PayloadAction<{ id: string }>) {
+      state.cartItems = state.cartItems.filter(
+        (cartItem) => cartItem.product._id !== action.payload.id
+      );
+    },
+    updateCartData(state) {
       //items price calclulation
       state.itemsPrice = toPriceDecimal(
         state.cartItems.reduce(

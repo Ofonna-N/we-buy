@@ -4,7 +4,7 @@ import ProductsListingPage from "./pages/ProductsListingPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import ErrorPage from "./pages/ErrorPage";
 import PlaygroundPage from "./pages/PlaygroundPage";
-import CartPage from "./pages/CartPage";
+import CartPage from "./pages/cartPage/CartPage";
 
 const router = createBrowserRouter([
   {
