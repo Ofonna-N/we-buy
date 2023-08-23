@@ -1,20 +1,5 @@
 //#region Imports
-import {
-  Alert,
-  Avatar,
-  Box,
-  Button,
-  Container,
-  FormControl,
-  IconButton,
-  Input,
-  Link,
-  List,
-  ListItem,
-  Paper,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Alert, Container, Link, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import {
   useAppDispatch,
@@ -22,7 +7,6 @@ import {
 } from "../../hooks/redux-hooks/appStoreHooks";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { cartActions } from "../../slices/cartSlice";
-import DeleteIcon from "@mui/icons-material/Delete";
 import CartSummarySection from "./components/CartSummarySection";
 import { CartItem } from "../../types/Cart";
 import CartItemsSection from "./components/CartItemsSection";
