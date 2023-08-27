@@ -3,7 +3,7 @@ const mockUsers = [
   {
     name: "John Poe",
     email: "johnpoe@yahoo.com",
-    password: bycript.hashSync("ela1234", 10),
+    password: bycript.hashSync("john1234", 10),
     isAdmin: true,
   },
   {
