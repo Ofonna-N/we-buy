@@ -4,14 +4,14 @@ const express = require("express");
 const app = express();
 const startServer = require("./startups/serverStartup");
 const connectDB = require("./startups/databaseStartup");
-const appMiddleware = require("./middleware/appMiddleware");
+const appDefaultMiddleware = require("./middleware/appDefaultMiddleware");
 
 const homeRoute = require("./routes/homeRoute");
 const productsRoute = require("./routes/productsRoute");
 const usersRoute = require("./routes/usersRoute");
 const errorRoute = require("./middleware/errorMiddleware");
 
-app.use(appMiddleware);
+app.use(appDefaultMiddleware);
 app.use("/", homeRoute);
 app.use("/api/products", productsRoute);
 app.use("/api/users", usersRoute);
