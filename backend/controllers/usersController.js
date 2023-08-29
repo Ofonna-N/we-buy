@@ -2,6 +2,13 @@ const usersModel = require("../models/usersModel");
 const jwt = require("jsonwebtoken");
 const ms = require("ms");
 const _ = require("lodash");
+
+const jwtCookieOptions = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === "production" ? true : false,
+  signed: true,
+};
+
 // register, login, getAll, logout, authenticate, getProfile, updateProfile, delete, getById
 
 // @desc register user
@@ -30,11 +37,9 @@ const loginUser = async (req, res) => {
     });
 
     res.cookie("jwt", token, {
+      ...jwtCookieOptions,
       expires: ms("30d"),
-      httpOnly: true,
       maxAge: ms("30d"),
-      secure: process.env.NODE_ENV === "production" ? true : false,
-      signed: true,
     });
 
     return res.json({
@@ -51,7 +56,8 @@ const loginUser = async (req, res) => {
 // @route POST /api/users/logout
 // @access private
 const logoutUser = async (req, res) => {
-  return res.send("logging out user....");
+  res.clearCookie("jwt", jwtCookieOptions);
+  return res.send("logged out user....");
 };
 
 // @desc update user profile
