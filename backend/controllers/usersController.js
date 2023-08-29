@@ -1,3 +1,7 @@
+const usersModel = require("../models/usersModel");
+const jwt = require("jsonwebtoken");
+const ms = require("ms");
+const _ = require("lodash");
 // register, login, getAll, logout, authenticate, getProfile, updateProfile, delete, getById
 
 // @desc register user
@@ -11,7 +15,36 @@ const registerUser = async (req, res) => {
 // @route POST /api/users/login
 // @access public
 const loginUser = async (req, res) => {
-  return res.send("loggin in user....");
+  const login = req.body;
+
+  const loginDetails = await usersModel.UserSchema.validate(login);
+
+  const user = await usersModel.User.findOne({ email: login.email });
+
+  const userValid = user && (await user.matchPassword(loginDetails.password));
+
+  if (userValid) {
+    console.log("User: ", user);
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+      expiresIn: ms("30d"),
+    });
+
+    res.cookie("jwt", token, {
+      expires: ms("30d"),
+      httpOnly: true,
+      maxAge: ms("30d"),
+      secure: process.env.NODE_ENV === "production" ? true : false,
+      signed: true,
+    });
+
+    return res.json({
+      user: _.omit(user.toObject(), ["password"]),
+    });
+  } else {
+    throw new Error("Invalid email or password");
+  }
+
+  // return res.send("loggin in user....");
 };
 
 // @desc loguot user

@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
-const bycript = require("bcrypt");
+const bcrypt = require("bcrypt");
+const yup = require("yup");
 const { type, required } = require("../services/defaults");
 
-const usersSchema = new mongoose.Schema(
+const usersMongooseSchema = new mongoose.Schema(
   {
     name: {
       type,
@@ -22,14 +23,21 @@ const usersSchema = new mongoose.Schema(
       default: false,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+    methods: {
+      async matchPassword(password) {
+        return await bcrypt.compare(password, this.password);
+      },
+    },
+  }
 );
 
-usersSchema.pre("save", async function (next) {
+usersMongooseSchema.pre("save", async function (next) {
   try {
     console.log(this, "user DOC!!!");
     if (!this.isModified("password")) return next();
-    const password = await bycript.hash(this.password, 10);
+    const password = await bcrypt.hash(this.password, 10);
     this.password = password;
 
     return next();
@@ -41,6 +49,13 @@ usersSchema.pre("save", async function (next) {
   // this.password =
 });
 
-const UserModel = mongoose.model("User", usersSchema);
+const UserModel = mongoose.model("User", usersMongooseSchema);
+
+const usersYupSchema = yup.object({
+  email: yup.string().email().required(),
+  password: yup.string().required(),
+});
+
+module.exports.UserSchema = usersYupSchema;
 
 module.exports.User = UserModel;
