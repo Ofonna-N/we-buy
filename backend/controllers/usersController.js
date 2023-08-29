@@ -1,6 +1,4 @@
 const usersModel = require("../models/usersModel");
-const jwt = require("jsonwebtoken");
-const ms = require("ms");
 const _ = require("lodash");
 const jwtCookieTokenGenerator = require("../services/jwtCookieTokenGenerator");
 
@@ -10,6 +8,24 @@ const jwtCookieTokenGenerator = require("../services/jwtCookieTokenGenerator");
 // @route POST /api/users/register
 // @access public
 const registerUser = async (req, res) => {
+  const credentials = req.body;
+
+  const registerationDetails = await usersModel.validateRegistrationSchema(
+    credentials
+  );
+
+  const userExist = await usersModel.User.findOne({
+    email: registerationDetails.email,
+  });
+
+  if (!userExist) {
+    const newUser = await usersModel.User.create(registerationDetails);
+    jwtCookieTokenGenerator.generateJwtCoookieToken(res, newUser);
+    return res.json(_.omit(newUser.toObject(), ["password"]));
+  } else {
+    throw new Error("Account already exists");
+  }
+
   return res.send("Registering user....");
 };
 
@@ -19,7 +35,7 @@ const registerUser = async (req, res) => {
 const loginUser = async (req, res) => {
   const login = req.body;
 
-  const loginDetails = await usersModel.UserSchema.validate(login);
+  const loginDetails = await usersModel.validateLoginSchema(login);
 
   const user = await usersModel.User.findOne({ email: login.email });
 

@@ -52,11 +52,27 @@ usersMongooseSchema.pre("save", async function (next) {
 
 const UserModel = mongoose.model("User", usersMongooseSchema);
 
-const usersYupSchema = yup.object({
+const usersYupLoginSchema = yup.object({
   email: yup.string().email().required(),
   password: yup.string().required(),
 });
 
-module.exports.UserSchema = usersYupSchema;
+const usersYupRegisterSchema = yup.object({
+  name: yup.string().required(),
+  email: yup.string().email().required(),
+  password: yup.string().required(),
+});
+
+async function validateLoginSchema(credentials) {
+  return await usersYupLoginSchema.validate(credentials);
+}
+
+async function validateRegistrationSchema(credentials) {
+  return await usersYupRegisterSchema.validate(credentials);
+}
+
+module.exports.validateLoginSchema = validateLoginSchema;
+
+module.exports.validateRegistrationSchema = validateRegistrationSchema;
 
 module.exports.User = UserModel;
