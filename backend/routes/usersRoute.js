@@ -1,7 +1,7 @@
 const express = require("express");
-
 const usersController = require("../controllers/usersController");
-
+const auth = require("../middleware/auth");
+const admin = require("../middleware/admin");
 const router = express.Router();
 
 // register, getAll, logout, authenticate, getProfile, updateProfile, delete, getById
@@ -10,20 +10,20 @@ router.get("/register", usersController.registerUser);
 
 router.post("/login", usersController.loginUser);
 
-router.post("/logout", usersController.logoutUser);
+router.post("/logout", auth, usersController.logoutUser);
 
 router
   .route("/profile")
-  .get(usersController.getByTokenUser)
-  .patch(usersController.updateByTokenUser)
-  .delete(usersController.deleteByTokenUser);
+  .get(auth, usersController.getByTokenUser)
+  .patch(auth, usersController.updateByTokenUser)
+  .delete(auth, usersController.deleteByTokenUser);
 
 router
   .route("/:id")
-  .get(usersController.getByIdUser)
-  .patch(usersController.updateByIdUser)
-  .delete(usersController.deleteByIdUser);
+  .get(auth, admin, usersController.getByIdUser)
+  .patch(auth, admin, usersController.updateByIdUser)
+  .delete(auth, admin, usersController.deleteByIdUser);
 
-router.get("/", usersController.getAllUser);
+router.get("/", auth, admin, usersController.getAllUser);
 
 module.exports = router;
