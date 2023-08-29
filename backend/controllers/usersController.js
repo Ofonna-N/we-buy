@@ -2,12 +2,7 @@ const usersModel = require("../models/usersModel");
 const jwt = require("jsonwebtoken");
 const ms = require("ms");
 const _ = require("lodash");
-
-const jwtCookieOptions = {
-  httpOnly: true,
-  secure: process.env.NODE_ENV === "production" ? true : false,
-  signed: true,
-};
+const jwtCookieTokenGenerator = require("../services/jwtCookieTokenGenerator");
 
 // register, login, getAll, logout, authenticate, getProfile, updateProfile, delete, getById
 
@@ -32,15 +27,7 @@ const loginUser = async (req, res) => {
 
   if (userValid) {
     console.log("User: ", user);
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-      expiresIn: ms("30d"),
-    });
-
-    res.cookie("jwt", token, {
-      ...jwtCookieOptions,
-      expires: ms("30d"),
-      maxAge: ms("30d"),
-    });
+    jwtCookieTokenGenerator.generateJwtCoookieToken(res, user);
 
     return res.json({
       user: _.omit(user.toObject(), ["password"]),
@@ -56,7 +43,7 @@ const loginUser = async (req, res) => {
 // @route POST /api/users/logout
 // @access private
 const logoutUser = async (req, res) => {
-  res.clearCookie("jwt", jwtCookieOptions);
+  res.clearCookie("jwt", jwtCookieTokenGenerator.jwtCookieOptions);
   return res.send("logged out user....");
 };
 
