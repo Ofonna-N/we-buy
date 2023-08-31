@@ -1,5 +1,3 @@
-type APIResponse<T> = {
-  data: T;
-};
+type APIResponse<T> = T;
 
 export default APIResponse;

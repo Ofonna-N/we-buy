@@ -12,7 +12,7 @@ const useData = <T>(endpoint: string) => {
     queryFn: async () => {
       const response = await apiClient.get();
       // throw new Error("BOOM");
-      return response.data.data;
+      return response.data;
     },
     staleTime: ms("5m"),
   });
