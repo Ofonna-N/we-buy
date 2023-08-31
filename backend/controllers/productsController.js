@@ -7,7 +7,7 @@ const getAllProduct = async (req, res) => {
 
   if (!products) return res.status(404).json({ message: "Products not found" });
 
-  return res.json({ data: products });
+  return res.json(products);
 };
 
 // @desc fetch single product
@@ -15,7 +15,7 @@ const getAllProduct = async (req, res) => {
 const getByIdProduct = async (req, res) => {
   const product = await Product.findById(req.params.id);
 
-  return res.json({ data: product });
+  return res.json(product);
 };
 
 module.exports = { getAllProduct, getByIdProduct };
