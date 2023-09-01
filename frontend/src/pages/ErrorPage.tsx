@@ -4,22 +4,14 @@ import Divider from "@mui/material/Divider";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import { isRouteErrorResponse, useRouteError } from "react-router-dom";
+import AppContainer from "../component/page/AppContainer";
 
 const ErrorPage = () => {
   const error = useRouteError();
 
   return (
     <Box>
-      <Container
-        fixed
-        sx={{
-          //   backgroundColor: "red",
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+      <AppContainer>
         <Paper variant="elevation" elevation={3} sx={{ padding: "1rem" }}>
           <Typography variant="h3">
             {isRouteErrorResponse(error)
@@ -33,7 +25,7 @@ const ErrorPage = () => {
               : "Something went wrong"}
           </Typography>
         </Paper>
-      </Container>
+      </AppContainer>
     </Box>
   );
 };

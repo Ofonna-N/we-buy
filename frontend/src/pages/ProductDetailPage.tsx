@@ -18,6 +18,7 @@ import { useState } from "react";
 import { CartItem } from "../types/Cart";
 import { useAppDispatch } from "../hooks/redux-hooks/appStoreHooks";
 import { cartActions } from "../slices/cartSlice";
+import AppContainer from "../component/page/AppContainer";
 
 const ProductDetailPage = () => {
   const { id } = useParams();
@@ -40,7 +41,7 @@ const ProductDetailPage = () => {
   };
 
   return (
-    <Container fixed>
+    <AppContainer>
       <Grid container spacing={1} mt={"4rem"}>
         <Grid {...productDetailCellProps}>
           {/* <Paper></Paper> */}
@@ -154,7 +155,7 @@ const ProductDetailPage = () => {
           <Paper>Product Meta</Paper>
         </Grid> */}
       </Grid>
-    </Container>
+    </AppContainer>
   );
 };
 

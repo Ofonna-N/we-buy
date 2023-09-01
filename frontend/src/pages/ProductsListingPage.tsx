@@ -1,6 +1,7 @@
 import { CircularProgress, Container, Typography } from "@mui/material";
 import ProductsListing from "../component/products/ProductsListing";
 import useProducts from "../hooks/api-hooks/useProducts";
+import AppContainer from "../component/page/AppContainer";
 
 const ProductsListingPage = () => {
   const { data: products, isLoading, error } = useProducts();
@@ -12,12 +13,7 @@ const ProductsListingPage = () => {
   if (error) throw new Error(error.message);
 
   return (
-    <Container
-      fixed
-      sx={{
-        marginTop: "2rem",
-      }}
-    >
+    <AppContainer>
       <Typography
         component={"h2"}
         fontSize={"1.8rem"}
@@ -30,7 +26,7 @@ const ProductsListingPage = () => {
         All Products
       </Typography>
       <ProductsListing products={products || []} />
-    </Container>
+    </AppContainer>
   );
 };
 
