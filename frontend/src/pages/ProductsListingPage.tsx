@@ -1,4 +1,4 @@
-import { CircularProgress, Container, Typography } from "@mui/material";
+import { CircularProgress, Typography } from "@mui/material";
 import ProductsListing from "../component/products/ProductsListing";
 import useProducts from "../hooks/api-hooks/useProducts";
 import AppContainer from "../component/page/AppContainer";
