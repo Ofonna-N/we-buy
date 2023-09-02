@@ -20,7 +20,6 @@ const SignInPage = () => {
   const {
     register,
     handleSubmit,
-
     formState: { errors },
   } = useForm<SignInFormInput>({
     resolver: yupResolver(signInFormSchema),
@@ -30,8 +29,6 @@ const SignInPage = () => {
     console.log(data);
     // submit
   });
-
-  // console.log(watch("email"));
 
   return (
     <AppContainer>
