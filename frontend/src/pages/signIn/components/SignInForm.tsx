@@ -6,7 +6,9 @@ import SignInFormInput from "../../../types/SignInFormInput";
 import * as yup from "yup";
 import useMutateLogin from "../../../hooks/api-hooks/auth/useMutateLogin";
 import AppSpinner from "../../../component/loading/AppSpinner";
-import { AxiosError } from "axios";
+import { useEffect } from "react";
+import { useAppDispatch } from "../../../hooks/redux-hooks/appStoreHooks";
+import { userSliceActions } from "../../../slices/userSlice";
 
 const signInFormSchema = yup.object({
   email: yup.string().email().required(),
@@ -29,12 +31,16 @@ const SignInForm = () => {
     resolver: yupResolver(signInFormSchema),
   });
 
+  const dispach = useAppDispatch();
+
   const onSubmitForm = handleSubmit(async (data) => {
     mutate(data);
   });
 
-  //   console.log("Error: ", { error });
-  console.log("data: ", userResponse);
+  useEffect(() => {
+    if (!userResponse) return;
+    dispach(userSliceActions.setUserCredentials(userResponse.user));
+  }, [userResponse]);
   return (
     <Box
       sx={{

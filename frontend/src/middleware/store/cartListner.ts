@@ -1,6 +1,7 @@
 import { createListenerMiddleware } from "@reduxjs/toolkit";
 import { cartActions } from "../../slices/cartSlice";
 import { RootState } from "../../store";
+import localStorageKeys from "../../constants/localStorageKeys";
 
 const cartListener = createListenerMiddleware();
 
@@ -22,7 +23,10 @@ cartListener.startListening({
     const state = listenerApi.getState() as RootState;
 
     // console.log("Cart: ", state.cartSlice);
-    localStorage.setItem("cart", JSON.stringify(state.cartSlice));
+    localStorage.setItem(
+      localStorageKeys.CART,
+      JSON.stringify(state.cartSlice)
+    );
   },
 });
 

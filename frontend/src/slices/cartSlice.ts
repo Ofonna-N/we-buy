@@ -1,7 +1,8 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import Cart, { CartItem } from "../types/Cart";
+import localStorageKeys from "../constants/localStorageKeys";
 
-const persistedCartItem = localStorage.getItem("cart");
+const persistedCartItem = localStorage.getItem(localStorageKeys.CART);
 
 const initialState = persistedCartItem
   ? (JSON.parse(persistedCartItem) as Cart)
