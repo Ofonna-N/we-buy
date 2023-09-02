@@ -42,7 +42,6 @@ const loginUser = async (req, res) => {
   const userValid = user && (await user.matchPassword(loginDetails.password));
 
   if (userValid) {
-    console.log("User: ", user);
     jwtCookieTokenGenerator.generateJwtCoookieToken(res, user);
 
     return res.json({
