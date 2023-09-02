@@ -22,6 +22,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import { appMenuAcitons } from "../../slices/appMenuSlice";
 import { Link as RouterLink } from "react-router-dom";
 import RoutesPaths from "../../constants/RoutePaths";
+import queryParams from "../../constants/queryParams";
 //#endregion
 
 const AppSideMenu = () => {
@@ -29,6 +30,7 @@ const AppSideMenu = () => {
   const cartQty = useAppSelector((state) => state.cartSlice.qty);
   const theme = useTheme();
   const isToggled = useAppSelector((state) => state.appMenuSlice.isToggled);
+  const user = useAppSelector((state) => state.userSlice.userInfo);
   const dispach = useAppDispatch();
   const navBarHeight = "88.01px";
 
@@ -46,7 +48,14 @@ const AppSideMenu = () => {
       </ListItemIcon>
       <ListItemText primary="Cart" />
     </ListItemButton>,
-    <ListItemButton component={RouterLink} to={RoutesPaths.SIGN_IN_ROUTE}>
+    <ListItemButton
+      component={RouterLink}
+      to={
+        RoutesPaths.SIGN_IN_ROUTE +
+        "?" +
+        (user?._id ? queryParams.REDIRECT_HOME : "")
+      }
+    >
       <ListItemIcon>
         <PersonIcon />
       </ListItemIcon>

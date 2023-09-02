@@ -6,6 +6,9 @@ import SignInFormInput from "../../../types/SignInFormInput";
 import * as yup from "yup";
 import useMutateLogin from "../../../hooks/api-hooks/auth/useMutateLogin";
 import AppSpinner from "../../../component/loading/AppSpinner";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useMemo } from "react";
+import RoutesPaths from "../../../constants/RoutePaths";
 
 const signInFormSchema = yup.object({
   email: yup.string().email().required(),
@@ -26,6 +29,17 @@ const SignInForm = () => {
   const onSubmitForm = handleSubmit(async (data) => {
     mutate(data);
   });
+  const navigate = useNavigate();
+  const location = useLocation();
+  const params = useMemo(() => {
+    return new URLSearchParams(location.search);
+  }, [location]);
+
+  const redirectParam = params.get("redirect");
+
+  useEffect(() => {
+    if (redirectParam) navigate(RoutesPaths.HOME_ROUTE);
+  }, [redirectParam]);
 
   return (
     <Box

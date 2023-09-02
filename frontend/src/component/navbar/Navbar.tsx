@@ -28,12 +28,14 @@ import {
 } from "../../hooks/redux-hooks/appStoreHooks";
 import { appMenuAcitons } from "../../slices/appMenuSlice";
 import RoutesPaths from "../../constants/RoutePaths";
+import queryParams from "../../constants/queryParams";
 //#endregion
 
 const Navbar = () => {
   const darkModeCtx = useModeCtx();
   const cartQty = useAppSelector((state) => state.cartSlice.qty);
   const isToggled = useAppSelector((state) => state.appMenuSlice.isToggled);
+  const user = useAppSelector((state) => state.userSlice.userInfo);
   const dispach = useAppDispatch();
 
   return (
@@ -88,7 +90,11 @@ const Navbar = () => {
             </NavLinkIconBtn>
             <NavLinkIconBtn
               startIcon={<PersonIcon />}
-              to={RoutesPaths.SIGN_IN_ROUTE}
+              to={
+                RoutesPaths.SIGN_IN_ROUTE +
+                "?" +
+                (user?._id ? queryParams.REDIRECT_HOME : "")
+              }
             >
               Sign In
             </NavLinkIconBtn>

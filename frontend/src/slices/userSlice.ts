@@ -6,7 +6,8 @@ const persistentUserInfo = localStorage.getItem(localStorageKeys.USER);
 
 const initialState = {
   userInfo:
-    (persistentUserInfo && JSON.parse(persistentUserInfo)) || ({} as User),
+    ((persistentUserInfo && JSON.parse(persistentUserInfo)) as User) ||
+    ({} as User),
 };
 
 const userSlice = createSlice({
