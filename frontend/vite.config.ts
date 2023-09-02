@@ -12,7 +12,7 @@ export default defineConfig({
       },
     },
   },
-  // optimizeDeps: {
-  //   include: ["@mui/icons-material"],
-  // },
+  optimizeDeps: {
+    include: ["@mui/icons-material"],
+  },
 });

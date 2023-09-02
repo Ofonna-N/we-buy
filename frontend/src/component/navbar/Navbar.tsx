@@ -93,7 +93,7 @@ const Navbar = () => {
             >
               Cart
             </NavLinkIconBtn>
-            <NavLinkIconBtn startIcon={<PersonIcon />} to="#">
+            <NavLinkIconBtn startIcon={<PersonIcon />} to="/signin">
               Sign In
             </NavLinkIconBtn>
           </Box>
