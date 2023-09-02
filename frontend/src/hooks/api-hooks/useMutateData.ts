@@ -4,7 +4,10 @@ import APIClient from "../../services/api-client";
 import { AxiosError } from "axios";
 import ErrorResponse from "../../types/ErrorResponse";
 
-const useMutateData = <T, B>(endpoint: string) => {
+const useMutateData = <T, B>(
+  endpoint: string,
+  onSuccessFn?: (data: T, variables: B) => void
+) => {
   const apiClient = useMemo(() => new APIClient<T>(endpoint), [endpoint]);
 
   return useMutation<T, Error, B>({
@@ -19,6 +22,8 @@ const useMutateData = <T, B>(endpoint: string) => {
         );
       }
     },
+
+    onSuccess: onSuccessFn,
   });
 };
 
