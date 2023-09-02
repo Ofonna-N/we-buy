@@ -10,6 +10,7 @@ import {
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { Link as RouterLink } from "react-router-dom";
 import Product from "../../types/Product";
+import RoutesPaths from "../../constants/RoutePaths";
 
 type Props = {
   product: Product;
@@ -30,7 +31,10 @@ const ProductCard = ({ product }: Props) => {
         },
       }}
     >
-      <CardActionArea component={RouterLink} to={`/products/${product._id}`}>
+      <CardActionArea
+        component={RouterLink}
+        to={`${RoutesPaths.PRODUCTS_ROUTE}/${product._id}`}
+      >
         <CardMedia
           src={product.image}
           component="img"

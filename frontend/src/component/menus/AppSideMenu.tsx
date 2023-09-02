@@ -21,6 +21,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
 import { appMenuAcitons } from "../../slices/appMenuSlice";
 import { Link as RouterLink } from "react-router-dom";
+import RoutesPaths from "../../constants/RoutePaths";
 //#endregion
 
 const AppSideMenu = () => {
@@ -32,7 +33,7 @@ const AppSideMenu = () => {
   const navBarHeight = "88.01px";
 
   const sideMenuNavItems = [
-    <ListItemButton component={RouterLink} to="/cart">
+    <ListItemButton component={RouterLink} to={RoutesPaths.CART_ROUTE}>
       <ListItemIcon>
         <Badge
           invisible={cartQty <= 0}
@@ -45,7 +46,7 @@ const AppSideMenu = () => {
       </ListItemIcon>
       <ListItemText primary="Cart" />
     </ListItemButton>,
-    <ListItemButton>
+    <ListItemButton component={RouterLink} to={RoutesPaths.SIGN_IN_ROUTE}>
       <ListItemIcon>
         <PersonIcon />
       </ListItemIcon>

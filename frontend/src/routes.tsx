@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import RoutePaths from "./constants/RoutePaths";
 import Layout from "./pages/Layout";
 import ProductsListingPage from "./pages/ProductsListingPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
@@ -9,7 +10,7 @@ import SignInPage from "./pages/SignInPage";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: RoutePaths.HOME_ROUTE,
     element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
@@ -18,19 +19,19 @@ const router = createBrowserRouter([
         element: <ProductsListingPage />,
       },
       {
-        path: "/products/:id",
+        path: `${RoutePaths.PRODUCTS_ROUTE}/:id`,
         element: <ProductDetailPage />,
       },
       {
-        path: "/cart",
+        path: RoutePaths.CART_ROUTE,
         element: <CartPage />,
       },
       {
-        path: "/signin",
+        path: RoutePaths.SIGN_IN_ROUTE,
         element: <SignInPage />,
       },
       {
-        path: "/playground",
+        path: RoutePaths.PLAYGROUND_ROUTE,
         element: <PlaygroundPage />,
       },
     ],

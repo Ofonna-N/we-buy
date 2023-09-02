@@ -27,6 +27,7 @@ import {
   useAppSelector,
 } from "../../hooks/redux-hooks/appStoreHooks";
 import { appMenuAcitons } from "../../slices/appMenuSlice";
+import RoutesPaths from "../../constants/RoutePaths";
 //#endregion
 
 const Navbar = () => {
@@ -55,7 +56,7 @@ const Navbar = () => {
           </IconButton>
           <Link
             component={RouterLink}
-            to={"/"}
+            to={RoutesPaths.HOME_ROUTE}
             variant="h3"
             sx={{
               flexGrow: "1",
@@ -68,18 +69,10 @@ const Navbar = () => {
             }}
           >
             We Buy
-            {/* <Typography
-                variant="h4"
-                component={"span"}
-                aria-label="logo"
-                role=""
-              >
-              </Typography> */}
           </Link>
           <Box display={{ xs: "none", sm: "flex" }} gap={"1rem"}>
             <NavLinkIconBtn
-              // href="/cart"
-              to="/cart"
+              to={RoutesPaths.CART_ROUTE}
               startIcon={
                 <Badge
                   invisible={cartQty <= 0}
@@ -93,7 +86,10 @@ const Navbar = () => {
             >
               Cart
             </NavLinkIconBtn>
-            <NavLinkIconBtn startIcon={<PersonIcon />} to="/signin">
+            <NavLinkIconBtn
+              startIcon={<PersonIcon />}
+              to={RoutesPaths.SIGN_IN_ROUTE}
+            >
               Sign In
             </NavLinkIconBtn>
           </Box>
