@@ -28,7 +28,9 @@ const AppTextField = React.forwardRef<HTMLInputElement, Props>(function (
   return (
     <FormControl fullWidth={fullWidth}>
       <TextField {...other} ref={ref} />
-      <FormHelperText error={!!useError}>{useError}</FormHelperText>
+      <FormHelperText error={!!useError} sx={{ marginInline: 0 }}>
+        {useError}
+      </FormHelperText>
     </FormControl>
   );
 });

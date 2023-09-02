@@ -12,7 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
-import useQuerySingleProduct from "../hooks/api-hooks/useQuerySingleProduct";
+import useQuerySingleProduct from "../hooks/api-hooks/products/useQuerySingleProduct";
 import { useState } from "react";
 import { CartItem } from "../types/Cart";
 import { useAppDispatch } from "../hooks/redux-hooks/appStoreHooks";

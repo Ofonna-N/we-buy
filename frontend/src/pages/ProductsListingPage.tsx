@@ -1,6 +1,6 @@
 import { CircularProgress, Typography } from "@mui/material";
 import ProductsListing from "../component/products/ProductsListing";
-import useQueryProducts from "../hooks/api-hooks/useQueryProducts";
+import useQueryProducts from "../hooks/api-hooks/products/useQueryProducts";
 import AppContainer from "../component/page/AppContainer";
 
 const ProductsListingPage = () => {
