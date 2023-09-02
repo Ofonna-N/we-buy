@@ -30,12 +30,10 @@ const SignInForm = () => {
   });
 
   const onSubmitForm = handleSubmit(async (data) => {
-    // console.log(data);
     mutate(data);
-    // submit
   });
 
-  console.log("Error: ", error);
+  //   console.log("Error: ", { error });
   console.log("data: ", userResponse);
   return (
     <Box
@@ -72,9 +70,7 @@ const SignInForm = () => {
             </Button>
           </FormControl>
           {isLoading && <AppSpinner />}
-          <FormHelperText error={!!error}>
-            {error?.response?.data.error}
-          </FormHelperText>
+          <FormHelperText error={!!error}>{error?.message}</FormHelperText>
         </Stack>
       </form>
     </Box>
