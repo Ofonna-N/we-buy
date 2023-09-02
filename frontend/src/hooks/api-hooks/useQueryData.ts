@@ -4,7 +4,7 @@ import { AxiosError } from "axios";
 import ms from "ms";
 import { useQuery } from "react-query";
 
-const useData = <T>(endpoint: string) => {
+const useQueryData = <T>(endpoint: string) => {
   const apiClient = useMemo(() => new APIClient<T>(endpoint), [endpoint]);
 
   return useQuery<T, AxiosError>({
@@ -48,4 +48,4 @@ const useData = <T>(endpoint: string) => {
   // return { data, error, isLoading };
 };
 
-export default useData;
+export default useQueryData;

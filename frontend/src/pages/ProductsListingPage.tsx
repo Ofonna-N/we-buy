@@ -1,10 +1,10 @@
 import { CircularProgress, Typography } from "@mui/material";
 import ProductsListing from "../component/products/ProductsListing";
-import useProducts from "../hooks/api-hooks/useProducts";
+import useQueryProducts from "../hooks/api-hooks/useQueryProducts";
 import AppContainer from "../component/page/AppContainer";
 
 const ProductsListingPage = () => {
-  const { data: products, isLoading, error } = useProducts();
+  const { data: products, isLoading, error } = useQueryProducts();
 
   if (isLoading)
     return <CircularProgress sx={{ marginLeft: "2rem", marginTop: "3rem" }} />;

@@ -12,7 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
-import useProduct from "../hooks/api-hooks/useProduct";
+import useQuerySingleProduct from "../hooks/api-hooks/useQuerySingleProduct";
 import { useState } from "react";
 import { CartItem } from "../types/Cart";
 import { useAppDispatch } from "../hooks/redux-hooks/appStoreHooks";
@@ -26,7 +26,7 @@ const ProductDetailPage = () => {
 
   const dispach = useAppDispatch();
 
-  const { data: product, isLoading, error } = useProduct(id || "");
+  const { data: product, isLoading, error } = useQuerySingleProduct(id || "");
 
   if (isLoading)
     return <CircularProgress sx={{ marginLeft: "2rem", marginTop: "3rem" }} />;
