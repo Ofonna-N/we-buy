@@ -1,8 +1,8 @@
 import { UserResponse } from "../../../types/User";
 import useMutateData from "../useMutateData";
 
-const useMutateLogin = () => {
-  return useMutateData<UserResponse>("/login");
+const useMutateLogin = <B>() => {
+  return useMutateData<UserResponse, B>("users/login");
 };
 
 export default useMutateLogin;

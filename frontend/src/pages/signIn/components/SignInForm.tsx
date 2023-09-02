@@ -1,9 +1,12 @@
-import { Box, Stack, FormControl, Button } from "@mui/material";
+import { Box, Stack, FormControl, Button, FormHelperText } from "@mui/material";
 import AppTextField from "../../../component/input/AppTextField";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import SignInFormInput from "../../../types/SignInFormInput";
 import * as yup from "yup";
+import useMutateLogin from "../../../hooks/api-hooks/auth/useMutateLogin";
+import AppSpinner from "../../../component/loading/AppSpinner";
+import { AxiosError } from "axios";
 
 const signInFormSchema = yup.object({
   email: yup.string().email().required(),
@@ -12,6 +15,13 @@ const signInFormSchema = yup.object({
 
 const SignInForm = () => {
   const {
+    data: userResponse,
+    isLoading,
+    error,
+    mutate,
+  } = useMutateLogin<SignInFormInput>();
+
+  const {
     register,
     handleSubmit,
     formState: { errors },
@@ -19,10 +29,14 @@ const SignInForm = () => {
     resolver: yupResolver(signInFormSchema),
   });
 
-  const onSubmitForm = handleSubmit((data) => {
-    console.log(data);
+  const onSubmitForm = handleSubmit(async (data) => {
+    // console.log(data);
+    mutate(data);
     // submit
   });
+
+  console.log("Error: ", error);
+  console.log("data: ", userResponse);
   return (
     <Box
       sx={{
@@ -36,6 +50,7 @@ const SignInForm = () => {
             label="email"
             type="email"
             {...register("email")}
+            disabled={isLoading}
             useError={errors.email?.message}
           />
           <AppTextField
@@ -43,14 +58,23 @@ const SignInForm = () => {
             label="Password"
             type="password"
             {...register("password")}
+            disabled={isLoading}
             useError={errors.password?.message}
           />
 
           <FormControl fullWidth>
-            <Button variant="contained" onClick={onSubmitForm}>
+            <Button
+              variant="contained"
+              disabled={isLoading}
+              onClick={onSubmitForm}
+            >
               Submit
             </Button>
           </FormControl>
+          {isLoading && <AppSpinner />}
+          <FormHelperText error={!!error}>
+            {error?.response?.data.error}
+          </FormHelperText>
         </Stack>
       </form>
     </Box>

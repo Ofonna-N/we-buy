@@ -16,7 +16,7 @@ export default class APIClient<T> {
     return axiosInstance.get<APIResponse<T>>(this.endpoint, config);
   }
 
-  post(config?: AxiosRequestConfig) {
-    return axiosInstance.post<APIResponse<T>>(this.endpoint, config);
+  post<B>(body: B, config?: AxiosRequestConfig) {
+    return axiosInstance.post<APIResponse<T>>(this.endpoint, body, config);
   }
 }

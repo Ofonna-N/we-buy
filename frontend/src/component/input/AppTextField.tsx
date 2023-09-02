@@ -18,6 +18,7 @@ type Props = {
   // ref?: TextFieldProps["ref"]; // assign ref prop
   focused?: TextFieldProps["focused"];
   useError?: string;
+  disabled?: TextFieldProps["disabled"];
 };
 
 const AppTextField = React.forwardRef<HTMLInputElement, Props>(function (

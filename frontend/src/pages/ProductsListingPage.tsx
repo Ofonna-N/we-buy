@@ -2,12 +2,13 @@ import { CircularProgress, Typography } from "@mui/material";
 import ProductsListing from "../component/products/ProductsListing";
 import useQueryProducts from "../hooks/api-hooks/products/useQueryProducts";
 import AppContainer from "../component/page/AppContainer";
+import AppSpinner from "../component/loading/AppSpinner";
 
 const ProductsListingPage = () => {
   const { data: products, isLoading, error } = useQueryProducts();
 
   if (isLoading)
-    return <CircularProgress sx={{ marginLeft: "2rem", marginTop: "3rem" }} />;
+    return <AppSpinner sx={{ marginLeft: "2rem", marginTop: "3rem" }} />;
   // console.log("ERROR: ", error?.message);
 
   if (error) throw new Error(error.message);
