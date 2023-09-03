@@ -6,8 +6,10 @@ const persistentUserInfo = localStorage.getItem(localStorageKeys.USER);
 
 const initialState = {
   userInfo:
-    ((persistentUserInfo && JSON.parse(persistentUserInfo)) as User) ||
-    ({} as User),
+    ((persistentUserInfo && JSON.parse(persistentUserInfo)) as
+      | User
+      | null
+      | undefined) || ({} as User | null | undefined),
 };
 
 const userSlice = createSlice({
@@ -16,6 +18,9 @@ const userSlice = createSlice({
   reducers: {
     setUserCredentials(state, action) {
       state.userInfo = action.payload;
+    },
+    logoutUser(state) {
+      state.userInfo = null;
     },
   },
 });

@@ -4,7 +4,7 @@ import { Link as RouterLink } from "react-router-dom";
 //   color: "white",
 //   textDecoration: "none",
 // }));
-const NavLinkIconBtn = (props: ButtonProps & { to: string }) => {
+const NavLinkIconBtn = (props: ButtonProps & { to?: string }) => {
   const { sx, to, ...otherProps } = props;
   //   styled(Button)<ButtonProps>(() => ({
   //   color: "white",

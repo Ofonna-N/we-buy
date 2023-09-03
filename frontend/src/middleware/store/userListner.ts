@@ -11,4 +11,11 @@ userListner.startListening({
   },
 });
 
+userListner.startListening({
+  actionCreator: userSliceActions.logoutUser,
+  effect: async () => {
+    localStorage.removeItem(localStorageKeys.USER);
+  },
+});
+
 export default userListner;

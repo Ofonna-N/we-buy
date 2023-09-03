@@ -12,7 +12,7 @@ const SignInPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user._id) navigate(RoutesPaths.HOME_ROUTE);
+    if (user?._id) navigate(RoutesPaths.HOME_ROUTE);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 

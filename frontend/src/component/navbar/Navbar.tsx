@@ -10,6 +10,7 @@ import {
   Typography,
   Link,
   Badge,
+  Button,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 //hooks
@@ -30,6 +31,8 @@ import { appMenuAcitons } from "../../slices/appMenuSlice";
 import RoutesPaths from "../../constants/RoutePaths";
 
 import AppDropDownMenu from "../menus/AppDropDownMenu";
+import useMutateLogout from "../../hooks/api-hooks/auth/useMutateLogout";
+import LogoutIcon from "@mui/icons-material/Logout";
 //#endregion
 
 const Navbar = () => {
@@ -38,6 +41,12 @@ const Navbar = () => {
   const isToggled = useAppSelector((state) => state.appMenuSlice.isToggled);
   const user = useAppSelector((state) => state.userSlice.userInfo);
   const dispach = useAppDispatch();
+
+  const { mutate } = useMutateLogout();
+
+  const onLogOut = () => {
+    mutate(null);
+  };
 
   return (
     <AppBar position="relative">
@@ -89,7 +98,19 @@ const Navbar = () => {
             >
               Cart
             </NavLinkIconBtn>
-            {(user._id && <AppDropDownMenu title={user.name} />) || (
+            {(user?._id && (
+              <AppDropDownMenu
+                title={user.name}
+                menuItems={[
+                  <NavLinkIconBtn startIcon={<PersonIcon />}>
+                    Profile
+                  </NavLinkIconBtn>,
+                  <NavLinkIconBtn startIcon={<LogoutIcon />} onClick={onLogOut}>
+                    Logout
+                  </NavLinkIconBtn>,
+                ]}
+              />
+            )) || (
               <NavLinkIconBtn
                 startIcon={<PersonIcon />}
                 to={RoutesPaths.SIGN_IN_ROUTE}

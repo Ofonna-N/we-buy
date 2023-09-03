@@ -5,10 +5,11 @@ import ArrowDropUp from "@mui/icons-material/ArrowDropUp";
 
 type Prop = {
   title: string;
+  menuItems: React.ReactNode[];
 };
 
 const AppDropDownMenu = (props: Prop) => {
-  const { title } = props;
+  const { title, menuItems } = props;
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
   return (
@@ -28,8 +29,9 @@ const AppDropDownMenu = (props: Prop) => {
         anchorEl={anchorRef.current}
         onClose={() => setOpen(false)}
       >
-        <MenuItem>Profile</MenuItem>
-        <MenuItem>Logout</MenuItem>
+        {menuItems?.map((item, i) => (
+          <MenuItem key={i}>{item}</MenuItem>
+        ))}
       </Menu>
     </Box>
   );
