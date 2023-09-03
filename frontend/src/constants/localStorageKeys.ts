@@ -1,5 +1,5 @@
 const localStorageKeys = {
-  USER: "user",
+  USER: "userInfo",
   CART: "cart",
 };
 
