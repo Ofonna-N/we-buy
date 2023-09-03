@@ -10,10 +10,6 @@ import {
   Typography,
   Link,
   Badge,
-  Button,
-  Menu,
-  MenuItem,
-  Stack,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 //hooks
@@ -32,7 +28,6 @@ import {
 } from "../../hooks/redux-hooks/appStoreHooks";
 import { appMenuAcitons } from "../../slices/appMenuSlice";
 import RoutesPaths from "../../constants/RoutePaths";
-import queryParams from "../../constants/queryParams";
 
 import AppDropDownMenu from "../menus/AppDropDownMenu";
 //#endregion
@@ -97,11 +92,7 @@ const Navbar = () => {
             {(user._id && <AppDropDownMenu title={user.name} />) || (
               <NavLinkIconBtn
                 startIcon={<PersonIcon />}
-                to={
-                  RoutesPaths.SIGN_IN_ROUTE +
-                  "?" +
-                  (user?._id ? queryParams.REDIRECT_HOME : "")
-                }
+                to={RoutesPaths.SIGN_IN_ROUTE}
               >
                 Sign In
               </NavLinkIconBtn>

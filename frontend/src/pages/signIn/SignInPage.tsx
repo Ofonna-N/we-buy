@@ -2,22 +2,20 @@ import { Box, Typography } from "@mui/material";
 import AppContainer from "../../component/page/AppContainer";
 
 import SignInForm from "./components/SignInForm";
-import { useMemo, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import RoutesPaths from "../../constants/RoutePaths";
+import { useAppSelector } from "../../hooks/redux-hooks/appStoreHooks";
 
 const SignInPage = () => {
+  const user = useAppSelector((state) => state.userSlice.userInfo);
   const navigate = useNavigate();
-  const location = useLocation();
-  const params = useMemo(() => {
-    return new URLSearchParams(location.search);
-  }, [location]);
-
-  const redirectParam = params.get("redirect");
 
   useEffect(() => {
-    if (redirectParam) navigate(RoutesPaths.HOME_ROUTE);
-  }, [redirectParam]);
+    if (user._id) navigate(RoutesPaths.HOME_ROUTE);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
+
   return (
     <AppContainer>
       <Box marginBottom={"1.5rem"}>

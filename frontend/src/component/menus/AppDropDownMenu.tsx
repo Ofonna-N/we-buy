@@ -8,7 +8,7 @@ type Prop = {
 };
 
 const AppDropDownMenu = (props: Prop) => {
-  const { title, ...other } = props;
+  const { title } = props;
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
   return (
