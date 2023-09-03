@@ -20,6 +20,7 @@ const NavLinkIconBtn = (props: ButtonProps & Props & { to?: string }) => {
         color: textColor,
         textDecoration: "none",
       }}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       component={RouterLink as any}
       to={to || "#"}
     />
