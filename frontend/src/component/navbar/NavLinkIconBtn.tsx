@@ -1,26 +1,27 @@
 import Button, { ButtonProps } from "@mui/material/Button";
 import { Link as RouterLink } from "react-router-dom";
-// const NavLinkIconBtn = styled(Button)<ButtonProps>(() => ({
-//   color: "white",
-//   textDecoration: "none",
-// }));
-const NavLinkIconBtn = (props: ButtonProps & { to?: string }) => {
-  const { sx, to, ...otherProps } = props;
-  //   styled(Button)<ButtonProps>(() => ({
-  //   color: "white",
-  //   textDecoration: "none",
-  // }));
+
+type Props = {
+  variantColor?: string;
+};
+
+const NavLinkIconBtn = (props: ButtonProps & Props & { to?: string }) => {
+  const { sx, to, variantColor, ...otherProps } = props;
+
+  // variant color should have more effect on the look of this button, this
+  // is definitely one that will need major refactor in the future
+  const textColor = variantColor || "white";
 
   return (
     <Button
       {...otherProps}
       sx={{
         ...sx,
-        color: "white",
+        color: textColor,
         textDecoration: "none",
       }}
       component={RouterLink as any}
-      to={to}
+      to={to || "#"}
     />
   );
 };

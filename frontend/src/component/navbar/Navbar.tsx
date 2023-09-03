@@ -33,6 +33,7 @@ import RoutesPaths from "../../constants/RoutePaths";
 import AppDropDownMenu from "../menus/AppDropDownMenu";
 import useMutateLogout from "../../hooks/api-hooks/auth/useMutateLogout";
 import LogoutIcon from "@mui/icons-material/Logout";
+
 //#endregion
 
 const Navbar = () => {
@@ -102,10 +103,21 @@ const Navbar = () => {
               <AppDropDownMenu
                 title={user.name}
                 menuItems={[
-                  <NavLinkIconBtn startIcon={<PersonIcon />}>
+                  <NavLinkIconBtn
+                    startIcon={<PersonIcon />}
+                    variantColor={
+                      darkModeCtx.mode === "dark" ? "white" : "black"
+                    }
+                  >
                     Profile
                   </NavLinkIconBtn>,
-                  <NavLinkIconBtn startIcon={<LogoutIcon />} onClick={onLogOut}>
+                  <NavLinkIconBtn
+                    startIcon={<LogoutIcon />}
+                    onClick={onLogOut}
+                    variantColor={
+                      darkModeCtx.mode === "dark" ? "white" : "black"
+                    }
+                  >
                     Logout
                   </NavLinkIconBtn>,
                 ]}
