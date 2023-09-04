@@ -12,25 +12,24 @@ import {
   ListItem,
   useTheme,
 } from "@mui/material";
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "../../hooks/redux-hooks/appStoreHooks";
-import useModeCtx from "../../hooks/useModeCtx";
+
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
 import { appMenuAcitons } from "../../slices/appMenuSlice";
 import { Link as RouterLink } from "react-router-dom";
 import RoutesPaths from "../../constants/RoutePaths";
+import useNavMenuSharedState from "../../hooks/common/useNavMenuSharedState";
+import AppDropDownMenu from "./AppDropDownMenu";
+import LogoutIcon from "@mui/icons-material/Logout";
+import NavLinkIconBtn from "../../pages/layout/components/navbar/NavLinkIconBtn";
 //#endregion
 
 const AppSideMenu = () => {
-  const darkModeCtx = useModeCtx();
-  const cartQty = useAppSelector((state) => state.cartSlice.qty);
-  const theme = useTheme();
-  const isToggled = useAppSelector((state) => state.appMenuSlice.isToggled);
+  const { darkModeCtx, cartQty, isToggled, user, dispach, logoutApi } =
+    useNavMenuSharedState();
 
-  const dispach = useAppDispatch();
+  const theme = useTheme();
+
   const navBarHeight = "88.01px";
 
   const sideMenuNavItems = [
@@ -47,12 +46,37 @@ const AppSideMenu = () => {
       </ListItemIcon>
       <ListItemText primary="Cart" />
     </ListItemButton>,
-    <ListItemButton component={RouterLink} to={RoutesPaths.SIGN_IN_ROUTE}>
-      <ListItemIcon>
-        <PersonIcon />
-      </ListItemIcon>
-      <ListItemText primary="Sign In" />
-    </ListItemButton>,
+
+    <>
+      {(user?._id && (
+        <AppDropDownMenu
+          title={user.name}
+          menuItems={[
+            <NavLinkIconBtn
+              startIcon={<PersonIcon />}
+              variantColor={darkModeCtx.mode === "dark" ? "white" : "black"}
+            >
+              Profile
+            </NavLinkIconBtn>,
+            <NavLinkIconBtn
+              startIcon={<LogoutIcon />}
+              onClick={() => logoutApi.mutate(null)}
+              variantColor={darkModeCtx.mode === "dark" ? "white" : "black"}
+            >
+              Logout
+            </NavLinkIconBtn>,
+          ]}
+        />
+      )) || (
+        <ListItemButton component={RouterLink} to={RoutesPaths.SIGN_IN_ROUTE}>
+          <ListItemIcon>
+            <PersonIcon />
+          </ListItemIcon>
+          <ListItemText primary="Sign In" />
+        </ListItemButton>
+      )}
+    </>,
+
     <ListItemButton disableRipple>
       <ListItemText>
         <FormControlLabel

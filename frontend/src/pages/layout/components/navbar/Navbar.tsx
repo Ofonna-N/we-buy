@@ -13,7 +13,6 @@ import {
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 //hooks
-import useModeCtx from "../../../../hooks/useModeCtx";
 
 // Icons
 import MenuIcon from "@mui/icons-material/Menu";
@@ -22,30 +21,22 @@ import PersonIcon from "@mui/icons-material/Person";
 
 // local modules
 import NavLinkIconBtn from "./NavLinkIconBtn";
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "../../../../hooks/redux-hooks/appStoreHooks";
+
 import { appMenuAcitons } from "../../../../slices/appMenuSlice";
 import RoutesPaths from "../../../../constants/RoutePaths";
 
 import AppDropDownMenu from "../../../../component/menus/AppDropDownMenu";
-import useMutateLogout from "../../../../hooks/api-hooks/auth/useMutateLogout";
 import LogoutIcon from "@mui/icons-material/Logout";
+import useNavMenuSharedState from "../../../../hooks/common/useNavMenuSharedState";
 
 //#endregion
 
 const Navbar = () => {
-  const darkModeCtx = useModeCtx();
-  const cartQty = useAppSelector((state) => state.cartSlice.qty);
-  const isToggled = useAppSelector((state) => state.appMenuSlice.isToggled);
-  const user = useAppSelector((state) => state.userSlice.userInfo);
-  const dispach = useAppDispatch();
-
-  const { mutate } = useMutateLogout();
+  const { darkModeCtx, cartQty, isToggled, user, dispach, logoutApi } =
+    useNavMenuSharedState();
 
   const onLogOut = () => {
-    mutate(null);
+    logoutApi.mutate(null);
   };
 
   return (
