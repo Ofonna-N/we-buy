@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 //hooks
-import useModeCtx from "../../hooks/useModeCtx";
+import useModeCtx from "../../../../hooks/useModeCtx";
 
 // Icons
 import MenuIcon from "@mui/icons-material/Menu";
@@ -25,12 +25,12 @@ import NavLinkIconBtn from "./NavLinkIconBtn";
 import {
   useAppDispatch,
   useAppSelector,
-} from "../../hooks/redux-hooks/appStoreHooks";
-import { appMenuAcitons } from "../../slices/appMenuSlice";
-import RoutesPaths from "../../constants/RoutePaths";
+} from "../../../../hooks/redux-hooks/appStoreHooks";
+import { appMenuAcitons } from "../../../../slices/appMenuSlice";
+import RoutesPaths from "../../../../constants/RoutePaths";
 
-import AppDropDownMenu from "../menus/AppDropDownMenu";
-import useMutateLogout from "../../hooks/api-hooks/auth/useMutateLogout";
+import AppDropDownMenu from "../../../../component/menus/AppDropDownMenu";
+import useMutateLogout from "../../../../hooks/api-hooks/auth/useMutateLogout";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 //#endregion
