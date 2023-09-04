@@ -6,7 +6,7 @@ const router = express.Router();
 
 // register, getAll, logout, authenticate, getProfile, updateProfile, delete, getById
 
-router.get("/register", usersController.registerUser);
+router.post("/register", usersController.registerUser);
 
 router.post("/login", usersController.loginUser);
 

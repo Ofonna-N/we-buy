@@ -21,7 +21,7 @@ const registerUser = async (req, res) => {
   if (!userExist) {
     const newUser = await usersModel.User.create(registerationDetails);
     jwtCookieTokenGenerator.generateJwtCoookieToken(res, newUser);
-    return res.json(_.omit(newUser.toObject(), ["password"]));
+    return res.json({ user: _.omit(newUser.toObject(), ["password"]) });
   } else {
     throw new Error("Account already exists");
   }

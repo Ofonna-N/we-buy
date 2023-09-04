@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import AppSpinner from "../../../component/loading/AppSpinner";
+import useMutateRegister from "../../../hooks/api-hooks/auth/useMutateRegister";
 
 const registerFormSchema = yup.object({
   firstName: yup
@@ -41,6 +42,8 @@ const RegisterForm = () => {
     marginBottom: "1rem",
   };
 
+  const { mutate, isLoading, error } = useMutateRegister();
+
   const onSubmitForm = handleSubmit((data) => {
     const fullName = `${data.firstName} ${data.lastName}`;
 
@@ -49,7 +52,8 @@ const RegisterForm = () => {
       email: data.email,
       password: data.password,
     };
-    console.log("Submited Form: ", body);
+    // console.log("Submited Form: ", body);
+    mutate(body);
   });
 
   return (
@@ -116,8 +120,8 @@ const RegisterForm = () => {
           <Button variant="contained" type="submit">
             Register
           </Button>
-          {/* {isLoading && <AppSpinner />} */}
-          {/* <FormHelperText error={!!error}>{error?.message}</FormHelperText> */}
+          {isLoading && <AppSpinner />}
+          <FormHelperText error={!!error}>{error?.message}</FormHelperText>
         </Box>
       </form>
     </Box>
