@@ -7,6 +7,7 @@ import ErrorPage from "./pages/ErrorPage";
 import PlaygroundPage from "./pages/PlaygroundPage";
 import CartPage from "./pages/cartPage/CartPage";
 import SignInPage from "./pages/signIn/SignInPage";
+import RegisterationPage from "./pages/registeration/registerationPage";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: RoutePaths.SIGN_IN_ROUTE,
         element: <SignInPage />,
+      },
+      {
+        path: RoutePaths.REGISTER_ROUTE,
+        element: <RegisterationPage />,
       },
       {
         path: RoutePaths.PLAYGROUND_ROUTE,

@@ -19,6 +19,7 @@ type Props = {
   focused?: TextFieldProps["focused"];
   useError?: string;
   disabled?: TextFieldProps["disabled"];
+  sx?: TextFieldProps["sx"];
 };
 
 const AppTextField = React.forwardRef<HTMLInputElement, Props>(function (
