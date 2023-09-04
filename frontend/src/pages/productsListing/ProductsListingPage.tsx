@@ -1,8 +1,8 @@
-import { CircularProgress, Typography } from "@mui/material";
-import ProductsListing from "../component/products/ProductsListing";
-import useQueryProducts from "../hooks/api-hooks/products/useQueryProducts";
-import AppContainer from "../component/page/AppContainer";
-import AppSpinner from "../component/loading/AppSpinner";
+import { Typography } from "@mui/material";
+import ProductsListing from "./components/ProductsListing";
+import useQueryProducts from "../../hooks/api-hooks/products/useQueryProducts";
+import AppContainer from "../../component/page/AppContainer";
+import AppSpinner from "../../component/loading/AppSpinner";
 
 const ProductsListingPage = () => {
   const { data: products, isLoading, error } = useQueryProducts();

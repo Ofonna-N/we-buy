@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import RoutePaths from "./constants/RoutePaths";
 import Layout from "./pages/Layout";
-import ProductsListingPage from "./pages/ProductsListingPage";
+import ProductsListingPage from "./pages/productsListing/ProductsListingPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import ErrorPage from "./pages/ErrorPage";
 import PlaygroundPage from "./pages/PlaygroundPage";

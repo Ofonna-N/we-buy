@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import ProductCard from "./ProductCard";
 import Grid from "@mui/material/Unstable_Grid2";
 
-import Product from "../../types/Product";
+import Product from "../../../types/Product";
 
 type Props = {
   products: Product[];

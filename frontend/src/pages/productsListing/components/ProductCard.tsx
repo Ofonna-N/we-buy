@@ -9,8 +9,8 @@ import {
 } from "@mui/material";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import { Link as RouterLink } from "react-router-dom";
-import Product from "../../types/Product";
-import RoutesPaths from "../../constants/RoutePaths";
+import Product from "../../../types/Product";
+import RoutesPaths from "../../../constants/RoutePaths";
 
 type Props = {
   product: Product;
