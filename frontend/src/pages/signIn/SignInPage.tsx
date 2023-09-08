@@ -17,8 +17,6 @@ const SignInPage = () => {
 
   const redirectParam = params.get("redirect");
 
-  console.log(redirectParam);
-
   useEffect(() => {
     const navigateRoute = redirectParam
       ? redirectParam
