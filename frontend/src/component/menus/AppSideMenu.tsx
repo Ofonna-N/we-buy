@@ -48,7 +48,7 @@ const AppSideMenu = () => {
     </ListItemButton>,
 
     <>
-      {(user?._id && (
+      {(user && (
         <AppDropDownMenu
           title={user.name}
           menuItems={[

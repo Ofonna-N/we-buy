@@ -89,7 +89,7 @@ const Navbar = () => {
             >
               Cart
             </NavLinkIconBtn>
-            {(user?._id && (
+            {(user && (
               <AppDropDownMenu
                 title={user.name}
                 menuItems={[

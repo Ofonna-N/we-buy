@@ -5,11 +5,10 @@ import localStorageKeys from "../constants/localStorageKeys";
 const persistentUserInfo = localStorage.getItem(localStorageKeys.USER);
 
 const initialState = {
-  userInfo:
-    ((persistentUserInfo && JSON.parse(persistentUserInfo)) as
-      | User
-      | null
-      | undefined) || ({} as User | null | undefined),
+  userInfo: ((persistentUserInfo && JSON.parse(persistentUserInfo)) || null) as
+    | User
+    | null
+    | undefined,
 };
 
 const userSlice = createSlice({
