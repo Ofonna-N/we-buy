@@ -40,7 +40,6 @@ const ShippinhForm = () => {
   };
 
   const onSubmitForm = handleSubmit((data) => {
-    console.log(data);
     dispatch(shippingInfoActions.setShippingInfo(data));
   });
 

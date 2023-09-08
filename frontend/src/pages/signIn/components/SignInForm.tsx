@@ -46,7 +46,6 @@ const SignInForm = () => {
         onSubmit={(e) => {
           e.preventDefault();
           onSubmitForm();
-          console.log("submited!");
         }}
       >
         <AppTextField
