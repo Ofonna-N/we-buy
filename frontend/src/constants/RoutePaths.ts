@@ -5,6 +5,7 @@ const RoutesPaths = {
   CART_ROUTE: "/cart",
   PRODUCTS_ROUTE: "/products",
   PLAYGROUND_ROUTE: "/playground",
+  SHIPPING_ROUTE: "/shipping",
 };
 
 export default RoutesPaths;

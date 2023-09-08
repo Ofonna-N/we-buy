@@ -8,6 +8,7 @@ import PlaygroundPage from "./pages/PlaygroundPage";
 import CartPage from "./pages/cartPage/CartPage";
 import SignInPage from "./pages/signIn/SignInPage";
 import RegisterationPage from "./pages/registeration/RegisterationPage";
+import ShippingPage from "./pages/shippingPage/ShippingPage";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: RoutePaths.REGISTER_ROUTE,
         element: <RegisterationPage />,
+      },
+      {
+        path: RoutePaths.SHIPPING_ROUTE,
+        element: <ShippingPage />,
       },
       {
         path: RoutePaths.PLAYGROUND_ROUTE,

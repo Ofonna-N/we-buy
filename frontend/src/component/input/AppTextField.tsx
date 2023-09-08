@@ -20,6 +20,7 @@ type Props = {
   useError?: string;
   disabled?: TextFieldProps["disabled"];
   sx?: TextFieldProps["sx"];
+  defaultValue?: TextFieldProps["defaultValue"];
 };
 
 const AppTextField = React.forwardRef<HTMLInputElement, Props>(function (
