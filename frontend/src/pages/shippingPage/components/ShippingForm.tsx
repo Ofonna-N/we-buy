@@ -24,7 +24,7 @@ const ShippinhForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     resolver: yupResolver(shippingFormSchema),
     defaultValues: {
@@ -35,6 +35,7 @@ const ShippinhForm = () => {
     },
   });
 
+  // console.log("Form is valid: ", isValid);
   const inputFieldSx: TextFieldProps["sx"] = {
     marginBottom: "1rem",
   };
@@ -88,7 +89,12 @@ const ShippinhForm = () => {
           {...register("country")}
           useError={errors.country?.message}
         />
-        <Button variant="contained" color="primary" type="submit">
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          disabled={!isValid}
+        >
           Continue
         </Button>
       </form>
