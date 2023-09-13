@@ -7,7 +7,7 @@ const RoutesPaths = {
   PLAYGROUND_ROUTE: "/playground",
   CHECKOUT_ROUTE: "/checkout",
   SHIPPING_ROUTE: "/shipping",
-  PAYMENT_ROUTE: "/payment",
+  PAYMENTMETHOD_ROUTE: "/paymentmethod",
   PLACE_ORDER_ROUTE: "/placeorder",
 };
 

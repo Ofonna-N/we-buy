@@ -55,7 +55,9 @@ const router = createBrowserRouter([
               },
               {
                 path:
-                  RoutePaths.CHECKOUT_ROUTE + "/" + RoutesPaths.PAYMENT_ROUTE,
+                  RoutePaths.CHECKOUT_ROUTE +
+                  "/" +
+                  RoutesPaths.PAYMENTMETHOD_ROUTE,
                 element: <PaymentPage />,
               },
               {
