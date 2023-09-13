@@ -10,12 +10,26 @@ import {
   useAppSelector,
 } from "../../hooks/redux-hooks/appStoreHooks";
 import { PaymentMethodActions } from "../../slices/paymentMethodSlice";
+import { useState } from "react";
+import PaymentMethodType from "../../types/PaymentMethods";
 
 const PaymentPage = () => {
   const paymentMethod = useAppSelector(
     (state) => state.paymentMethodSlice.paymentMethod
   );
+
+  const [selectedPaymentMethod, setSelectedPaymentMethod] =
+    useState<PaymentMethodType>(paymentMethod);
+
   const dispatch = useAppDispatch();
+
+  const setPaymentMethod = () => {
+    dispatch(
+      PaymentMethodActions.setPaymentMethod({
+        paymentMethod: selectedPaymentMethod,
+      })
+    );
+  };
 
   return (
     <Box>
@@ -27,21 +41,19 @@ const PaymentPage = () => {
           labelPlacement="start"
           control={
             <Radio
-              checked={paymentMethod === "Paypal"}
+              checked={selectedPaymentMethod === "Paypal"}
               onChange={(e) => {
                 if (e.target.checked) {
-                  dispatch(
-                    PaymentMethodActions.setPaymentMethod({
-                      paymentMethod: "Paypal",
-                    })
-                  );
+                  setSelectedPaymentMethod("Paypal");
                 }
               }}
             />
           }
         />
       </Box>
-      <Button variant="contained">Continue</Button>
+      <Button variant="contained" onClick={setPaymentMethod}>
+        Continue
+      </Button>
     </Box>
   );
 };
