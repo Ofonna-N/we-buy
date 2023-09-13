@@ -6,6 +6,7 @@ import userSlice from "./slices/userSlice";
 import userListner from "./middleware/store/userListner";
 import shippingInfoSlice from "./slices/shippingInfoSlice";
 import shippingInfoListener from "./middleware/store/shippingInfoListener";
+import paymentMethodSlice from "./slices/paymentMethodSlice";
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     appMenuSlice,
     userSlice,
     shippingInfoSlice,
+    paymentMethodSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().prepend([
