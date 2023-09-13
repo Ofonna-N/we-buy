@@ -24,6 +24,7 @@ const CheckoutPage = () => {
         <Breadcrumbs separator={"/"}>
           {breadCrumbs.map((crumb, i) => (
             <AppNavLink
+              key={crumb}
               sx={{
                 color: i === breadCrumbs.length - 1 ? "white" : "primary",
                 textDecoration: "none",
