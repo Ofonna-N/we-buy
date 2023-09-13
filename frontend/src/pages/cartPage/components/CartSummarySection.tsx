@@ -3,6 +3,7 @@ import Cart from "../../../types/Cart";
 
 type Props = {
   cart: Cart;
+  proceedToCheckout: () => void;
 };
 
 const CartSummarySection = (props: Props) => {
@@ -43,7 +44,11 @@ const CartSummarySection = (props: Props) => {
         </ListItem>
       ))}
       <ListItem>
-        <Button variant="contained" sx={{ marginY: "1rem" }}>
+        <Button
+          variant="contained"
+          sx={{ marginY: "1rem" }}
+          onClick={props.proceedToCheckout}
+        >
           Proceed To Checkout
         </Button>
       </ListItem>

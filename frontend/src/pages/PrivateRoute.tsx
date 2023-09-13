@@ -5,7 +5,7 @@ import RoutesPaths from "../constants/RoutePaths";
 const PrivateRoute = () => {
   const userInfo = useAppSelector((state) => state.userSlice.userInfo);
 
-  console.log(userInfo);
+  // console.log(userInfo);
   return userInfo ? (
     <Outlet />
   ) : (

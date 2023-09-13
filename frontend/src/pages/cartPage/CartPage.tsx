@@ -1,6 +1,6 @@
 //#region Imports
 import { Alert, Container, Link, Typography } from "@mui/material";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import {
   useAppDispatch,
   useAppSelector,
@@ -10,11 +10,13 @@ import { cartActions } from "../../slices/cartSlice";
 import CartSummarySection from "./components/CartSummarySection";
 import { CartItem } from "../../types/Cart";
 import CartItemsSection from "./components/CartItemsSection";
+import RoutesPaths from "../../constants/RoutePaths";
 //#endregion
 
 const CartPage = () => {
   const cart = useAppSelector((state) => state.cartSlice);
   const dispach = useAppDispatch();
+  const navigate = useNavigate();
 
   const addToCart = (cartItem: CartItem, qty: string) => {
     dispach(
@@ -33,6 +35,10 @@ const CartPage = () => {
         id,
       })
     );
+  };
+
+  const proceedToCheckout = () => {
+    navigate(RoutesPaths.CHECKOUT_ROUTE);
   };
 
   if (cart.cartItems.length <= 0) {
@@ -62,7 +68,10 @@ const CartPage = () => {
           />
         </Grid2>
         <Grid2 lg={4}>
-          <CartSummarySection cart={cart} />
+          <CartSummarySection
+            cart={cart}
+            proceedToCheckout={proceedToCheckout}
+          />
         </Grid2>
       </Grid2>
     </Container>

@@ -10,6 +10,10 @@ import SignInPage from "./pages/signIn/SignInPage";
 import RegisterationPage from "./pages/registeration/RegisterationPage";
 import ShippingPage from "./pages/shippingPage/ShippingPage";
 import PrivateRoute from "./pages/PrivateRoute";
+import CheckoutPage from "./pages/checkoutPage/CheckoutPage";
+import RoutesPaths from "./constants/RoutePaths";
+import PaymentPage from "./pages/paymentPage/paymentPage";
+import PlaceOrderPage from "./pages/placeOrderPage/PlaceOrderPage";
 
 const router = createBrowserRouter([
   {
@@ -42,8 +46,26 @@ const router = createBrowserRouter([
         element: <PrivateRoute />,
         children: [
           {
-            path: RoutePaths.SHIPPING_ROUTE,
-            element: <ShippingPage />,
+            path: RoutePaths.CHECKOUT_ROUTE,
+            element: <CheckoutPage />,
+            children: [
+              {
+                index: true,
+                element: <ShippingPage />,
+              },
+              {
+                path:
+                  RoutePaths.CHECKOUT_ROUTE + "/" + RoutesPaths.PAYMENT_ROUTE,
+                element: <PaymentPage />,
+              },
+              {
+                path:
+                  RoutePaths.CHECKOUT_ROUTE +
+                  "/" +
+                  RoutesPaths.PLACE_ORDER_ROUTE,
+                element: <PlaceOrderPage />,
+              },
+            ],
           },
         ],
       },
