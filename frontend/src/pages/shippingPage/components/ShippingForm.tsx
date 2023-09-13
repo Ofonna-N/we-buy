@@ -4,8 +4,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAppSelector } from "../../../hooks/redux-hooks/appStoreHooks";
-import { useDispatch } from "react-redux";
-import { shippingInfoActions } from "../../../slices/shippingInfoSlice";
+import ShippingFormInput from "../../../types/ShippingFormInput";
 
 const shippingFormSchema = yup.object({
   address: yup.string().required(),
@@ -14,9 +13,11 @@ const shippingFormSchema = yup.object({
   country: yup.string().required(),
 });
 
-const ShippinhForm = () => {
-  const dispatch = useDispatch();
+type Props = {
+  onFormSubmit: (data: ShippingFormInput) => void;
+};
 
+const ShippingForm = (props: Props) => {
   const shippingInfo = useAppSelector(
     (state) => state.shippingInfoSlice.shippingInfo
   );
@@ -41,7 +42,7 @@ const ShippinhForm = () => {
   };
 
   const onSubmitForm = handleSubmit((data) => {
-    dispatch(shippingInfoActions.setShippingInfo(data));
+    props.onFormSubmit(data);
   });
 
   return (
@@ -102,4 +103,4 @@ const ShippinhForm = () => {
   );
 };
 
-export default ShippinhForm;
+export default ShippingForm;

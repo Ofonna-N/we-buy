@@ -10,8 +10,11 @@ import {
   useAppSelector,
 } from "../../hooks/redux-hooks/appStoreHooks";
 import { PaymentMethodActions } from "../../slices/paymentMethodSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PaymentMethodType from "../../types/PaymentMethods";
+import { checkoutStepsActions } from "../../slices/checkoutStepsSlice";
+import { useNavigate } from "react-router-dom";
+import RoutesPaths from "../../constants/RoutePaths";
 
 const PaymentPage = () => {
   const paymentMethod = useAppSelector(
@@ -22,6 +25,7 @@ const PaymentPage = () => {
     useState<PaymentMethodType>(paymentMethod);
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const setPaymentMethod = () => {
     dispatch(
@@ -29,7 +33,23 @@ const PaymentPage = () => {
         paymentMethod: selectedPaymentMethod,
       })
     );
+    dispatch(
+      checkoutStepsActions.updateCheckoutStep({
+        completedStep: "Payment Method",
+      })
+    );
+    navigate(RoutesPaths.PLACE_ORDER_ROUTE);
   };
+
+  useEffect(() => {
+    dispatch(
+      checkoutStepsActions.updatecheckoutBreadCrumb({
+        currentStep: "Payment Method",
+      })
+    );
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Box>

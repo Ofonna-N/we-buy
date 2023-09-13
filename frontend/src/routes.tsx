@@ -54,17 +54,11 @@ const router = createBrowserRouter([
                 element: <ShippingPage />,
               },
               {
-                path:
-                  RoutePaths.CHECKOUT_ROUTE +
-                  "/" +
-                  RoutesPaths.PAYMENTMETHOD_ROUTE,
+                path: RoutesPaths.PAYMENTMETHOD_ROUTE,
                 element: <PaymentPage />,
               },
               {
-                path:
-                  RoutePaths.CHECKOUT_ROUTE +
-                  "/" +
-                  RoutesPaths.PLACE_ORDER_ROUTE,
+                path: RoutesPaths.PLACE_ORDER_ROUTE,
                 element: <PlaceOrderPage />,
               },
             ],

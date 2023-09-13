@@ -1,3 +1,5 @@
+const checkoutRoute = "/checkout";
+
 const RoutesPaths = {
   HOME_ROUTE: "/",
   SIGN_IN_ROUTE: "/signin",
@@ -5,10 +7,10 @@ const RoutesPaths = {
   CART_ROUTE: "/cart",
   PRODUCTS_ROUTE: "/products",
   PLAYGROUND_ROUTE: "/playground",
-  CHECKOUT_ROUTE: "/checkout",
-  SHIPPING_ROUTE: "/shipping",
-  PAYMENTMETHOD_ROUTE: "/paymentmethod",
-  PLACE_ORDER_ROUTE: "/placeorder",
+  CHECKOUT_ROUTE: checkoutRoute,
+  SHIPPING_ROUTE: checkoutRoute + "/shipping",
+  PAYMENTMETHOD_ROUTE: checkoutRoute + "/paymentmethod",
+  PLACE_ORDER_ROUTE: checkoutRoute + "/placeorder",
 };
 
 export default RoutesPaths;
