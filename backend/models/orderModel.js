@@ -78,7 +78,7 @@ const orderSchema = new mongoose.Schema(
       required,
       default: 0.0,
     },
-    isPad: {
+    isPaid: {
       type: Boolean,
       required,
       default: false,
