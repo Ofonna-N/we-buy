@@ -12,8 +12,8 @@ import ShippingPage from "./pages/shippingPage/ShippingPage";
 import PrivateRoute from "./pages/PrivateRoute";
 import CheckoutPage from "./pages/checkoutPage/CheckoutPage";
 import RoutesPaths from "./constants/RoutePaths";
-import PaymentPage from "./pages/paymentPage/paymentPage";
 import PlaceOrderPage from "./pages/placeOrderPage/PlaceOrderPage";
+import PaymentPage from "./pages/paymentPage/PaymentPage";
 
 const router = createBrowserRouter([
   {
