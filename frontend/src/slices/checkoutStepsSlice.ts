@@ -6,7 +6,7 @@ type CheckoutStep = "Shipping" | "Payment Method" | "Place Order";
 const initialState = {
   checkoutSteps: {
     shipping: {
-      path: RoutesPaths.CHECKOUT_ROUTE,
+      path: RoutesPaths.SHIPPING_ROUTE,
       complete: false,
       label: "Shipping" as CheckoutStep,
     },

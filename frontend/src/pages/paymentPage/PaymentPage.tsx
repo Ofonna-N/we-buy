@@ -21,6 +21,10 @@ const PaymentPage = () => {
     (state) => state.paymentMethodSlice.paymentMethod
   );
 
+  const prevStep = useAppSelector(
+    (state) => state.shippingInfoSlice.shippingInfo
+  );
+
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState<PaymentMethodType>(paymentMethod);
 
@@ -42,6 +46,10 @@ const PaymentPage = () => {
   };
 
   useEffect(() => {
+    if (prevStep === null) {
+      navigate(RoutesPaths.SHIPPING_ROUTE);
+    }
+
     dispatch(
       checkoutStepsActions.updatecheckoutBreadCrumb({
         currentStep: "Payment Method",

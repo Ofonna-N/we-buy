@@ -1,10 +1,11 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
-import { Box, Breadcrumbs } from "@mui/material";
+import { Box, Breadcrumbs, useTheme } from "@mui/material";
 import AppContainer from "../../component/page/AppContainer";
 import { useAppSelector } from "../../hooks/redux-hooks/appStoreHooks";
 import AppNavLink from "../../component/interactive/AppNavLink";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
+import RoutesPaths from "../../constants/RoutePaths";
 
 const CheckoutPage = () => {
   const checkoutSteps = useAppSelector(
@@ -18,6 +19,14 @@ const CheckoutPage = () => {
     return Object.values(checkoutSteps);
   }, [checkoutSteps]);
 
+  const navigate = useNavigate();
+
+  const theme = useTheme();
+
+  useEffect(() => {
+    navigate(RoutesPaths.SHIPPING_ROUTE);
+  }, []);
+
   return (
     <AppContainer>
       <Box mb={"2rem"}>
@@ -26,7 +35,10 @@ const CheckoutPage = () => {
             <AppNavLink
               key={crumb}
               sx={{
-                color: i === breadCrumbs.length - 1 ? "white" : "primary",
+                color:
+                  i === breadCrumbs.length - 1
+                    ? theme.palette.text.primary
+                    : "primary",
                 textDecoration: "none",
               }}
               to={checkoutStepsData.find((data) => crumb === data.label)?.path}

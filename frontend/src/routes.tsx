@@ -47,10 +47,11 @@ const router = createBrowserRouter([
         children: [
           {
             path: RoutePaths.CHECKOUT_ROUTE,
+
             element: <CheckoutPage />,
             children: [
               {
-                index: true,
+                path: RoutePaths.SHIPPING_ROUTE,
                 element: <ShippingPage />,
               },
               {
