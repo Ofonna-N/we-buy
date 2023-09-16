@@ -10,7 +10,7 @@ router.post("/", auth, ordersController.createAndAddOrdersByToken_Orders);
 
 router.get("/profile", auth, ordersController.getOrdersByToken_Orders);
 
-router.get("/:id", auth, admin, ordersController.getSingleOrderById_Orders);
+router.get("/:id", auth, ordersController.getSingleOrderById_Orders);
 
 router.patch(
   "/:id/pay",

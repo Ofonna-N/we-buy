@@ -4,14 +4,30 @@ const orderModel = require("../models/orderModel");
 // @route POST /api/orders
 // @access private
 const createAndAddOrdersByToken_Orders = async (req, res) => {
-  const body = req.body;
-  // const order = orderModel.Order.create({
-  //   user:"",
-  // })
+  const {
+    orderItems,
+    itemPrice,
+    shippingInfo,
+    paymentMethod,
+    taxPrice,
+    shippingPrice,
+    totalPrice,
+  } = req.body;
+
+  const order = await orderModel.Order.create({
+    user: req.user,
+    orderItems,
+    itemPrice,
+    taxPrice,
+    totalPrice,
+    shippingPrice,
+    paymentMethod,
+    shippingInfo,
+  });
 
   return res.json({
     message: "created order",
-    body,
+    order,
   });
 };
 

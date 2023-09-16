@@ -79,6 +79,10 @@ const PlaceOrderPage = () => {
     mutate(body);
   };
 
+  if (error) {
+    throw new Error(error.message);
+  }
+
   return (
     <Stack
       sx={{
