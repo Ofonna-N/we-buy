@@ -1,8 +1,20 @@
-import { List, ListItem, Paper, Typography } from "@mui/material";
+import {
+  Button,
+  ButtonProps,
+  List,
+  ListItem,
+  Paper,
+  Typography,
+} from "@mui/material";
 import Cart from "../../../types/Cart";
 
 type Props = {
   cart: Cart;
+  usePlaceOrderButton?: {
+    label: string;
+    disabled: ButtonProps["disabled"];
+    onClick: ButtonProps["onClick"];
+  };
 };
 
 const OrderSummaryInfo = (props: Props) => {
@@ -35,6 +47,22 @@ const OrderSummaryInfo = (props: Props) => {
           {info}
         </ListItem>
       ))}
+      <ListItem>
+        <Button
+          variant="contained"
+          fullWidth
+          // sx={{
+          //   maxWidth: {
+          //     maxWidth: "100%",
+          //     lg: "100%",
+          //   },
+          // }}
+          disabled={props.usePlaceOrderButton?.disabled}
+          onClick={props.usePlaceOrderButton?.onClick}
+        >
+          {props.usePlaceOrderButton?.label || "Place Order"}
+        </Button>
+      </ListItem>
     </Paper>
   );
 };

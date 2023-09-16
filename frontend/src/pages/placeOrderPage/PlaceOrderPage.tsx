@@ -9,6 +9,8 @@ import OrderSummaryList from "./components/OrderSummaryList";
 import { useNavigate } from "react-router-dom";
 import RoutesPaths from "../../constants/RoutePaths";
 import OrderSummaryInfo from "./components/OrderSummaryInfo";
+import Order from "../../types/Order";
+import useMutatePlaceOrder from "../../hooks/api-hooks/orders/useMutatePlaceOrder";
 
 const PlaceOrderPage = () => {
   /* #region REDUX */
@@ -49,6 +51,34 @@ const PlaceOrderPage = () => {
   }, []);
   /* #endregion */
 
+  const { isLoading, error, mutate } = useMutatePlaceOrder();
+
+  const onPlaceOrder = () => {
+    const nullStringsValue = "Error"; //what gets sent to the backend if we have an undefined string property
+
+    const body: Order = {
+      orderItems: cart.cartItems.map((cartItem) => ({
+        name: cartItem.product.name,
+        image: cartItem.product.image,
+        quantity: cartItem.qty,
+        product: cartItem.product._id,
+      })),
+      paymentMethod: paymentMethod,
+      itemPrice: cart.itemsPrice,
+      shippingPrice: cart.shippingPrice,
+      taxPrice: cart.taxPrice,
+      totalPrice: cart.totalPrice,
+      shippingInfo: {
+        address: shippingInfo?.address || nullStringsValue,
+        city: shippingInfo?.city || nullStringsValue,
+        country: shippingInfo?.country || nullStringsValue,
+        postalCode: shippingInfo?.postalCode?.toString() || nullStringsValue,
+      },
+    };
+    // console.log("Request body: ", body);
+    mutate(body);
+  };
+
   return (
     <Stack
       sx={{
@@ -63,7 +93,14 @@ const PlaceOrderPage = () => {
         paymentMethod={paymentMethod}
         cartItems={cart.cartItems}
       />
-      <OrderSummaryInfo cart={cart} />
+      <OrderSummaryInfo
+        cart={cart}
+        usePlaceOrderButton={{
+          label: "Place Order",
+          disabled: isLoading,
+          onClick: onPlaceOrder,
+        }}
+      />
     </Stack>
   );
 };
