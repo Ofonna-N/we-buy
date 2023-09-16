@@ -1,10 +1,10 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import { Box, Breadcrumbs, useTheme } from "@mui/material";
 import AppContainer from "../../component/page/AppContainer";
 import { useAppSelector } from "../../hooks/redux-hooks/appStoreHooks";
 import AppNavLink from "../../component/interactive/AppNavLink";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import RoutesPaths from "../../constants/RoutePaths";
 
 const CheckoutPage = () => {
@@ -19,13 +19,20 @@ const CheckoutPage = () => {
     return Object.values(checkoutSteps);
   }, [checkoutSteps]);
 
-  const navigate = useNavigate();
+  const navigate = useRef(useNavigate());
+  const location = useLocation();
 
+  console.log(navigate);
   const theme = useTheme();
 
   useEffect(() => {
-    navigate(RoutesPaths.SHIPPING_ROUTE);
-  }, []);
+    const loc = location.pathname;
+    const path = RoutesPaths.CHECKOUT_ROUTE;
+
+    if (loc === path) {
+      navigate.current(RoutesPaths.SHIPPING_ROUTE);
+    }
+  }, [location]);
 
   return (
     <AppContainer>

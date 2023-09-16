@@ -10,7 +10,7 @@ import {
   useAppSelector,
 } from "../../hooks/redux-hooks/appStoreHooks";
 import { PaymentMethodActions } from "../../slices/paymentMethodSlice";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PaymentMethodType from "../../types/PaymentMethods";
 import { checkoutStepsActions } from "../../slices/checkoutStepsSlice";
 import { useNavigate } from "react-router-dom";
@@ -28,35 +28,35 @@ const PaymentPage = () => {
   const [selectedPaymentMethod, setSelectedPaymentMethod] =
     useState<PaymentMethodType>(paymentMethod);
 
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const dispatch = useRef(useAppDispatch());
+  const navigate = useRef(useNavigate());
 
   const setPaymentMethod = () => {
-    dispatch(
+    dispatch.current(
       PaymentMethodActions.setPaymentMethod({
         paymentMethod: selectedPaymentMethod,
       })
     );
-    dispatch(
+    dispatch.current(
       checkoutStepsActions.updateCheckoutStep({
         completedStep: "Payment Method",
       })
     );
-    navigate(RoutesPaths.PLACE_ORDER_ROUTE);
+    navigate.current(RoutesPaths.PLACE_ORDER_ROUTE);
   };
 
   useEffect(() => {
     if (prevStep === null) {
-      navigate(RoutesPaths.SHIPPING_ROUTE);
+      navigate.current(RoutesPaths.SHIPPING_ROUTE);
     }
+  }, [prevStep]);
 
-    dispatch(
+  useEffect(() => {
+    dispatch.current(
       checkoutStepsActions.updatecheckoutBreadCrumb({
         currentStep: "Payment Method",
       })
     );
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
