@@ -1,8 +1,18 @@
+const orderModel = require("../models/orderModel");
+
 // @desc create and add order to list of orders
 // @route POST /api/orders
 // @access private
 const createAndAddOrdersByToken_Orders = async (req, res) => {
-  return res.send("created and added orders...");
+  const body = req.body;
+  // const order = orderModel.Order.create({
+  //   user:"",
+  // })
+
+  return res.json({
+    message: "created order",
+    body,
+  });
 };
 
 // @desc get logged in user orders
