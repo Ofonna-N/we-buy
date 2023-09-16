@@ -4,6 +4,7 @@ import useMutateData from "../useMutateData";
 import { useAppDispatch } from "../../redux-hooks/appStoreHooks";
 import { userSliceActions } from "../../../slices/userSlice";
 import RoutesPaths from "../../../constants/RoutePaths";
+import endpointRoutes from "../../../constants/EndpointRoutes";
 
 const useMutateRegister = () => {
   const dispach = useAppDispatch();
@@ -14,7 +15,7 @@ const useMutateRegister = () => {
     navigate(RoutesPaths.HOME_ROUTE);
   };
 
-  return useMutateData("users/register", onRegisterUser);
+  return useMutateData(endpointRoutes.AUTH.REGISTER_USER, onRegisterUser);
 };
 
 export default useMutateRegister;

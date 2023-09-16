@@ -2,3 +2,5 @@ in the cart page, the summary section should have each summary item be at both e
 cart page needs a better mobile responsive layout
 Place Order page summary titles should all be bold, looks odd in light mode
 place orde rsummary items should have some padding
+fix endpoints error status codes
+add redirection for logged out user trying to checkout
