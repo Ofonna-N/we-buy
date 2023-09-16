@@ -22,7 +22,6 @@ const CheckoutPage = () => {
   const navigate = useRef(useNavigate());
   const location = useLocation();
 
-  console.log(navigate);
   const theme = useTheme();
 
   useEffect(() => {
