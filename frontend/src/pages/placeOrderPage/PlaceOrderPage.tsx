@@ -100,7 +100,7 @@ const PlaceOrderPage = () => {
       />
       <OrderSummaryInfo
         cart={cart}
-        usePlaceOrderButton={{
+        placeOrderButton={{
           label: "Place Order",
           disabled: isLoading,
           onClick: onPlaceOrder,
