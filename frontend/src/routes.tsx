@@ -14,6 +14,7 @@ import CheckoutPage from "./pages/checkoutPage/CheckoutPage";
 import RoutesPaths from "./constants/RoutePaths";
 import PlaceOrderPage from "./pages/placeOrderPage/PlaceOrderPage";
 import PaymentPage from "./pages/paymentPage/PaymentPage";
+import OrderDetailsPage from "./pages/orderDetailsPage/OrderDetailsPage";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
                 element: <PlaceOrderPage />,
               },
             ],
+          },
+          {
+            path: `${RoutePaths.ORDERS_ROUTE}/:id`,
+            element: <OrderDetailsPage />,
           },
         ],
       },

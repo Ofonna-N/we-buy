@@ -61,6 +61,7 @@ const PlaceOrderPage = () => {
         name: cartItem.product.name,
         image: cartItem.product.image,
         quantity: cartItem.qty,
+        price: cartItem.product.price.toString(),
         product: cartItem.product._id,
       })),
       paymentMethod: paymentMethod,

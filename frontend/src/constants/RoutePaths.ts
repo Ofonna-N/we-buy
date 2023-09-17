@@ -11,6 +11,7 @@ const RoutesPaths = {
   SHIPPING_ROUTE: checkoutRoute + "/shipping",
   PAYMENTMETHOD_ROUTE: checkoutRoute + "/paymentmethod",
   PLACE_ORDER_ROUTE: checkoutRoute + "/placeorder",
+  ORDERS_ROUTE: "/orders",
 };
 
 export default RoutesPaths;

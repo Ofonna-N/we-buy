@@ -42,7 +42,13 @@ const getOrdersByToken_Orders = async (req, res) => {
 // @route GET /api/orders/:id
 // @access private/Admin
 const getSingleOrderById_Orders = async (req, res) => {
-  return res.send("getting order by id...");
+  const order = await orderModel.Order.findById(req.params.id).populate("user");
+
+  if (!order) {
+    throw new Error("Order not found");
+  }
+
+  return res.json(order);
 };
 
 // @desc update order to paid
