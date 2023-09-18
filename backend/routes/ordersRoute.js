@@ -8,9 +8,11 @@ const router = express.Router();
 
 router.post("/", auth, ordersController.createAndAddOrdersByToken_Orders);
 
-router.get("/profile", auth, ordersController.getOrdersByToken_Orders);
+router.get("/profile", auth, ordersController.getUserOrders_Orders);
 
-router.get("/:id", auth, ordersController.getSingleOrderById_Orders);
+router.get("/profile/:id", auth, ordersController.getUserSingleOrder_Orders);
+
+router.get("/:id", auth, admin, ordersController.getSingleOrderById_Orders);
 
 router.patch(
   "/:id/pay",

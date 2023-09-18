@@ -6,6 +6,7 @@ const endpointRoutes = {
   },
   ORDERS: {
     ORDERS: "/orders/",
+    USER_ORDER_ROUTE: "/orders/profile/",
   },
   PRODUCTS: {
     PRODUCTS: "/products/",

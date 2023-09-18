@@ -25,17 +25,29 @@ const createAndAddOrdersByToken_Orders = async (req, res) => {
     shippingInfo,
   });
 
-  return res.json({
-    message: "created order",
-    order,
-  });
+  return res.json(order);
 };
 
 // @desc get logged in user orders
 // @route GET /api/orders/profile
 // @access private
-const getOrdersByToken_Orders = async (req, res) => {
+const getUserOrders_Orders = async (req, res) => {
   return res.send("getting users orders by token...");
+};
+// @desc get logged in user order by Id
+// @route GET /api/orders/profile/:id
+// @access private
+const getUserSingleOrder_Orders = async (req, res) => {
+  const order = await orderModel.Order.findById(req.params.id).populate("user");
+
+  if (!order) {
+    throw new Error("Order not found");
+  }
+
+  if (req.user._id.toString() !== order.user._id.toString())
+    throw new Error("unAuthorized access to a user's order");
+
+  return res.json(order);
 };
 
 // @desc get single order by id
@@ -74,7 +86,8 @@ const getOrders_Orders = async (req, res) => {
 
 module.exports = {
   createAndAddOrdersByToken_Orders,
-  getOrdersByToken_Orders,
+  getUserOrders_Orders,
+  getUserSingleOrder_Orders,
   getSingleOrderById_Orders,
   updateOrderToPaidById_Orders,
   updateOrderToDeliveredById_Orders,

@@ -25,7 +25,14 @@ const OrderDetailsPage = () => {
       <Box py={3}>
         <Typography variant="h3">Order No: {order?._id}</Typography>
       </Box>
-      <Stack gap={2} direction={"row"}>
+      <Stack
+        gap={2}
+        sx={{
+          flexDirection: {
+            lg: "row",
+          },
+        }}
+      >
         <OrderDetailsInfo order={order as OrderResponse} />
         <OrderDetailsSummary order={order as OrderResponse} />
       </Stack>
