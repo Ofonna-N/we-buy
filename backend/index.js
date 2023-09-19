@@ -10,6 +10,7 @@ const homeRoute = require("./routes/homeRoute");
 const productsRoute = require("./routes/productsRoute");
 const usersRoute = require("./routes/usersRoute");
 const ordersRoute = require("./routes/ordersRoute");
+const paypalRoute = require("./routes/paypalRoute");
 const errorRoute = require("./middleware/errorMiddleware");
 
 app.use(appDefaultMiddleware);
@@ -17,6 +18,7 @@ app.use("/", homeRoute);
 app.use("/api/products", productsRoute);
 app.use("/api/users", usersRoute);
 app.use("/api/orders", ordersRoute);
+app.use("/api/paypal", paypalRoute);
 app.use(errorRoute);
 
 startServer(app);
