@@ -11,6 +11,9 @@ const endpointRoutes = {
   PRODUCTS: {
     PRODUCTS: "/products/",
   },
+  PAYPAL: {
+    CLIENT_ID: "/paypal/clientid",
+  },
 };
 
 export default endpointRoutes;
