@@ -12,7 +12,7 @@ const endpointRoutes = {
     PRODUCTS: "/products/",
   },
   PAYPAL: {
-    CLIENT_ID: "/paypal/clientid",
+    CLIENT_ID: "/paypal/clientid/",
   },
 };
 

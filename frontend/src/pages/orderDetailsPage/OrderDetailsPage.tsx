@@ -6,19 +6,23 @@ import AppSpinner from "../../component/loading/AppSpinner";
 import OrderDetailsInfo from "./components/OrderDetailsInfo";
 import { OrderResponse } from "../../types/Order";
 import OrderDetailsSummary from "./components/OrderDetailsSummary";
+import { usePayPalScriptReducer } from "@paypal/react-paypal-js";
 
 const OrderDetailsPage = () => {
   const params = useParams();
 
   const {
     data: order,
-    isLoading,
-    error,
+    isLoading: orderLoading,
+    error: orderError,
+    refetch: refetchOrder,
   } = useQuerySingleOrder(params.id || "");
 
-  if (isLoading) return <AppSpinner />;
+  const paypalScript = usePayPalScriptReducer();
 
-  if (error) throw new Error(error.message);
+  if (orderLoading) return <AppSpinner />;
+
+  if (orderError) throw new Error(orderError.message);
 
   return (
     <AppContainer>
@@ -34,7 +38,12 @@ const OrderDetailsPage = () => {
         }}
       >
         <OrderDetailsInfo order={order as OrderResponse} />
-        <OrderDetailsSummary order={order as OrderResponse} />
+        <OrderDetailsSummary
+          order={order as OrderResponse}
+          paypalScript={paypalScript}
+          isLoading={orderLoading}
+          refetchOrder={() => refetchOrder()}
+        />
       </Stack>
     </AppContainer>
   );

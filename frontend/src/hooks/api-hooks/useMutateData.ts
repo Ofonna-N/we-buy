@@ -4,16 +4,33 @@ import APIClient from "../../services/api-client";
 import { AxiosError } from "axios";
 import ErrorResponse from "../../types/ErrorResponse";
 
+export type APIMutateMethods = "post" | "patch" | "delete" | "put";
+
 const useMutateData = <T, B>(
   endpoint: string,
-  onSuccessFn?: (data: T, variables: B) => void
+  onSuccessFn?: (data: T, variables: B) => void,
+  method?: APIMutateMethods
 ) => {
   const apiClient = useMemo(() => new APIClient<T>(endpoint), [endpoint]);
 
   return useMutation<T, Error, B>({
     mutationFn: async (body) => {
+      let UserResponse = null;
       try {
-        const UserResponse = await apiClient.post(body);
+        switch (method) {
+          case "patch":
+            UserResponse = await apiClient.patch(body);
+            break;
+          case "put":
+            UserResponse = await apiClient.put(body);
+            break;
+          case "delete":
+            UserResponse = await apiClient.delete();
+            break;
+          default:
+            UserResponse = await apiClient.post(body);
+            break;
+        }
         const user = UserResponse.data;
         return user;
       } catch (err) {

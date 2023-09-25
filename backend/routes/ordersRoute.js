@@ -17,12 +17,12 @@ router.get("/:id", auth, admin, ordersController.getSingleOrderById_Orders);
 router.patch(
   "/:id/pay",
   auth,
-  admin,
+  // admin,
   ordersController.updateOrderToPaidById_Orders
 );
 
 router.patch(
-  "/:id/deliver",
+  "/deliver",
   auth,
   admin,
   ordersController.updateOrderToDeliveredById_Orders

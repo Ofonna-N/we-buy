@@ -1,5 +1,5 @@
 const orderModel = require("../models/orderModel");
-
+const mongoose = require("mongoose");
 // @desc create and add order to list of orders
 // @route POST /api/orders
 // @access private
@@ -67,7 +67,25 @@ const getSingleOrderById_Orders = async (req, res) => {
 // @route PATCH /api/orders/:id/pay
 // @access private/Admin
 const updateOrderToPaidById_Orders = async (req, res) => {
-  return res.send("updating order to paid...");
+  const id = new mongoose.Types.ObjectId(req.params.id);
+  const order = await orderModel.Order.findOne(id);
+
+  if (order) {
+    order.isPaid = true;
+    order.paidAt = Date.now();
+    order.paymentResult = {
+      id: req.body.id,
+      status: req.body.status,
+      update_time: req.body.update_time,
+      email_address: req.body.email_address,
+    };
+  } else {
+    throw new Error("Order does not exist");
+  }
+
+  const updatedOrder = await order.save();
+
+  return res.json(updatedOrder);
 };
 
 // @desc updpate order to delivered

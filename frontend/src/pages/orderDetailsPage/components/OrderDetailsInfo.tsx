@@ -56,7 +56,7 @@ const OrderDetailsInfo = (props: Props) => {
           severity={props.order?.isPaid ? "success" : "warning"}
           sx={{ width: "100%" }}
         >
-          {props.order?.isDelivered ? "Paid" : "Not Paid"}
+          {props.order?.isPaid ? "Paid" : "Not Paid"}
         </Alert>
       </ListItem>
       <ListItem sx={{ flexDirection: "column", alignItems: "start", gap: 1 }}>
