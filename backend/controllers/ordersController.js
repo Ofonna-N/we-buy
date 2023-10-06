@@ -69,15 +69,15 @@ const getSingleOrderById_Orders = async (req, res) => {
 const updateOrderToPaidById_Orders = async (req, res) => {
   const id = new mongoose.Types.ObjectId(req.params.id);
   const order = await orderModel.Order.findOne(id);
-
+  console.log("body: ", req.body);
   if (order) {
     order.isPaid = true;
     order.paidAt = Date.now();
     order.paymentResult = {
-      id: req.body.id,
-      status: req.body.status,
-      update_time: req.body.update_time,
-      email_address: req.body.email_address,
+      id: req.body.details.id,
+      status: req.body.details.status,
+      update_time: req.body.details.update_time,
+      email_address: req.body.details.payer.email_address,
     };
   } else {
     throw new Error("Order does not exist");
