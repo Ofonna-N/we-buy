@@ -16,7 +16,7 @@ const useMutatePayOrder = (id: string) => {
         },
       })
     );
-    console.log("ORDER PAIDD: ", order);
+    console.log("ORDER PAID: ", order);
   };
 
   return useMutateData(

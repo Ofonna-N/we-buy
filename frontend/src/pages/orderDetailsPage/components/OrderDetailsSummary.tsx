@@ -12,6 +12,12 @@ import { useEffect, useRef } from "react";
 import useMutatePayOrder from "../../../hooks/api-hooks/orders/useMutatePayOrder";
 import { useAppDispatch } from "../../../hooks/redux-hooks/appStoreHooks";
 import { appSnackBarActions } from "../../../slices/appSnackBarSlice";
+import {
+  CreateOrderActions,
+  CreateOrderData,
+  OnApproveActions,
+  OnApproveData,
+} from "@paypal/paypal-js";
 
 type Props = {
   order: OrderResponse;
@@ -40,13 +46,11 @@ const OrderDetailsSummary = (props: Props) => {
 
   const payPalDispatchRef = useRef(paypalDispach);
   const refetchOrderRef = useRef(props.refetchOrder);
-  const canLoadPaypalScript = useRef(
-    !isPending && !props.isLoading && clientId?.id
-  );
-  // console.log(props.paypalScript);
 
   useEffect(() => {
-    if (canLoadPaypalScript.current) {
+    const canLoadPaypalScript = !!(!props.isLoading && clientId?.id);
+    if (canLoadPaypalScript) {
+      console.log("loading script");
       const loadPaypalScript = async () => {
         payPalDispatchRef.current({
           type: "resetOptions",
@@ -65,7 +69,7 @@ const OrderDetailsSummary = (props: Props) => {
         loadPaypalScript();
       }
     }
-  }, [clientId?.id, props.order.isPaid]);
+  }, [clientId?.id, props.order.isPaid, props.isLoading]);
 
   useEffect(() => {
     if (payOrderIsSucess) {
@@ -75,28 +79,52 @@ const OrderDetailsSummary = (props: Props) => {
 
     if (payOrderIsError) {
       console.log("order payment error...");
-      dispatchRef.current(
-        appSnackBarActions.showAppSnackBar({
-          open: true,
-          message: "Couldn't process payment",
-          useIcon: {
-            icon: "error",
-          },
-        })
-      );
+      showErrorSnackBar("Couldn't process payment");
     }
   }, [payOrderIsSucess, payOrderIsError]);
 
-  const onCreateOrder = () => {
-    // implement method
+  const showErrorSnackBar = (msg: string) => {
+    dispatchRef.current(
+      appSnackBarActions.showAppSnackBar({
+        open: true,
+        message: msg,
+        useIcon: {
+          icon: "error",
+        },
+      })
+    );
   };
 
-  const onApproveOrder = () => {
+  const onCreateOrder = (_: CreateOrderData, actions: CreateOrderActions) => {
     // implement method
+    return actions.order
+      .create({
+        purchase_units: [
+          {
+            amount: {
+              value: props.order.totalPrice.toString(),
+            },
+          },
+        ],
+      })
+      .then((orderID) => {
+        return orderID;
+      });
   };
 
-  const onError = () => {
-    // implement method
+  const onApproveOrder = async (
+    _: OnApproveData,
+    actions: OnApproveActions
+  ): Promise<void | undefined> => {
+    actions.order?.capture().then((details) => {
+      console.log("order details: ", details);
+      payOrder({ id: props.order._id, details });
+      return details;
+    });
+  };
+
+  const onErrorOrder = () => {
+    showErrorSnackBar("Payment cannot be processed at this time");
   };
 
   const onApproveTest = () => {
@@ -141,7 +169,16 @@ const OrderDetailsSummary = (props: Props) => {
                 >
                   Demo Pay
                 </Button>
-                <PayPalButtons style={{ layout: "vertical" }} />
+
+                <PayPalButtons
+                  style={{ layout: "vertical" }}
+                  onApprove={onApproveOrder}
+                  onError={(err) => {
+                    console.log(err);
+                    onErrorOrder();
+                  }}
+                  createOrder={onCreateOrder}
+                />
               </Box>
             )
           )}
