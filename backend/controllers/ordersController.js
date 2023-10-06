@@ -69,7 +69,7 @@ const getSingleOrderById_Orders = async (req, res) => {
 const updateOrderToPaidById_Orders = async (req, res) => {
   const id = new mongoose.Types.ObjectId(req.params.id);
   const order = await orderModel.Order.findOne(id);
-  console.log("body: ", req.body);
+  // console.log("body: ", req.body);
   if (order) {
     order.isPaid = true;
     order.paidAt = Date.now();
