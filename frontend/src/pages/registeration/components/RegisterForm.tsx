@@ -1,10 +1,4 @@
-import {
-  Box,
-  Button,
-  FormHelperText,
-  TextFieldProps,
-  Typography,
-} from "@mui/material";
+import { Box, Button, FormHelperText, Typography } from "@mui/material";
 import AppTextField from "../../../component/input/AppTextField";
 import AppNavLink from "../../../component/interactive/AppNavLink";
 import RoutesPaths from "../../../constants/RoutePaths";
@@ -38,10 +32,6 @@ const RegisterForm = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(registerFormSchema) });
 
-  const inputFieldSx: TextFieldProps["sx"] = {
-    marginBottom: "1rem",
-  };
-
   const { mutate, isLoading, error } = useMutateRegister();
 
   const onSubmitForm = handleSubmit((data) => {
@@ -73,7 +63,6 @@ const RegisterForm = () => {
           type="text"
           label="First Name"
           fullWidth
-          sx={{ ...inputFieldSx }}
           {...register("firstName")}
           useError={errors?.firstName?.message}
         />
@@ -82,7 +71,6 @@ const RegisterForm = () => {
           type="text"
           label="Last Name"
           fullWidth
-          sx={{ ...inputFieldSx }}
           {...register("lastName")}
           useError={errors?.lastName?.message}
         />
@@ -91,7 +79,6 @@ const RegisterForm = () => {
           type="email"
           label="Email"
           fullWidth
-          sx={{ ...inputFieldSx }}
           {...register("email")}
           useError={errors?.email?.message}
         />
@@ -100,7 +87,6 @@ const RegisterForm = () => {
           type="password"
           label="Password"
           fullWidth
-          sx={{ ...inputFieldSx }}
           {...register("password")}
           useError={errors?.password?.message}
         />

@@ -1,6 +1,7 @@
 const usersModel = require("../models/usersModel");
 const _ = require("lodash");
 const jwtCookieTokenGenerator = require("../services/jwtCookieTokenGenerator");
+const bcrypt = require("bcrypt");
 
 // register, login, getAll, logout, authenticate, getProfile, updateProfile, delete, getById
 
@@ -66,14 +67,49 @@ const logoutUser = async (req, res) => {
 // @route GET /api/users/profile
 // @access private
 const getByTokenUser = async (req, res) => {
-  return res.send("getting single user by token....");
+  return res.json(req.user);
 };
 
 // @desc update user profile
 // @route PATCH /api/users/profile
 // @access private
 const updateByTokenUser = async (req, res) => {
-  return res.send("updating user profile....");
+  const user = await usersModel.User.findById(req.user._id);
+
+  // updating email
+  const emailUpdated = req.body.email && user.email !== req.body.email;
+
+  if (emailUpdated) {
+    console.log("updating email");
+    const updatedEmailExists = !!(await usersModel.User.findOne({
+      email: req.body.email,
+    }));
+    // console.log("Email: ", updatedEmailExists);
+    if (updatedEmailExists) {
+      throw new Error("Email already exists");
+    } else {
+      user.email = req.body.email;
+    }
+  }
+
+  // updating name
+  const nameUpdated = req.body.name && user.name !== req.body.name;
+  if (nameUpdated) {
+    console.log("updating full name");
+    user.name = req.body.name;
+  }
+
+  // updating password
+  const passwordUpdated =
+    req.body.password &&
+    !(await bcrypt.compare(req.body.password, user.password));
+  if (passwordUpdated) {
+    console.log("updating password: ", req.body.password);
+    user.password = req.body.password;
+  }
+  const updatedUser = await user.save();
+
+  return res.json(_.omit(updatedUser.toObject(), ["password"]));
 };
 
 // @desc delete user

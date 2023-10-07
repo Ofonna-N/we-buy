@@ -1,4 +1,4 @@
-import { Box, Button, TextFieldProps } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import AppTextField from "../../../component/input/AppTextField";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
@@ -36,11 +36,6 @@ const ShippingForm = (props: Props) => {
     },
   });
 
-  // console.log("Form is valid: ", isValid);
-  const inputFieldSx: TextFieldProps["sx"] = {
-    marginBottom: "1rem",
-  };
-
   const onSubmitForm = handleSubmit((data) => {
     props.onFormSubmit(data);
   });
@@ -58,7 +53,6 @@ const ShippingForm = (props: Props) => {
           type="text"
           label="Address"
           fullWidth
-          sx={{ ...inputFieldSx }}
           {...register("address")}
           useError={errors.address?.message}
         />
@@ -67,7 +61,6 @@ const ShippingForm = (props: Props) => {
           type="text"
           label="City"
           fullWidth
-          sx={{ ...inputFieldSx }}
           {...register("city")}
           useError={errors.city?.message}
         />
@@ -76,7 +69,6 @@ const ShippingForm = (props: Props) => {
           type="number"
           label="Postal Code"
           fullWidth
-          sx={{ ...inputFieldSx }}
           {...register("postalCode")}
           useError={errors.postalCode?.message}
           defaultValue={shippingInfo?.postalCode}
@@ -86,7 +78,6 @@ const ShippingForm = (props: Props) => {
           type="text"
           label="Country"
           fullWidth
-          sx={{ ...inputFieldSx }}
           {...register("country")}
           useError={errors.country?.message}
         />

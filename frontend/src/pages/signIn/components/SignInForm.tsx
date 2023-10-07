@@ -56,9 +56,6 @@ const SignInForm = () => {
           disabled={isLoading}
           useError={errors.email?.message}
           fullWidth
-          sx={{
-            marginBottom: "1rem",
-          }}
         />
         <AppTextField
           id="password"

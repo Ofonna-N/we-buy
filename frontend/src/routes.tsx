@@ -15,6 +15,7 @@ import RoutesPaths from "./constants/RoutePaths";
 import PlaceOrderPage from "./pages/placeOrderPage/PlaceOrderPage";
 import PaymentPage from "./pages/paymentPage/PaymentPage";
 import OrderDetailsPage from "./pages/orderDetailsPage/OrderDetailsPage";
+import ProfilePage from "./pages/profilePage/ProfilePage";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
           {
             path: `${RoutePaths.ORDERS_ROUTE}/:id`,
             element: <OrderDetailsPage />,
+          },
+          {
+            path: RoutePaths.PROFILE_ROUTE,
+            element: <ProfilePage />,
           },
         ],
       },

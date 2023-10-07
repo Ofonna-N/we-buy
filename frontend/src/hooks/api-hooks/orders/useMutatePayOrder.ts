@@ -1,27 +1,21 @@
 import endpointRoutes from "../../../constants/EndpointRoutes";
-import { appSnackBarActions } from "../../../slices/appSnackBarSlice";
 import { OrderResponse } from "../../../types/Order";
-import { useAppDispatch } from "../../redux-hooks/appStoreHooks";
+import useShowSnackBar from "../../notification/useShowSnackBar";
 import useMutateData from "../useMutateData";
 
 const useMutatePayOrder = (id: string) => {
-  const dispatch = useAppDispatch();
+  const { showSnackBar } = useShowSnackBar();
+
   const onOrderPaid = (order: OrderResponse) => {
-    dispatch(
-      appSnackBarActions.showAppSnackBar({
-        message: "Order Paid (Test Button)",
-        open: true,
-        useIcon: {
-          icon: "success",
-        },
-      })
-    );
+    showSnackBar("Order Paid (Test Button)", "success");
+
     console.log("ORDER PAID: ", order);
   };
 
   return useMutateData(
     `${endpointRoutes.ORDERS.ORDERS}${id}/pay`,
     onOrderPaid,
+    undefined,
     "patch"
   );
 };

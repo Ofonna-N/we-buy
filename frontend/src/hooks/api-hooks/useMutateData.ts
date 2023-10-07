@@ -9,6 +9,7 @@ export type APIMutateMethods = "post" | "patch" | "delete" | "put";
 const useMutateData = <T, B>(
   endpoint: string,
   onSuccessFn?: (data: T, variables: B) => void,
+  onErrorFn?: (error: Error, variables: B) => void,
   method?: APIMutateMethods
 ) => {
   const apiClient = useMemo(() => new APIClient<T>(endpoint), [endpoint]);
@@ -41,6 +42,7 @@ const useMutateData = <T, B>(
     },
 
     onSuccess: onSuccessFn,
+    onError: onErrorFn,
   });
 };
 

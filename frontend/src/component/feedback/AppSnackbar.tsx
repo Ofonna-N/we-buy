@@ -14,7 +14,7 @@ const AppSnackbar = () => {
     (state) => state.appSnackBarSlice.snackBar
   );
 
-  console.log(snackBarState);
+  // console.log(snackBarState);
   const dispatch = useAppDispatch();
 
   const Icon = () => {

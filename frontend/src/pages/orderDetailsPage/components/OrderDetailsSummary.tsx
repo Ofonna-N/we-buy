@@ -18,6 +18,7 @@ import {
   OnApproveActions,
   OnApproveData,
 } from "@paypal/paypal-js";
+import useShowSnackBar from "../../../hooks/notification/useShowSnackBar";
 
 type Props = {
   order: OrderResponse;
@@ -42,10 +43,13 @@ const OrderDetailsSummary = (props: Props) => {
     isError: payOrderIsError,
   } = useMutatePayOrder(props.order._id);
 
+  const { showSnackBar } = useShowSnackBar();
+
   const dispatchRef = useRef(useAppDispatch());
 
   const payPalDispatchRef = useRef(paypalDispach);
   const refetchOrderRef = useRef(props.refetchOrder);
+  const showSnackBarBarRef = useRef(showSnackBar);
 
   useEffect(() => {
     const canLoadPaypalScript = !!(!props.isLoading && clientId?.id);
@@ -84,15 +88,7 @@ const OrderDetailsSummary = (props: Props) => {
   }, [payOrderIsSucess, payOrderIsError]);
 
   const showErrorSnackBar = (msg: string) => {
-    dispatchRef.current(
-      appSnackBarActions.showAppSnackBar({
-        open: true,
-        message: msg,
-        useIcon: {
-          icon: "error",
-        },
-      })
-    );
+    showSnackBarBarRef.current(msg, "error");
   };
 
   const onCreateOrder = (_: CreateOrderData, actions: CreateOrderActions) => {

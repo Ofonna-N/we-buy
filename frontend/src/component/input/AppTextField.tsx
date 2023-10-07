@@ -29,7 +29,13 @@ const AppTextField = React.forwardRef<HTMLInputElement, Props>(function (
 ) {
   const { useError, fullWidth, sx, ...other } = props;
   return (
-    <FormControl fullWidth={fullWidth} sx={sx}>
+    <FormControl
+      fullWidth={fullWidth}
+      sx={{
+        marginBottom: "1rem",
+        ...sx,
+      }}
+    >
       <TextField {...other} ref={ref} />
       <FormHelperText error={!!useError} sx={{ marginInline: 0 }}>
         {useError}
