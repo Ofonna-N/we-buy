@@ -1,15 +1,15 @@
 import endpointRoutes from "../../../constants/EndpointRoutes";
-import { OrderResponse } from "../../../types/Order";
+// import { OrderResponse } from "../../../types/Order";
 import useShowSnackBar from "../../notification/useShowSnackBar";
 import useMutateData from "../useMutateData";
 
 const useMutatePayOrder = (id: string) => {
   const { showSnackBar } = useShowSnackBar();
 
-  const onOrderPaid = (order: OrderResponse) => {
+  const onOrderPaid = () => {
     showSnackBar("Order Paid (Test Button)", "success");
 
-    console.log("ORDER PAID: ", order);
+    // console.log("ORDER PAID: ", order);
   };
 
   return useMutateData(

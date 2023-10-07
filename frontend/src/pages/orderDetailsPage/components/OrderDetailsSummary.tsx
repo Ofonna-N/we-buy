@@ -10,8 +10,6 @@ import AppSpinner from "../../../component/loading/AppSpinner";
 import useQueryPaypalClientId from "../../../hooks/api-hooks/paypal/useQueryPaypalClientId";
 import { useEffect, useRef } from "react";
 import useMutatePayOrder from "../../../hooks/api-hooks/orders/useMutatePayOrder";
-import { useAppDispatch } from "../../../hooks/redux-hooks/appStoreHooks";
-import { appSnackBarActions } from "../../../slices/appSnackBarSlice";
 import {
   CreateOrderActions,
   CreateOrderData,
@@ -44,8 +42,6 @@ const OrderDetailsSummary = (props: Props) => {
   } = useMutatePayOrder(props.order._id);
 
   const { showSnackBar } = useShowSnackBar();
-
-  const dispatchRef = useRef(useAppDispatch());
 
   const payPalDispatchRef = useRef(paypalDispach);
   const refetchOrderRef = useRef(props.refetchOrder);

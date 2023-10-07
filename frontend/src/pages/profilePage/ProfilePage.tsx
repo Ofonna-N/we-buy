@@ -52,7 +52,7 @@ const ProfilePage = () => {
         break;
       }
     }
-    console.log("body: ", body);
+    // console.log("body: ", body);
     if (updateDatabase) mutate(body);
   });
 

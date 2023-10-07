@@ -11,7 +11,7 @@ const useMutatePlaceOrder = () => {
     navigate(RoutesPaths.ORDERS_ROUTE + "/" + data._id, {
       replace: true,
     });
-    console.log("order placed: ", data);
+    // console.log("order placed: ", data);
   };
 
   return useMutateData(endpointRoutes.ORDERS.ORDERS, onOrderPlaced);
