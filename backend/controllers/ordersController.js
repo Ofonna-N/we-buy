@@ -32,7 +32,9 @@ const createAndAddOrdersByToken_Orders = async (req, res) => {
 // @route GET /api/orders/profile
 // @access private
 const getUserOrders_Orders = async (req, res) => {
-  return res.send("getting users orders by token...");
+  const orders = await orderModel.Order.find({ user: req.user._id });
+
+  return res.json(orders);
 };
 // @desc get logged in user order by Id
 // @route GET /api/orders/profile/:id
