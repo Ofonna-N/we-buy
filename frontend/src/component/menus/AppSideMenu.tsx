@@ -54,6 +54,7 @@ const AppSideMenu = () => {
           menuItems={[
             <NavLinkIconBtn
               startIcon={<PersonIcon />}
+              to={RoutesPaths.PROFILE_ROUTE}
               variantColor={darkModeCtx.mode === "dark" ? "white" : "black"}
             >
               Profile
