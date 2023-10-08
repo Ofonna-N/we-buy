@@ -50,7 +50,7 @@ const OrderDetailsSummary = (props: Props) => {
   useEffect(() => {
     const canLoadPaypalScript = !!(!props.isLoading && clientId?.id);
     if (canLoadPaypalScript) {
-      console.log("loading script");
+      // console.log("loading script");
       const loadPaypalScript = async () => {
         payPalDispatchRef.current({
           type: "resetOptions",
@@ -73,12 +73,12 @@ const OrderDetailsSummary = (props: Props) => {
 
   useEffect(() => {
     if (payOrderIsSucess) {
-      console.log("order payment successfull Refetching order object...");
+      // console.log("order payment successfull Refetching order object...");
       refetchOrderRef.current();
     }
 
     if (payOrderIsError) {
-      console.log("order payment error...");
+      // console.log("order payment error...");
       showErrorSnackBar("Couldn't process payment");
     }
   }, [payOrderIsSucess, payOrderIsError]);
@@ -109,7 +109,7 @@ const OrderDetailsSummary = (props: Props) => {
     actions: OnApproveActions
   ): Promise<void | undefined> => {
     actions.order?.capture().then((details) => {
-      console.log("order details: ", details);
+      // console.log("order details: ", details);
       payOrder({ id: props.order._id, details });
       return details;
     });

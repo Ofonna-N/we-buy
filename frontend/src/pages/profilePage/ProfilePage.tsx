@@ -1,20 +1,7 @@
-import {
-  Alert,
-  Box,
-  Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Typography,
-} from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import AppContainer from "../../component/page/AppContainer";
 import { useAppSelector } from "../../hooks/redux-hooks/appStoreHooks";
-import AppSpinner from "../../component/loading/AppSpinner";
 import useQueryProfileOrders from "../../hooks/api-hooks/orders/useQueryProfileOrders";
-import { useNavigate } from "react-router-dom";
-import RoutesPaths from "../../constants/RoutePaths";
 import EditProfileForm from "./components/EditProfileForm";
 import ProfileOrdersDisplay from "./components/ProfileOrdersDisplay";
 

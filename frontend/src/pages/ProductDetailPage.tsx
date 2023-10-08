@@ -97,7 +97,7 @@ const ProductDetailPage = () => {
                 sx={{ marginBlock: "1rem" }}
                 onClick={() => {
                   if (!product) {
-                    console.log("add to cart Quantity");
+                    // console.log("add to cart Quantity");
                     return;
                   }
                   addToCart({ product, qty });
