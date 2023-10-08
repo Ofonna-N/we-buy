@@ -13,6 +13,7 @@ import { OrderResponse } from "../../../types/Order";
 import { AxiosError } from "axios";
 import ErrorResponse from "../../../types/ErrorResponse";
 import { useNavigate } from "react-router-dom";
+import CloseIcon from "@mui/icons-material/Close";
 
 type Props = {
   orders: OrderResponse[] | undefined;
@@ -34,8 +35,8 @@ const ProfileOrdersDisplay = (props: Props) => {
               <TableCell>ID</TableCell>
               <TableCell>DATE</TableCell>
               <TableCell>TOTAL</TableCell>
-              <TableCell>PAID</TableCell>
-              <TableCell>DELIVERED</TableCell>
+              <TableCell align="center">PAID</TableCell>
+              <TableCell align="center">DELIVERED</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -60,9 +61,19 @@ const ProfileOrdersDisplay = (props: Props) => {
                     : ""}
                 </TableCell>
                 <TableCell>${order.totalPrice}</TableCell>
-                <TableCell>{order.isPaid ? "Paid" : "Not Paid"}</TableCell>
-                <TableCell>
-                  {order.isDelivered ? "Delivered" : "Not Delivered"}
+                <TableCell align="center">
+                  {order.paidAt ? (
+                    new Date(order.paidAt).toLocaleDateString()
+                  ) : (
+                    <CloseIcon color="error" />
+                  )}
+                </TableCell>
+                <TableCell align="center">
+                  {order.isDelivered ? (
+                    "Delivered"
+                  ) : (
+                    <CloseIcon color="error" />
+                  )}
                 </TableCell>
               </TableRow>
             ))}
