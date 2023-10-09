@@ -30,4 +30,11 @@ cartListener.startListening({
   },
 });
 
+cartListener.startListening({
+  actionCreator: cartActions.clearCart,
+  effect: async () => {
+    localStorage.removeItem(localStorageKeys.CART);
+  },
+});
+
 export default cartListener;

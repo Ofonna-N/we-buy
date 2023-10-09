@@ -63,6 +63,9 @@ const cartSlice = createSlice({
       // total qantity
       state.qty = state.cartItems.reduce((acc, item) => acc + item.qty, 0);
     },
+    clearCart(state) {
+      state.cartItems = [];
+    },
   },
 });
 
