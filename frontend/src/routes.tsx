@@ -16,6 +16,9 @@ import PlaceOrderPage from "./pages/placeOrderPage/PlaceOrderPage";
 import PaymentPage from "./pages/paymentPage/PaymentPage";
 import OrderDetailsPage from "./pages/orderDetailsPage/OrderDetailsPage";
 import ProfilePage from "./pages/profilePage/ProfilePage";
+import AdminRoute from "./pages/AdminRoute";
+import OrdersAdminPage from "./pages/admin/orders/OrdersAdminPage";
+import OrderDetailAdminPage from "./pages/admin/orders/OrderDetailAdminPage";
 
 const router = createBrowserRouter([
   {
@@ -73,6 +76,20 @@ const router = createBrowserRouter([
           {
             path: RoutePaths.PROFILE_ROUTE,
             element: <ProfilePage />,
+          },
+        ],
+      },
+      {
+        path: "",
+        element: <AdminRoute />,
+        children: [
+          {
+            path: RoutePaths.ADMIN_ROUTE + RoutePaths.ORDERS_ROUTE,
+            element: <OrdersAdminPage />,
+          },
+          {
+            path: `${RoutePaths.ADMIN_ROUTE + RoutePaths.ORDERS_ROUTE}/:id`,
+            element: <OrderDetailAdminPage />,
           },
         ],
       },

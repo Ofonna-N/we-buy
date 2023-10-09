@@ -40,7 +40,12 @@ const OrderDetailsInfo = (props: Props) => {
           severity={props.order?.isDelivered ? "success" : "warning"}
           sx={{ width: "100%" }}
         >
-          {props.order?.isDelivered ? "Delivered" : "Not Delivered"}
+          {props.order?.isDelivered
+            ? props.order.deliveredAt
+              ? "Delivered on " +
+                new Date(props.order.deliveredAt).toLocaleDateString()
+              : ""
+            : "Not Delivered"}
         </Alert>
       </ListItem>
       <ListItem
@@ -56,7 +61,12 @@ const OrderDetailsInfo = (props: Props) => {
           severity={props.order?.isPaid ? "success" : "warning"}
           sx={{ width: "100%" }}
         >
-          {props.order?.isPaid ? "Paid" : "Not Paid"}
+          {props.order?.isPaid
+            ? "Paid on " +
+              (props.order.paidAt
+                ? new Date(props.order.paidAt).toLocaleDateString()
+                : "")
+            : "Not Paid"}
         </Alert>
       </ListItem>
       <ListItem sx={{ flexDirection: "column", alignItems: "start", gap: 1 }}>

@@ -3,7 +3,10 @@ import AppContainer from "../../component/page/AppContainer";
 import { useAppSelector } from "../../hooks/redux-hooks/appStoreHooks";
 import useQueryProfileOrders from "../../hooks/api-hooks/orders/useQueryProfileOrders";
 import EditProfileForm from "./components/EditProfileForm";
-import ProfileOrdersDisplay from "./components/ProfileOrdersDisplay";
+import AppOrdersTable from "../../component/common/AppOrdersTable";
+import { useNavigate } from "react-router-dom";
+import { OrderResponse } from "../../types/Order";
+import RoutesPaths from "../../constants/RoutePaths";
 
 const ProfilePage = () => {
   const user = useAppSelector((state) => state.userSlice.userInfo);
@@ -13,6 +16,8 @@ const ProfilePage = () => {
     error: orderError,
     isLoading: orderIsLoading,
   } = useQueryProfileOrders();
+
+  const navigate = useNavigate();
 
   const OrderSectionTitle = (title: string) => (
     <Box>
@@ -52,10 +57,13 @@ const ProfilePage = () => {
           }}
         >
           {OrderSectionTitle("Orders")}
-          <ProfileOrdersDisplay
+          <AppOrdersTable
             orders={orders}
             orderError={orderError}
             orderIsLoading={orderIsLoading}
+            onRowClick={(order: OrderResponse) =>
+              navigate(RoutesPaths.ORDERS_ROUTE + "/" + order._id)
+            }
           />
         </Box>
       </Stack>

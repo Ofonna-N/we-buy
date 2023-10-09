@@ -21,7 +21,6 @@ import RoutesPaths from "../../constants/RoutePaths";
 import useNavMenuSharedState from "../../hooks/common/useNavMenuSharedState";
 import AppDropDownMenu from "./AppDropDownMenu";
 import LogoutIcon from "@mui/icons-material/Logout";
-import NavLinkIconBtn from "../../pages/layout/components/navbar/NavLinkIconBtn";
 //#endregion
 
 const AppSideMenu = () => {
@@ -52,20 +51,16 @@ const AppSideMenu = () => {
         <AppDropDownMenu
           title={user.name}
           menuItems={[
-            <NavLinkIconBtn
-              startIcon={<PersonIcon />}
-              to={RoutesPaths.PROFILE_ROUTE}
-              variantColor={darkModeCtx.mode === "dark" ? "white" : "black"}
-            >
-              Profile
-            </NavLinkIconBtn>,
-            <NavLinkIconBtn
-              startIcon={<LogoutIcon />}
-              onClick={() => logoutApi.mutate(null)}
-              variantColor={darkModeCtx.mode === "dark" ? "white" : "black"}
-            >
-              Logout
-            </NavLinkIconBtn>,
+            {
+              label: "Profile",
+              startIcon: <PersonIcon />,
+              to: RoutesPaths.PROFILE_ROUTE,
+            },
+            {
+              label: "Logout",
+              startIcon: <LogoutIcon />,
+              onClick: () => logoutApi.mutate(null),
+            },
           ]}
         />
       )) || (

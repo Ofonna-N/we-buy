@@ -1,4 +1,4 @@
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { OrderResponse } from "../../../types/Order";
 import OrderSummaryCard from "../../../component/common/OrderSummaryCard";
 import {
@@ -130,23 +130,24 @@ const OrderDetailsSummary = (props: Props) => {
     <OrderSummaryCard
       title="Order Summary"
       infoItems={[
-        <>
-          <Typography>Items</Typography>
-          <Typography>${props.order?.itemPrice}</Typography>
-        </>,
-        <>
-          <Typography>Shipping</Typography>
-          <Typography>${props.order?.shippingPrice}</Typography>
-        </>,
-        <>
-          {" "}
-          <Typography>Tax</Typography>
-          <Typography>${props.order?.taxPrice}</Typography>
-        </>,
-        <>
-          <Typography>Total</Typography>
-          <Typography>${props.order?.totalPrice}</Typography>
-        </>,
+        {
+          label: "Items:",
+          value: `$${props.order?.itemPrice}`,
+        },
+        {
+          label: "Shipping:",
+          value: `$${props.order?.shippingPrice}`,
+        },
+        {
+          label: "Tax:",
+          value: `$${props.order?.taxPrice}`,
+        },
+        {
+          label: "Total:",
+          value: `$${props.order?.totalPrice}`,
+        },
+      ]}
+      infoNodes={[
         <>
           {isPending || props.isLoading || payOrderIsLoading ? (
             <AppSpinner />

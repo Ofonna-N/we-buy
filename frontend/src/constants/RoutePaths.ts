@@ -13,6 +13,7 @@ const RoutesPaths = {
   PLACE_ORDER_ROUTE: checkoutRoute + "/placeorder",
   ORDERS_ROUTE: "/orders",
   PROFILE_ROUTE: "/profile",
+  ADMIN_ROUTE: "/admin",
 };
 
 export default RoutesPaths;

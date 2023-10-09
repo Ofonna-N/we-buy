@@ -93,24 +93,16 @@ const Navbar = () => {
               <AppDropDownMenu
                 title={user.name}
                 menuItems={[
-                  <NavLinkIconBtn
-                    startIcon={<PersonIcon />}
-                    to={RoutesPaths.PROFILE_ROUTE}
-                    variantColor={
-                      darkModeCtx.mode === "dark" ? "white" : "black"
-                    }
-                  >
-                    Profile
-                  </NavLinkIconBtn>,
-                  <NavLinkIconBtn
-                    startIcon={<LogoutIcon />}
-                    onClick={onLogOut}
-                    variantColor={
-                      darkModeCtx.mode === "dark" ? "white" : "black"
-                    }
-                  >
-                    Logout
-                  </NavLinkIconBtn>,
+                  {
+                    label: "Profile",
+                    startIcon: <PersonIcon />,
+                    to: RoutesPaths.PROFILE_ROUTE,
+                  },
+                  {
+                    label: "Logout",
+                    startIcon: <LogoutIcon />,
+                    onClick: onLogOut,
+                  },
                 ]}
               />
             )) || (
@@ -120,6 +112,18 @@ const Navbar = () => {
               >
                 Sign In
               </NavLinkIconBtn>
+            )}
+            {user && user.isAdmin && (
+              <AppDropDownMenu
+                title={"Admin"}
+                menuItems={[
+                  {
+                    label: "Orders",
+                    startIcon: <ShoppingCartIcon />,
+                    to: RoutesPaths.ADMIN_ROUTE + RoutesPaths.ORDERS_ROUTE,
+                  },
+                ]}
+              />
             )}
           </Box>
           <FormControlLabel

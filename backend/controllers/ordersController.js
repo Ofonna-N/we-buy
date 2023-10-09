@@ -32,7 +32,9 @@ const createAndAddOrdersByToken_Orders = async (req, res) => {
 // @route GET /api/orders/profile
 // @access private
 const getUserOrders_Orders = async (req, res) => {
-  const orders = await orderModel.Order.find({ user: req.user._id });
+  const orders = await orderModel.Order.find({ user: req.user._id }).populate(
+    "user"
+  );
 
   return res.json(orders);
 };
@@ -94,14 +96,26 @@ const updateOrderToPaidById_Orders = async (req, res) => {
 // @route PATCH /api/orders/:id/deliver
 // @access private/Admin
 const updateOrderToDeliveredById_Orders = async (req, res) => {
-  return res.send("admin just updated order to delivered...");
+  const id = new mongoose.Types.ObjectId(req.body.id);
+  const order = await orderModel.Order.findOne(id);
+
+  if (order) {
+    order.isDelivered = true;
+    order.deliveredAt = Date.now();
+    const updatedOrder = await order.save();
+    return res.json(updatedOrder);
+  } else {
+    throw new Error("Order does not exist");
+  }
 };
 
 // @desc get all orders
 // @route GET /api/orders/
 // @access private/Admin
 const getOrders_Orders = async (req, res) => {
-  return res.send("getting all orders...");
+  const orders = await orderModel.Order.find({}).populate("user");
+
+  return res.json(orders);
 };
 
 module.exports = {
