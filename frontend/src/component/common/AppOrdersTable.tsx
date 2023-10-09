@@ -23,7 +23,7 @@ type Props = {
 
 const AppOrdersTable = (props: Props) => {
   return (
-    <Box>
+    <Box sx={{ overflowX: "auto" }}>
       {props.orderIsLoading ? (
         <AppSpinner />
       ) : props.orders && props.orders.length > 0 ? (
