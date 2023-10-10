@@ -1,19 +1,52 @@
-import { Box, Typography } from "@mui/material";
+import { Alert, Box, Stack, Typography } from "@mui/material";
 import AppContainer from "../../../component/page/AppContainer";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import AppBackButton from "../../../component/interactive/clickables/AppBackButton";
+import Product from "../../../types/Product";
+import EditProductsForm from "./container/EditProductsForm";
 
 const ProductsDetailAdminPage = () => {
-  const params = useParams();
+  const location = useLocation();
+
+  const productJSON = new URLSearchParams(location.search).get("product");
+  const product = JSON.parse(productJSON || "{}") as Product;
+
+  if (!product?._id)
+    return (
+      <Alert
+        severity="error"
+        sx={{ mt: 2, marginX: "auto", maxWidth: "50rem" }}
+      >
+        Product not found
+      </Alert>
+    );
 
   return (
     <AppContainer>
-      <Typography variant="h4" mb={"2rem"}>
-        {" "}
-        Edit Product{" "}
-        <Box component={"span"} fontSize={"1.35rem"}>
-          {params.id}
-        </Box>
-      </Typography>
+      <Stack
+        sx={{
+          flexDirection: {
+            direction: "column",
+            sm: "row",
+          },
+          justifyContent: {
+            justifyContent: "center",
+            sm: "space-between",
+          },
+          alignItems: "center",
+        }}
+        mb={2}
+      >
+        <Typography variant="h4" mb={"2rem"}>
+          {" "}
+          Edit Product{" "}
+          <Box component={"span"} fontSize={"1.35rem"}>
+            {product._id}
+          </Box>
+        </Typography>
+        <AppBackButton />
+      </Stack>
+      <EditProductsForm product={product} />
     </AppContainer>
   );
 };

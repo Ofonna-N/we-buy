@@ -18,7 +18,8 @@ const ProductsAdminPage = () => {
   const navigate = useNavigate();
 
   const onEditProduct = (product: Product) => {
-    navigate(product._id, { relative: "path" });
+    const serializedData = JSON.stringify(product);
+    navigate(product._id + "?product=" + serializedData, { relative: "path" });
   };
 
   const onDeleteProduct = (product: Product) => {
@@ -27,7 +28,6 @@ const ProductsAdminPage = () => {
       title: "Delete Product",
       message: `Are you sure you want to delete ${product.name}?`,
       onYesClick: () => {
-        console.log("Delete product: ", product._id);
         setProductModalData((prev) => ({ ...prev, isOpen: false }));
       },
       onNoClick: () => {

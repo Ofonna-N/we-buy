@@ -20,6 +20,8 @@ type Props = {
   useError?: string;
   disabled?: TextFieldProps["disabled"];
   sx?: TextFieldProps["sx"];
+  multiline?: TextFieldProps["multiline"];
+  inputProps?: TextFieldProps["inputProps"];
   defaultValue?: TextFieldProps["defaultValue"];
 };
 
@@ -36,7 +38,7 @@ const AppTextField = React.forwardRef<HTMLInputElement, Props>(function (
         ...sx,
       }}
     >
-      <TextField {...other} ref={ref} />
+      <TextField {...other} ref={ref} minRows={2} maxRows={5} />
       <FormHelperText error={!!useError} sx={{ marginInline: 0 }}>
         {useError}
       </FormHelperText>
