@@ -39,7 +39,8 @@ const AppProductsTable = (props: Props) => {
               <TableCell>PRICE</TableCell>
               <TableCell>CATEGORY</TableCell>
               <TableCell align="center">BRAND</TableCell>
-              {/* <TableCell align="center">DELIVERED</TableCell> */}
+              <TableCell align="center">EDIT</TableCell>
+              <TableCell align="center">DELETE</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
