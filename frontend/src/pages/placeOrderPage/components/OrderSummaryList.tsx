@@ -11,7 +11,7 @@ import {
 import ShippingFormInput from "../../../types/ShippingFormInput";
 import PaymentMethodType from "../../../types/PaymentMethods";
 import { CartItem } from "../../../types/Cart";
-import AppNavLink from "../../../component/interactive/AppNavLink";
+import AppNavLink from "../../../component/interactive/clickables/AppNavLink";
 import RoutesPaths from "../../../constants/RoutePaths";
 
 type Props = {

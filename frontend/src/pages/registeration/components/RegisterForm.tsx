@@ -1,6 +1,6 @@
 import { Box, Button, FormHelperText, Typography } from "@mui/material";
 import AppTextField from "../../../component/input/AppTextField";
-import AppNavLink from "../../../component/interactive/AppNavLink";
+import AppNavLink from "../../../component/interactive/clickables/AppNavLink";
 import RoutesPaths from "../../../constants/RoutePaths";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";

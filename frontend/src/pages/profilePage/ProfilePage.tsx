@@ -50,22 +50,24 @@ const ProfilePage = () => {
           {OrderSectionTitle("Profile")}
           <EditProfileForm user={user} />
         </Box>
-        <Box
-          flexGrow={1}
-          sx={{
-            overflowX: "auto",
-          }}
-        >
-          {OrderSectionTitle("Orders")}
-          <AppOrdersTable
-            orders={orders}
-            orderError={orderError}
-            orderIsLoading={orderIsLoading}
-            onRowClick={(order: OrderResponse) =>
-              navigate(RoutesPaths.ORDERS_ROUTE + "/" + order._id)
-            }
-          />
-        </Box>
+        {!user?.isAdmin && (
+          <Box
+            flexGrow={1}
+            sx={{
+              overflowX: "auto",
+            }}
+          >
+            {OrderSectionTitle("Orders")}
+            <AppOrdersTable
+              orders={orders}
+              orderError={orderError}
+              orderIsLoading={orderIsLoading}
+              onRowClick={(order: OrderResponse) =>
+                navigate(RoutesPaths.ORDERS_ROUTE + "/" + order._id)
+              }
+            />
+          </Box>
+        )}
       </Stack>
     </AppContainer>
   );

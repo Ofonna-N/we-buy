@@ -15,7 +15,10 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import useQuerySingleProduct from "../hooks/api-hooks/products/useQuerySingleProduct";
 import { useState } from "react";
 import { CartItem } from "../types/Cart";
-import { useAppDispatch } from "../hooks/redux-hooks/appStoreHooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../hooks/redux-hooks/appStoreHooks";
 import { cartActions } from "../slices/cartSlice";
 import AppContainer from "../component/page/AppContainer";
 
@@ -25,7 +28,7 @@ const ProductDetailPage = () => {
   const [qty, setQty] = useState<number>(1);
 
   const dispach = useAppDispatch();
-
+  const isAdmin = useAppSelector((state) => state.userSlice.userInfo?.isAdmin);
   const { data: product, isLoading, error } = useQuerySingleProduct(id || "");
 
   if (isLoading)
@@ -84,57 +87,59 @@ const ProductDetailPage = () => {
                 }
               />
             </ListItem>
-            <ListItem
-              divider
-              sx={{
-                gap: "1rem",
-                flexDirection: { flexDirection: "column", sm: "row" },
-              }}
-            >
-              <Button
-                variant="contained"
-                size="large"
-                sx={{ marginBlock: "1rem" }}
-                onClick={() => {
-                  if (!product) {
-                    // console.log("add to cart Quantity");
-                    return;
-                  }
-                  addToCart({ product, qty });
-                }}
-              >
-                Add to Cart{" "}
-              </Button>
-              <FormControl
+            {!isAdmin && (
+              <ListItem
+                divider
                 sx={{
-                  flexGrow: 1,
-                  flexDirection: "row",
-                  alignItems: "end",
                   gap: "1rem",
+                  flexDirection: { flexDirection: "column", sm: "row" },
                 }}
               >
-                {/* <InputLabel>Quantity</InputLabel> */}
-                <Typography variant="h6">Quantity:</Typography>
-                <Input
-                  value={qty}
-                  onChange={(e) => setQty(Number(e.target.value))}
-                  onBlur={(e) => {
-                    if (
-                      product?.countInStock &&
-                      Number(e.target.value) > product?.countInStock
-                    )
-                      setQty(product?.countInStock || 1);
+                <Button
+                  variant="contained"
+                  size="large"
+                  sx={{ marginBlock: "1rem" }}
+                  onClick={() => {
+                    if (!product) {
+                      // console.log("add to cart Quantity");
+                      return;
+                    }
+                    addToCart({ product, qty });
                   }}
-                  slotProps={{
-                    input: {
-                      min: 1,
-                      max: product?.countInStock,
-                      type: "number",
-                    },
+                >
+                  Add to Cart{" "}
+                </Button>
+                <FormControl
+                  sx={{
+                    flexGrow: 1,
+                    flexDirection: "row",
+                    alignItems: "end",
+                    gap: "1rem",
                   }}
-                />
-              </FormControl>
-            </ListItem>
+                >
+                  {/* <InputLabel>Quantity</InputLabel> */}
+                  <Typography variant="h6">Quantity:</Typography>
+                  <Input
+                    value={qty}
+                    onChange={(e) => setQty(Number(e.target.value))}
+                    onBlur={(e) => {
+                      if (
+                        product?.countInStock &&
+                        Number(e.target.value) > product?.countInStock
+                      )
+                        setQty(product?.countInStock || 1);
+                    }}
+                    slotProps={{
+                      input: {
+                        min: 1,
+                        max: product?.countInStock,
+                        type: "number",
+                      },
+                    }}
+                  />
+                </FormControl>
+              </ListItem>
+            )}
             <ListItem divider>
               <Typography variant="h6">
                 {product?.countInStock && product?.countInStock > 0

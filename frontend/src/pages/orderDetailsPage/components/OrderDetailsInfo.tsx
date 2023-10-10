@@ -9,7 +9,7 @@ import {
   Box,
   useTheme,
 } from "@mui/material";
-import AppNavLink from "../../../component/interactive/AppNavLink";
+import AppNavLink from "../../../component/interactive/clickables/AppNavLink";
 import RoutesPaths from "../../../constants/RoutePaths";
 import { OrderResponse } from "../../../types/Order";
 

@@ -13,7 +13,7 @@ import * as yup from "yup";
 import useMutateLogin from "../../../hooks/api-hooks/auth/useMutateLogin";
 import AppSpinner from "../../../component/loading/AppSpinner";
 
-import AppNavLink from "../../../component/interactive/AppNavLink";
+import AppNavLink from "../../../component/interactive/clickables/AppNavLink";
 import RoutesPaths from "../../../constants/RoutePaths";
 
 const signInFormSchema = yup.object({

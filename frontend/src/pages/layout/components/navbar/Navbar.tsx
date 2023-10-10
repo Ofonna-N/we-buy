@@ -75,21 +75,25 @@ const Navbar = () => {
             We Buy
           </Link>
           <Box display={{ xs: "none", sm: "flex" }} gap={"1rem"}>
-            <NavLinkIconBtn
-              to={RoutesPaths.CART_ROUTE}
-              startIcon={
-                <Badge
-                  invisible={cartQty <= 0}
-                  badgeContent={cartQty}
-                  color={darkModeCtx.mode === "dark" ? "primary" : "secondary"}
-                  max={99}
-                >
-                  <ShoppingCartIcon />
-                </Badge>
-              }
-            >
-              Cart
-            </NavLinkIconBtn>
+            {!user?.isAdmin && (
+              <NavLinkIconBtn
+                to={RoutesPaths.CART_ROUTE}
+                startIcon={
+                  <Badge
+                    invisible={cartQty <= 0}
+                    badgeContent={cartQty}
+                    color={
+                      darkModeCtx.mode === "dark" ? "primary" : "secondary"
+                    }
+                    max={99}
+                  >
+                    <ShoppingCartIcon />
+                  </Badge>
+                }
+              >
+                Cart
+              </NavLinkIconBtn>
+            )}
             {(user && (
               <AppDropDownMenu
                 title={user.name}

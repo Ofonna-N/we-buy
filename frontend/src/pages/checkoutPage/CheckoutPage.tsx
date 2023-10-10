@@ -3,7 +3,7 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Box, Breadcrumbs, useTheme } from "@mui/material";
 import AppContainer from "../../component/page/AppContainer";
 import { useAppSelector } from "../../hooks/redux-hooks/appStoreHooks";
-import AppNavLink from "../../component/interactive/AppNavLink";
+import AppNavLink from "../../component/interactive/clickables/AppNavLink";
 import { useEffect, useMemo, useRef } from "react";
 import RoutesPaths from "../../constants/RoutePaths";
 
