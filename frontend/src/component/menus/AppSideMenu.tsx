@@ -11,6 +11,7 @@ import {
   List,
   ListItem,
   useTheme,
+  Box,
 } from "@mui/material";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -21,6 +22,7 @@ import RoutesPaths from "../../constants/RoutePaths";
 import useNavMenuSharedState from "../../hooks/common/useNavMenuSharedState";
 import AppDropDownMenu from "./AppDropDownMenu";
 import LogoutIcon from "@mui/icons-material/Logout";
+import InventoryIcon from "@mui/icons-material/Inventory";
 //#endregion
 
 const AppSideMenu = () => {
@@ -46,7 +48,7 @@ const AppSideMenu = () => {
       <ListItemText primary="Cart" />
     </ListItemButton>,
 
-    <>
+    <Box pl={"1rem"}>
       {(user && (
         <AppDropDownMenu
           title={user.name}
@@ -71,8 +73,26 @@ const AppSideMenu = () => {
           <ListItemText primary="Sign In" />
         </ListItemButton>
       )}
-    </>,
-
+    </Box>,
+    <Box pl={"1rem"}>
+      {user && user.isAdmin && (
+        <AppDropDownMenu
+          title={"Admin"}
+          menuItems={[
+            {
+              label: "Orders",
+              startIcon: <InventoryIcon />,
+              to: RoutesPaths.ADMIN_ROUTE + RoutesPaths.ORDERS_ROUTE,
+            },
+            {
+              label: "Products",
+              startIcon: <ShoppingCartIcon />,
+              to: RoutesPaths.ADMIN_ROUTE + RoutesPaths.PRODUCTS_ROUTE,
+            },
+          ]}
+        />
+      )}
+    </Box>,
     <ListItemButton disableRipple>
       <ListItemText>
         <FormControlLabel

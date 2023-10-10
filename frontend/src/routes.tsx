@@ -19,6 +19,7 @@ import ProfilePage from "./pages/profilePage/ProfilePage";
 import AdminRoute from "./pages/AdminRoute";
 import OrdersAdminPage from "./pages/admin/orders/OrdersAdminPage";
 import OrderDetailAdminPage from "./pages/admin/orders/OrderDetailAdminPage";
+import ProductsAdminPage from "./pages/admin/products/ProductsAdminPage";
 
 const router = createBrowserRouter([
   {
@@ -90,6 +91,10 @@ const router = createBrowserRouter([
           {
             path: `${RoutePaths.ADMIN_ROUTE + RoutePaths.ORDERS_ROUTE}/:id`,
             element: <OrderDetailAdminPage />,
+          },
+          {
+            path: RoutePaths.ADMIN_ROUTE + RoutePaths.PRODUCTS_ROUTE,
+            element: <ProductsAdminPage />,
           },
         ],
       },

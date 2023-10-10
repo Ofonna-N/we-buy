@@ -18,6 +18,7 @@ import { Link as RouterLink } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PersonIcon from "@mui/icons-material/Person";
+import InventoryIcon from "@mui/icons-material/Inventory";
 
 // local modules
 import NavLinkIconBtn from "./NavLinkIconBtn";
@@ -119,8 +120,13 @@ const Navbar = () => {
                 menuItems={[
                   {
                     label: "Orders",
-                    startIcon: <ShoppingCartIcon />,
+                    startIcon: <InventoryIcon />,
                     to: RoutesPaths.ADMIN_ROUTE + RoutesPaths.ORDERS_ROUTE,
+                  },
+                  {
+                    label: "Products",
+                    startIcon: <ShoppingCartIcon />,
+                    to: RoutesPaths.ADMIN_ROUTE + RoutesPaths.PRODUCTS_ROUTE,
                   },
                 ]}
               />
