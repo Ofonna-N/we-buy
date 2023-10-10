@@ -35,9 +35,7 @@ const AppModalBasic: React.FC<AppModalBasicProps> = ({
         alignItems={"baseline"}
         mb={1}
       >
-        <Typography variant="h5" component="h3">
-          {title}
-        </Typography>
+        {title}
         <IconButton onClick={onClose}>
           <CloseIcon />
         </IconButton>

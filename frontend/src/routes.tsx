@@ -20,7 +20,7 @@ import AdminRoute from "./pages/AdminRoute";
 import OrdersAdminPage from "./pages/admin/orders/OrdersAdminPage";
 import OrderDetailAdminPage from "./pages/admin/orders/OrderDetailAdminPage";
 import ProductsAdminPage from "./pages/admin/products/ProductsAdminPage";
-import ProductsDetailAdminPage from "./pages/admin/products/ProductsDetailAdminPage";
+import EditProductsAdminPage from "./pages/admin/products/EditProductsAdminPage";
 
 const router = createBrowserRouter([
   {
@@ -99,7 +99,7 @@ const router = createBrowserRouter([
           },
           {
             path: `${RoutePaths.ADMIN_ROUTE + RoutePaths.PRODUCTS_ROUTE}/:id`,
-            element: <ProductsDetailAdminPage />,
+            element: <EditProductsAdminPage />,
           },
         ],
       },

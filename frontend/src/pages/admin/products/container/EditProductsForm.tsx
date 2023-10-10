@@ -4,6 +4,7 @@ import Product from "../../../../types/Product";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import useMutateEditProduct from "../../../../hooks/api-hooks/products/useMutateEditProduct";
 
 type Props = {
   product: Product;
@@ -42,8 +43,10 @@ const EditProductsForm = (props: Props) => {
     },
   });
 
+  const { mutate } = useMutateEditProduct(props.product._id);
+
   const onSubmit = handleSubmit((data: ProductFormValues) => {
-    console.log(data);
+    mutate(data);
   });
 
   return (
@@ -99,14 +102,13 @@ const EditProductsForm = (props: Props) => {
           label="Description"
           id={"description"}
           type="text"
-          multiline
           fullWidth
           {...register("description")}
           useError={errors.description?.message}
         />
 
         <Box display={"flex"} justifyContent={"flex-start"}>
-          <Button variant="contained" color="primary" type="submit">
+          <Button variant="contained" color="info" type="submit">
             Update
           </Button>
         </Box>

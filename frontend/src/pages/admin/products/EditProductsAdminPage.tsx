@@ -5,7 +5,7 @@ import AppBackButton from "../../../component/interactive/clickables/AppBackButt
 import Product from "../../../types/Product";
 import EditProductsForm from "./container/EditProductsForm";
 
-const ProductsDetailAdminPage = () => {
+const EditProductsAdminPage = () => {
   const location = useLocation();
 
   const productJSON = new URLSearchParams(location.search).get("product");
@@ -51,4 +51,4 @@ const ProductsDetailAdminPage = () => {
   );
 };
 
-export default ProductsDetailAdminPage;
+export default EditProductsAdminPage;
