@@ -26,7 +26,9 @@ const useMutateData = <T, B>(
             UserResponse = await apiClient.put(body);
             break;
           case "delete":
-            UserResponse = await apiClient.delete();
+            UserResponse = await new APIClient<T>(
+              endpoint + "/" + body
+            ).delete();
             break;
           default:
             UserResponse = await apiClient.post(body);

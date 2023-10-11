@@ -1,5 +1,5 @@
 const { Product } = require("../models/productsModel");
-
+const mongoose = require("mongoose");
 // @desc create a product
 // @route POST /api/products
 // @access Private/Admin
@@ -63,4 +63,21 @@ const getByIdProduct = async (req, res) => {
   return res.json(product);
 };
 
-module.exports = { getAllProduct, getByIdProduct, createProduct, editProduct };
+const deleteProduct = async (req, res) => {
+  const id = new mongoose.Types.ObjectId(req.params.id);
+  const product = await Product.findOne(id);
+
+  if (!product) throw new Error("Product not found");
+
+  const deletedProduct = await Product.deleteOne(id);
+
+  return res.json(deletedProduct);
+};
+
+module.exports = {
+  getAllProduct,
+  getByIdProduct,
+  createProduct,
+  editProduct,
+  deleteProduct,
+};

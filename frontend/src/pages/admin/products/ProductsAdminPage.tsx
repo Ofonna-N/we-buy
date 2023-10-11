@@ -10,6 +10,7 @@ import AdminProductsActionModal from "./components/AdminProductsActionModal";
 import ProductModalDataType from "../types/ProductModalDataType";
 import AppBackButton from "../../../component/interactive/clickables/AppBackButton";
 import useMutateCreateProduct from "../../../hooks/api-hooks/products/useMutateCreateProduct";
+import useMutateDeleteProduct from "../../../hooks/api-hooks/products/useMutateDeleteProduct";
 
 const ProductsAdminPage = () => {
   const {
@@ -26,11 +27,14 @@ const ProductsAdminPage = () => {
   const { mutate: createProduct, isSuccess: isCreatedProductSucess } =
     useMutateCreateProduct();
 
+  const { mutate: deleteProduct, isSuccess: isDeletedProductSucess } =
+    useMutateDeleteProduct();
+
   useEffect(() => {
-    if (isCreatedProductSucess) {
+    if (isCreatedProductSucess || isDeletedProductSucess) {
       refetchProducts();
     }
-  }, [isCreatedProductSucess, refetchProducts]);
+  }, [isCreatedProductSucess, isDeletedProductSucess, refetchProducts]);
 
   const onCreateProduct = () => {
     setProductModalData({
@@ -61,6 +65,7 @@ const ProductsAdminPage = () => {
       title: "Delete Product",
       message: `Are you sure you want to delete ${product.name}?`,
       onYesClick: () => {
+        deleteProduct(product._id);
         setProductModalData((prev) => ({ ...prev, isOpen: false }));
       },
       onNoClick: () => {
