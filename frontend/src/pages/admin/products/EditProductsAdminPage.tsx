@@ -1,9 +1,9 @@
-import { Alert, Box, Stack, Typography } from "@mui/material";
+import { Alert } from "@mui/material";
 import AppContainer from "../../../component/page/AppContainer";
 import { useLocation } from "react-router-dom";
-import AppBackButton from "../../../component/interactive/clickables/AppBackButton";
 import Product from "../../../types/Product";
 import EditProductsForm from "./container/EditProductsForm";
+import AppPageHeader from "../../../component/page/AppPageHeader";
 
 const EditProductsAdminPage = () => {
   const location = useLocation();
@@ -23,29 +23,7 @@ const EditProductsAdminPage = () => {
 
   return (
     <AppContainer>
-      <Stack
-        sx={{
-          flexDirection: {
-            direction: "column",
-            sm: "row",
-          },
-          justifyContent: {
-            justifyContent: "center",
-            sm: "space-between",
-          },
-          alignItems: "center",
-        }}
-        mb={2}
-      >
-        <Typography variant="h4" mb={"2rem"}>
-          {" "}
-          Edit Product{" "}
-          <Box component={"span"} fontSize={"1.35rem"}>
-            {product._id}
-          </Box>
-        </Typography>
-        <AppBackButton />
-      </Stack>
+      <AppPageHeader title={"Edit Product"} titlePostfix={product._id} />
       <EditProductsForm product={product} />
     </AppContainer>
   );

@@ -1,14 +1,17 @@
 import { Box, Button, FormHelperText } from "@mui/material";
-import AppTextField from "../../../component/input/AppTextField";
-import AppSpinner from "../../../component/loading/AppSpinner";
+import AppTextField from "../input/AppTextField";
+import AppSpinner from "../loading/AppSpinner";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import User from "../../../types/User";
-import useMutateUpdateUser from "../../../hooks/api-hooks/users/useMutateUpdateUser";
+import User from "../../types/User";
+import { UseMutateFunction } from "react-query";
 
 type Props = {
   user: User | null | undefined;
+  updateUser: UseMutateFunction<User, Error, unknown, unknown>;
+  updateUserError: Error | null;
+  updateUserIsLoading: boolean;
 };
 const profileFormSchema = yup.object({
   fullName: yup
@@ -34,8 +37,6 @@ const EditProfileForm = (props: Props) => {
     },
   });
 
-  const { mutate, error, isLoading } = useMutateUpdateUser();
-
   const onSubmitForm = handleSubmit((data) => {
     const body = {
       name: data.fullName?.trim(),
@@ -52,7 +53,7 @@ const EditProfileForm = (props: Props) => {
       }
     }
     // console.log("body: ", body);
-    if (updateDatabase) mutate(body);
+    if (updateDatabase) props.updateUser(body);
   });
 
   return (
@@ -96,7 +97,7 @@ const EditProfileForm = (props: Props) => {
           useError={errors.confirmPassword?.message}
         />
         <Box>
-          {isLoading ? (
+          {props.updateUserIsLoading ? (
             <AppSpinner />
           ) : (
             <Button variant="contained" type="submit">
@@ -104,7 +105,9 @@ const EditProfileForm = (props: Props) => {
             </Button>
           )}
 
-          <FormHelperText error={!!error}>{error?.message}</FormHelperText>
+          <FormHelperText error={!!props.updateUserError}>
+            {props.updateUserError?.message}
+          </FormHelperText>
         </Box>
       </form>
     </Box>

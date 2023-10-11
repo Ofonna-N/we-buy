@@ -130,14 +130,28 @@ const getByIdUser = async (req, res) => {
 // @route GET /api/users
 // @access private/Admin
 const getAllUser = async (req, res) => {
-  return res.send("getting all users....");
+  const users = await usersModel.User.find({});
+  return res.json(users);
 };
 
-// @desc delete user
-// @route PATCH /api/users/:id
+// @desc update user
+// @route put /api/users/:id
 // @access private/Admin
 const updateByIdUser = async (req, res) => {
-  return res.send("updating user by Id....");
+  const user = await usersModel.User.findById(req.params.id);
+
+  if (!user) throw new Error("User not found");
+
+  user.name = req.body.name || user.name;
+  user.email = req.body.email || user.email;
+
+  if (req.body.password) {
+    user.password = req.body.password;
+  }
+
+  const updatedUser = await user.save();
+
+  return res.json(_.omit(updatedUser.toObject(), ["password"]));
 };
 
 // @desc delete user

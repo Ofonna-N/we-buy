@@ -16,6 +16,7 @@ const endpointRoutes = {
   },
   USERS: {
     USER_PROFILE: "/users/profile/",
+    USERS: "/users/",
   },
 };
 

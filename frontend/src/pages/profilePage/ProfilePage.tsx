@@ -2,11 +2,13 @@ import { Box, Stack, Typography } from "@mui/material";
 import AppContainer from "../../component/page/AppContainer";
 import { useAppSelector } from "../../hooks/redux-hooks/appStoreHooks";
 import useQueryProfileOrders from "../../hooks/api-hooks/orders/useQueryProfileOrders";
-import EditProfileForm from "./components/EditProfileForm";
+import EditProfileForm from "../../component/common/EditProfileForm";
 import AppOrdersTable from "../../component/common/AppOrdersTable";
 import { useNavigate } from "react-router-dom";
 import { OrderResponse } from "../../types/Order";
 import RoutesPaths from "../../constants/RoutePaths";
+import AppPageHeader from "../../component/page/AppPageHeader";
+import useMutateUpdateUser from "../../hooks/api-hooks/users/useMutateUpdateUser";
 
 const ProfilePage = () => {
   const user = useAppSelector((state) => state.userSlice.userInfo);
@@ -19,6 +21,12 @@ const ProfilePage = () => {
 
   const navigate = useNavigate();
 
+  const {
+    mutate: updateUser,
+    error: updateUserError,
+    isLoading: updateUserIsLoading,
+  } = useMutateUpdateUser();
+
   const OrderSectionTitle = (title: string) => (
     <Box>
       <Typography variant="h4" component={"h2"} mb={"2rem"}>
@@ -29,6 +37,7 @@ const ProfilePage = () => {
 
   return (
     <AppContainer>
+      <AppPageHeader title="Edit Profile" />
       <Stack
         sx={{
           flexDirection: {
@@ -48,7 +57,12 @@ const ProfilePage = () => {
           }}
         >
           {OrderSectionTitle("Profile")}
-          <EditProfileForm user={user} />
+          <EditProfileForm
+            user={user}
+            updateUser={updateUser}
+            updateUserError={updateUserError}
+            updateUserIsLoading={updateUserIsLoading}
+          />
         </Box>
         {!user?.isAdmin && (
           <Box

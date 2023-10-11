@@ -15,14 +15,12 @@ import {
 } from "@mui/material";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import PersonIcon from "@mui/icons-material/Person";
-import { appMenuAcitons } from "../../slices/appMenuSlice";
+import { appMenuAcitons } from "../../../../slices/appMenuSlice";
 import { Link as RouterLink } from "react-router-dom";
-import RoutesPaths from "../../constants/RoutePaths";
-import useNavMenuSharedState from "../../hooks/common/useNavMenuSharedState";
-import AppDropDownMenu from "./AppDropDownMenu";
-import LogoutIcon from "@mui/icons-material/Logout";
-import InventoryIcon from "@mui/icons-material/Inventory";
+import RoutesPaths from "../../../../constants/RoutePaths";
+import useNavMenuSharedState from "../../../../hooks/common/useNavMenuSharedState";
+import NavUserDropDownMenu from "../common/NavUserDropDownMenu";
+import NavAdminDropDownMenu from "../common/NavAdminDropDownMenu";
 //#endregion
 
 const AppSideMenu = () => {
@@ -34,64 +32,31 @@ const AppSideMenu = () => {
   const navBarHeight = "88.01px";
 
   const sideMenuNavItems = [
-    <ListItemButton component={RouterLink} to={RoutesPaths.CART_ROUTE}>
-      <ListItemIcon>
-        <Badge
-          invisible={cartQty <= 0}
-          badgeContent={cartQty}
-          color={darkModeCtx.mode === "dark" ? "primary" : "secondary"}
-          max={99}
-        >
-          <ShoppingCartIcon />
-        </Badge>
-      </ListItemIcon>
-      <ListItemText primary="Cart" />
-    </ListItemButton>,
-
-    <Box pl={"1rem"}>
-      {(user && (
-        <AppDropDownMenu
-          title={user.name}
-          menuItems={[
-            {
-              label: "Profile",
-              startIcon: <PersonIcon />,
-              to: RoutesPaths.PROFILE_ROUTE,
-            },
-            {
-              label: "Logout",
-              startIcon: <LogoutIcon />,
-              onClick: () => logoutApi.mutate(null),
-            },
-          ]}
-        />
-      )) || (
-        <ListItemButton component={RouterLink} to={RoutesPaths.SIGN_IN_ROUTE}>
+    <>
+      {user && !user.isAdmin && (
+        <ListItemButton component={RouterLink} to={RoutesPaths.CART_ROUTE}>
           <ListItemIcon>
-            <PersonIcon />
+            <Badge
+              invisible={cartQty <= 0}
+              badgeContent={cartQty}
+              color={darkModeCtx.mode === "dark" ? "primary" : "secondary"}
+              max={99}
+            >
+              <ShoppingCartIcon />
+            </Badge>
           </ListItemIcon>
-          <ListItemText primary="Sign In" />
+          <ListItemText primary="Cart" />
         </ListItemButton>
       )}
+    </>,
+    <Box pl={"1rem"}>
+      <NavUserDropDownMenu
+        user={user}
+        onLogOut={() => logoutApi.mutate(null)}
+      />
     </Box>,
     <Box pl={"1rem"}>
-      {user && user.isAdmin && (
-        <AppDropDownMenu
-          title={"Admin"}
-          menuItems={[
-            {
-              label: "Orders",
-              startIcon: <InventoryIcon />,
-              to: RoutesPaths.ADMIN_ROUTE + RoutesPaths.ORDERS_ROUTE,
-            },
-            {
-              label: "Products",
-              startIcon: <ShoppingCartIcon />,
-              to: RoutesPaths.ADMIN_ROUTE + RoutesPaths.PRODUCTS_ROUTE,
-            },
-          ]}
-        />
-      )}
+      <NavAdminDropDownMenu user={user} />
     </Box>,
     <ListItemButton disableRipple>
       <ListItemText>

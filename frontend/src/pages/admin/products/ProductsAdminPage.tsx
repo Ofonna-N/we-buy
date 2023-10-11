@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import AppContainer from "../../../component/page/AppContainer";
 import { useNavigate } from "react-router-dom";
 import useQueryProducts from "../../../hooks/api-hooks/products/useQueryProducts";
@@ -8,9 +8,9 @@ import Product from "../../../types/Product";
 import React, { useEffect } from "react";
 import AdminProductsActionModal from "./components/AdminProductsActionModal";
 import ProductModalDataType from "../types/ProductModalDataType";
-import AppBackButton from "../../../component/interactive/clickables/AppBackButton";
 import useMutateCreateProduct from "../../../hooks/api-hooks/products/useMutateCreateProduct";
 import useMutateDeleteProduct from "../../../hooks/api-hooks/products/useMutateDeleteProduct";
+import AppPageHeader from "../../../component/page/AppPageHeader";
 
 const ProductsAdminPage = () => {
   const {
@@ -79,27 +79,9 @@ const ProductsAdminPage = () => {
 
   return (
     <AppContainer>
-      <Stack
-        sx={{
-          flexDirection: {
-            direction: "column",
-            sm: "row",
-          },
-          justifyContent: {
-            justifyContent: "center",
-            sm: "space-between",
-          },
-          alignItems: {
-            alignItems: "center",
-          },
-        }}
-        mb={2}
-      >
-        <Typography variant="h4" mb={{ xs: "2rem", md: 0 }}>
-          Products
-        </Typography>
-        <Box display={"flex"} gap={2}>
-          <AppBackButton />
+      <AppPageHeader
+        title={"Products"}
+        rightSlot={
           <Button
             variant="contained"
             color="secondary"
@@ -107,8 +89,8 @@ const ProductsAdminPage = () => {
           >
             Create Product
           </Button>
-        </Box>
-      </Stack>
+        }
+      />
       <AppProductsTable
         products={products}
         productError={error}

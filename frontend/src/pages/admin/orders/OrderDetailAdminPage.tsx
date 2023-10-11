@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { Stack } from "@mui/material";
 import AppContainer from "../../../component/page/AppContainer";
 import { useParams } from "react-router-dom";
 import useQuerySingleOrderById from "../../../hooks/api-hooks/orders/useQuerySingleOrderById";
@@ -8,6 +8,7 @@ import OrderSummaryCard from "../../../component/common/OrderSummaryCard";
 import useMutateDeliverOrder from "../../../hooks/api-hooks/orders/useMutateDeliverOrder";
 import useMutatePayOrder from "../../../hooks/api-hooks/orders/useMutatePayOrder";
 import React from "react";
+import AppPageHeader from "../../../component/page/AppPageHeader";
 
 const OrderDetailAdminPage = () => {
   const params = useParams();
@@ -51,10 +52,7 @@ const OrderDetailAdminPage = () => {
 
   return (
     <AppContainer>
-      <Typography variant="h4" mb={"2rem"}>
-        {" "}
-        Order {order?._id}
-      </Typography>
+      <AppPageHeader title={"Order Details"} />
       <Stack
         gap={2}
         sx={{

@@ -11,61 +11,70 @@ import {
 import AppSpinner from "../loading/AppSpinner";
 import { AxiosError } from "axios";
 import ErrorResponse from "../../types/ErrorResponse";
-import Product from "../../types/Product";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { UserResponse } from "../../types/User";
+import CloseIcon from "@mui/icons-material/Close";
+import DoneIcon from "@mui/icons-material/Done";
 
 type Props = {
-  products: Product[] | undefined;
-  productError: AxiosError<ErrorResponse> | null;
-  productIsLoading: boolean;
-  isAdmin?: boolean;
-  onRowClick?: (product: Product) => void;
-  onEditClick?: (product: Product) => void;
-  onDeleteClick?: (product: Product) => void;
+  users: UserResponse["user"][] | undefined;
+  userError: AxiosError<ErrorResponse> | null;
+  userIsLoading: boolean;
+  onRowClick?: (product: UserResponse["user"]) => void;
+  onEditClick?: (product: UserResponse["user"]) => void;
+  onDeleteClick?: (product: UserResponse["user"]) => void;
 };
 
-const AppProductsTable = (props: Props) => {
+const AppUsersTable = (props: Props) => {
   return (
     <Box sx={{ overflowX: "auto" }}>
-      {props.productIsLoading ? (
+      {props.userIsLoading ? (
         <AppSpinner />
-      ) : props.products && props.products.length > 0 ? (
+      ) : props.users && props.users.length > 0 ? (
         <Table>
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
               <TableCell>NAME</TableCell>
-              <TableCell>PRICE</TableCell>
-              <TableCell>CATEGORY</TableCell>
-              <TableCell align="center">BRAND</TableCell>
+              <TableCell>EMAIL</TableCell>
+              <TableCell>ADMIN</TableCell>
               <TableCell align="center">EDIT</TableCell>
               <TableCell align="center">DELETE</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.products.map((product, i) => (
+            {props.users.map((user, i) => (
               <TableRow
                 key={i}
                 sx={{
                   textDecoration: "none",
                   "&:hover td": {
-                    color: "primary.main",
+                    color: !user.isAdmin ? "primary.main" : "",
                   },
                   cursor: "pointer",
                 }}
-                onClick={() => props.onRowClick && props.onRowClick(product)}
+                onClick={() => props.onRowClick && props.onRowClick(user)}
               >
-                <TableCell>{product._id}</TableCell>
-                {props.isAdmin && <TableCell>{product.name}</TableCell>}
-                <TableCell>${product.price}</TableCell>
-                <TableCell>{product.category}</TableCell>
-                <TableCell align="center">{product.brand}</TableCell>
+                <TableCell>{user._id}</TableCell>
+                <TableCell>{user.name}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>
+                  {user.isAdmin ? (
+                    <DoneIcon color="success" />
+                  ) : (
+                    <CloseIcon color="error" />
+                  )}
+                </TableCell>
+
                 <TableCell align="center">
                   <IconButton
+                    disabled={user.isAdmin}
                     onClick={(event) => {
                       event.stopPropagation();
-                      props.onEditClick && props.onEditClick(product);
+                      !user.isAdmin &&
+                        props.onEditClick &&
+                        props.onEditClick(user);
                     }}
                   >
                     <EditNoteIcon />
@@ -73,9 +82,12 @@ const AppProductsTable = (props: Props) => {
                 </TableCell>
                 <TableCell align="center">
                   <IconButton
+                    disabled={user.isAdmin}
                     onClick={(event) => {
                       event.stopPropagation();
-                      props.onDeleteClick && props.onDeleteClick(product);
+                      !user.isAdmin &&
+                        props.onDeleteClick &&
+                        props.onDeleteClick(user);
                     }}
                   >
                     <DeleteIcon />
@@ -85,9 +97,9 @@ const AppProductsTable = (props: Props) => {
             ))}
           </TableBody>
         </Table>
-      ) : props.productError?.message ? (
+      ) : props.userError?.message ? (
         <Alert variant="outlined" severity="error">
-          {props.productError?.message}
+          {props.userError?.message}
         </Alert>
       ) : (
         <Alert variant="outlined" severity="info">
@@ -98,4 +110,4 @@ const AppProductsTable = (props: Props) => {
   );
 };
 
-export default AppProductsTable;
+export default AppUsersTable;

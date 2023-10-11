@@ -17,8 +17,6 @@ import { Link as RouterLink } from "react-router-dom";
 // Icons
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import PersonIcon from "@mui/icons-material/Person";
-import InventoryIcon from "@mui/icons-material/Inventory";
 
 // local modules
 import NavLinkIconBtn from "./NavLinkIconBtn";
@@ -26,9 +24,9 @@ import NavLinkIconBtn from "./NavLinkIconBtn";
 import { appMenuAcitons } from "../../../../slices/appMenuSlice";
 import RoutesPaths from "../../../../constants/RoutePaths";
 
-import AppDropDownMenu from "../../../../component/menus/AppDropDownMenu";
-import LogoutIcon from "@mui/icons-material/Logout";
 import useNavMenuSharedState from "../../../../hooks/common/useNavMenuSharedState";
+import NavUserDropDownMenu from "../common/NavUserDropDownMenu";
+import NavAdminDropDownMenu from "../common/NavAdminDropDownMenu";
 
 //#endregion
 
@@ -94,47 +92,8 @@ const Navbar = () => {
                 Cart
               </NavLinkIconBtn>
             )}
-            {(user && (
-              <AppDropDownMenu
-                title={user.name}
-                menuItems={[
-                  {
-                    label: "Profile",
-                    startIcon: <PersonIcon />,
-                    to: RoutesPaths.PROFILE_ROUTE,
-                  },
-                  {
-                    label: "Logout",
-                    startIcon: <LogoutIcon />,
-                    onClick: onLogOut,
-                  },
-                ]}
-              />
-            )) || (
-              <NavLinkIconBtn
-                startIcon={<PersonIcon />}
-                to={RoutesPaths.SIGN_IN_ROUTE}
-              >
-                Sign In
-              </NavLinkIconBtn>
-            )}
-            {user && user.isAdmin && (
-              <AppDropDownMenu
-                title={"Admin"}
-                menuItems={[
-                  {
-                    label: "Orders",
-                    startIcon: <InventoryIcon />,
-                    to: RoutesPaths.ADMIN_ROUTE + RoutesPaths.ORDERS_ROUTE,
-                  },
-                  {
-                    label: "Products",
-                    startIcon: <ShoppingCartIcon />,
-                    to: RoutesPaths.ADMIN_ROUTE + RoutesPaths.PRODUCTS_ROUTE,
-                  },
-                ]}
-              />
-            )}
+            <NavUserDropDownMenu user={user} onLogOut={onLogOut} />
+            <NavAdminDropDownMenu user={user} />
           </Box>
           <FormControlLabel
             control={<Switch size="small" />}

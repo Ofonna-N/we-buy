@@ -21,7 +21,7 @@ router
 router
   .route("/:id")
   .get(auth, admin, usersController.getByIdUser)
-  .patch(auth, admin, usersController.updateByIdUser)
+  .put(auth, admin, usersController.updateByIdUser)
   .delete(auth, admin, usersController.deleteByIdUser);
 
 router.get("/", auth, admin, usersController.getAllUser);

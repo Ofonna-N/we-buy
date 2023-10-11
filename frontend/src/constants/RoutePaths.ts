@@ -14,6 +14,7 @@ const RoutesPaths = {
   ORDERS_ROUTE: "/orders",
   PROFILE_ROUTE: "/profile",
   ADMIN_ROUTE: "/admin",
+  USERS_ROUTE: "/users",
 };
 
 export default RoutesPaths;

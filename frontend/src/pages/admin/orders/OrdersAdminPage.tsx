@@ -1,19 +1,16 @@
-import { Typography } from "@mui/material";
 import AppContainer from "../../../component/page/AppContainer";
 import useQueryAllOrders from "../../../hooks/api-hooks/orders/useQueryAllOrders";
 import AppOrdersTable from "../../../component/common/AppOrdersTable";
 import { useNavigate } from "react-router-dom";
 import RoutesPaths from "../../../constants/RoutePaths";
+import AppPageHeader from "../../../component/page/AppPageHeader";
 
 const OrdersAdminPage = () => {
   const { data: orders, isLoading, error } = useQueryAllOrders();
   const navigate = useNavigate();
   return (
     <AppContainer>
-      <Typography variant="h4" mb={"2rem"}>
-        {" "}
-        Orders
-      </Typography>
+      <AppPageHeader title="Orders" />
       <AppOrdersTable
         orders={orders}
         orderError={error}

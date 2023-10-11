@@ -21,6 +21,8 @@ import OrdersAdminPage from "./pages/admin/orders/OrdersAdminPage";
 import OrderDetailAdminPage from "./pages/admin/orders/OrderDetailAdminPage";
 import ProductsAdminPage from "./pages/admin/products/ProductsAdminPage";
 import EditProductsAdminPage from "./pages/admin/products/EditProductsAdminPage";
+import UserListAdminPage from "./pages/admin/users/UserListAdminPage";
+import EditUserAdminPage from "./pages/admin/users/EditUserAdminPage";
 
 const router = createBrowserRouter([
   {
@@ -100,6 +102,14 @@ const router = createBrowserRouter([
           {
             path: `${RoutePaths.ADMIN_ROUTE + RoutePaths.PRODUCTS_ROUTE}/:id`,
             element: <EditProductsAdminPage />,
+          },
+          {
+            path: `${RoutePaths.ADMIN_ROUTE + RoutePaths.USERS_ROUTE}`,
+            element: <UserListAdminPage />,
+          },
+          {
+            path: `${RoutePaths.ADMIN_ROUTE + RoutePaths.USERS_ROUTE}/:id`,
+            element: <EditUserAdminPage />,
           },
         ],
       },
