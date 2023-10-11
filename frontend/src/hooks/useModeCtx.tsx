@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { modeCtx } from "../providers/AppThemeProvider";
+import modeCtx from "../contexts/ModeCtx";
 
 const useModeCtx = () => {
   return useContext(modeCtx);

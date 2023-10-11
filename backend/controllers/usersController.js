@@ -158,7 +158,11 @@ const updateByIdUser = async (req, res) => {
 // @route DELETE /api/users/:id
 // @access private/Admin
 const deleteByIdUser = async (req, res) => {
-  return res.send("deleting user by Id....");
+  const user = await usersModel.User.findById(req.params.id);
+  if (!user) throw new Error("User not found");
+
+  const removedUser = await usersModel.User.deleteOne({ _id: user._id });
+  return res.json(removedUser);
 };
 
 module.exports = {

@@ -9,6 +9,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import AppQueryClientProvider from "./providers/AppQueryClientProvider.tsx";
 import AppStoreProvider from "./providers/AppStoreProvider.tsx";
 import AppPaypalProvider from "./providers/AppPaypalProvider.tsx";
+import ConfirmationDialogProvider from "./providers/ConfirmationDialogProvider.tsx";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
@@ -17,8 +18,10 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
       <AppStoreProvider>
         <AppPaypalProvider>
           <AppThemeProvider>
-            <CssBaseline />
-            <RouterProvider router={routes} />
+            <ConfirmationDialogProvider>
+              <CssBaseline />
+              <RouterProvider router={routes} />
+            </ConfirmationDialogProvider>
           </AppThemeProvider>
         </AppPaypalProvider>
       </AppStoreProvider>

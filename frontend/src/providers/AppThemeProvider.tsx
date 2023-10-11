@@ -1,18 +1,12 @@
 import { PaletteMode, useMediaQuery } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import React, { createContext, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import modeCtx, { ModeCtx } from "../contexts/ModeCtx";
 
 const themeMode: { light: PaletteMode; dark: PaletteMode } = {
   light: "light",
   dark: "dark",
 };
-
-type ModeCtx = {
-  mode: PaletteMode;
-  toggleMode: () => void;
-};
-
-export const modeCtx = createContext({} as ModeCtx);
 
 const modeKey = "mode";
 

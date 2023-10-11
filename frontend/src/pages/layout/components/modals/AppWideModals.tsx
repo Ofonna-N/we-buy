@@ -1,5 +1,11 @@
+import BasicConfirmationDialog from "./BasicConfirmationDialog";
+
 const AppWideModals = () => {
-  return "";
+  return (
+    <>
+      <BasicConfirmationDialog />
+    </>
+  );
 };
 
 export default AppWideModals;

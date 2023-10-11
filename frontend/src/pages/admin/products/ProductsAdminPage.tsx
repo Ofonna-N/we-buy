@@ -5,12 +5,11 @@ import useQueryProducts from "../../../hooks/api-hooks/products/useQueryProducts
 import AppProductsTable from "../../../component/common/AppProductsTable";
 import RoutesPaths from "../../../constants/RoutePaths";
 import Product from "../../../types/Product";
-import React, { useEffect } from "react";
-import AdminProductsActionModal from "./components/AdminProductsActionModal";
-import ProductModalDataType from "../types/ProductModalDataType";
+import { useEffect } from "react";
 import useMutateCreateProduct from "../../../hooks/api-hooks/products/useMutateCreateProduct";
 import useMutateDeleteProduct from "../../../hooks/api-hooks/products/useMutateDeleteProduct";
 import AppPageHeader from "../../../component/page/AppPageHeader";
+import useBasicConfirmationDialog from "../../../hooks/useBasicConfirmationDialog";
 
 const ProductsAdminPage = () => {
   const {
@@ -19,9 +18,12 @@ const ProductsAdminPage = () => {
     error,
     refetch: refetchProducts,
   } = useQueryProducts();
-  const [productModalData, setProductModalData] =
-    React.useState<ProductModalDataType>({} as ProductModalDataType);
-
+  // const [productModalData, setProductModalData] =
+  //   React.useState<ProductModalDataType>({} as ProductModalDataType);
+  const setConfirmationDialog =
+    useBasicConfirmationDialog().setBasicConfirmationDialogState;
+  const closeConfirmationDialog =
+    useBasicConfirmationDialog().clearBasicConfirmationDialogState;
   const navigate = useNavigate();
 
   const { mutate: createProduct, isSuccess: isCreatedProductSucess } =
@@ -37,19 +39,16 @@ const ProductsAdminPage = () => {
   }, [isCreatedProductSucess, isDeletedProductSucess, refetchProducts]);
 
   const onCreateProduct = () => {
-    setProductModalData({
-      isOpen: true,
+    setConfirmationDialog({
+      open: true,
       title: "Create Product",
-      message: "Are you sure you want to create a new product?",
-      onYesClick: () => {
-        createProduct({});
-        setProductModalData((prev) => ({ ...prev, isOpen: false }));
+      content: "Are you sure you want to create a new product?",
+      onConfirm: () => {
+        createProduct(null);
+        closeConfirmationDialog();
       },
-      onNoClick: () => {
-        setProductModalData((prev) => ({ ...prev, isOpen: false }));
-      },
-      onClose: () => {
-        setProductModalData((prev) => ({ ...prev, isOpen: false }));
+      onCancel: () => {
+        closeConfirmationDialog();
       },
     });
   };
@@ -60,19 +59,16 @@ const ProductsAdminPage = () => {
   };
 
   const onDeleteProduct = (product: Product) => {
-    setProductModalData({
-      isOpen: true,
+    setConfirmationDialog({
+      open: true,
       title: "Delete Product",
-      message: `Are you sure you want to delete ${product.name}?`,
-      onYesClick: () => {
+      content: `Are you sure you want to delete ${product.name}?`,
+      onConfirm: () => {
         deleteProduct(product._id);
-        setProductModalData((prev) => ({ ...prev, isOpen: false }));
+        closeConfirmationDialog();
       },
-      onNoClick: () => {
-        setProductModalData((prev) => ({ ...prev, isOpen: false }));
-      },
-      onClose: () => {
-        setProductModalData((prev) => ({ ...prev, isOpen: false }));
+      onCancel: () => {
+        closeConfirmationDialog();
       },
     });
   };
@@ -102,7 +98,6 @@ const ProductsAdminPage = () => {
         onEditClick={onEditProduct}
         onDeleteClick={onDeleteProduct}
       />
-      <AdminProductsActionModal modalData={productModalData} />
     </AppContainer>
   );
 };
