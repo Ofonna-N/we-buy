@@ -30,9 +30,8 @@ const UserListAdminPage = () => {
     setConfirmationDialog({
       open: true,
       title: "Delete User",
-      content: "Are you sure you want to delete this user?",
+      content: `Are you sure you want to delete this user?\nThis action cannot be undone and all orders associated with this user will also be permanently deleted.`,
       onConfirm: () => {
-        // deleteProduct(product._id);
         deleteUser(user._id);
         closeConfirmationDialog();
       },

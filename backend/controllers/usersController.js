@@ -2,6 +2,7 @@ const usersModel = require("../models/usersModel");
 const _ = require("lodash");
 const jwtCookieTokenGenerator = require("../services/jwtCookieTokenGenerator");
 const bcrypt = require("bcrypt");
+const ordersModel = require("../models/orderModel");
 
 // register, login, getAll, logout, authenticate, getProfile, updateProfile, delete, getById
 
@@ -160,7 +161,7 @@ const updateByIdUser = async (req, res) => {
 const deleteByIdUser = async (req, res) => {
   const user = await usersModel.User.findById(req.params.id);
   if (!user) throw new Error("User not found");
-
+  const userOrders = await ordersModel.Order.deleteMany({ user: user._id });
   const removedUser = await usersModel.User.deleteOne({ _id: user._id });
   return res.json(removedUser);
 };

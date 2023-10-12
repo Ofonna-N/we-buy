@@ -41,7 +41,7 @@ const AppModalBasic: React.FC<AppModalBasicProps> = ({
         </IconButton>
       </DialogTitle>
       <DialogContent>
-        <Typography variant="body1" component="p">
+        <Typography variant="body1" component="p" whiteSpace={"pre-wrap"}>
           {message}
         </Typography>
       </DialogContent>

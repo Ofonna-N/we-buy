@@ -9,6 +9,7 @@ const useMutateDeleteUser = () => {
 
   const onUserDeleted = () => {
     queryClient.refetchQueries(endpointRoutes.USERS.USERS);
+    queryClient.refetchQueries(endpointRoutes.ORDERS.ORDERS);
     showSnackBar("User deleted successfully", "success");
   };
   const onUserDeletedError = (error: Error) => {
