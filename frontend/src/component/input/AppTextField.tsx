@@ -21,6 +21,7 @@ type Props = {
   disabled?: TextFieldProps["disabled"];
   sx?: TextFieldProps["sx"];
   multiline?: TextFieldProps["multiline"];
+  minRows?: TextFieldProps["minRows"];
   inputProps?: TextFieldProps["inputProps"];
   defaultValue?: TextFieldProps["defaultValue"];
 };

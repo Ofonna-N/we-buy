@@ -7,6 +7,7 @@ import OrderDetailsInfo from "./components/OrderDetailsInfo";
 import { OrderResponse } from "../../types/Order";
 import OrderDetailsSummary from "./components/OrderDetailsSummary";
 import { usePayPalScriptReducer } from "@paypal/react-paypal-js";
+import AppPageHeader from "../../component/page/AppPageHeader";
 
 const OrderDetailsPage = () => {
   const params = useParams();
@@ -26,9 +27,7 @@ const OrderDetailsPage = () => {
 
   return (
     <AppContainer>
-      <Box py={3}>
-        <Typography variant="h3">Order No: {order?._id}</Typography>
-      </Box>
+      <AppPageHeader title="Order Details" titlePostfix={order?._id} />
       <Stack
         gap={2}
         sx={{

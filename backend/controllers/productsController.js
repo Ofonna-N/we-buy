@@ -1,4 +1,5 @@
 const { Product } = require("../models/productsModel");
+const { Order } = require("../models/orderModel");
 const mongoose = require("mongoose");
 // @desc create a product
 // @route POST /api/products
@@ -63,6 +64,55 @@ const getByIdProduct = async (req, res) => {
   return res.json(product);
 };
 
+// @desc create new review
+// @route POST /api/products/:id/reviews
+// @access Private
+const createProductReview = async (req, res) => {
+  const { rating, comment } = req.body;
+  const product = await Product.findById(req.params.id);
+
+  if (!product) throw new Error("Product not found");
+
+  const alreadyReviewed = product.reviews.find(
+    (review) => review.user.toString() === req.user._id.toString()
+  );
+
+  if (alreadyReviewed) throw new Error("Product already reviewed");
+
+  // Check if the user has ordered this product before
+  const userOrders = await Order.find({ user: req.user._id });
+  const orderedProduct = userOrders.some((order) =>
+    order.orderItems.some(
+      (item) => item.product.toString() === product._id.toString()
+    )
+  );
+
+  if (!orderedProduct)
+    throw new Error("You must order this product before you can review it");
+
+  const review = {
+    name: req.user.name,
+    rating: Number(rating),
+    comment,
+    user: req.user._id,
+  };
+
+  product.reviews.push(review);
+
+  product.numReviews = product.reviews.length;
+
+  product.rating =
+    product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+    product.reviews.length;
+
+  const reviewedProduct = await product.save();
+
+  return res.status(201).json(reviewedProduct);
+};
+
+// @desc delete a product
+// @route DELETE /api/products/:id
+// @access Private/Admin
 const deleteProduct = async (req, res) => {
   const id = new mongoose.Types.ObjectId(req.params.id);
   const product = await Product.findOne(id);
@@ -79,5 +129,6 @@ module.exports = {
   getByIdProduct,
   createProduct,
   editProduct,
+  createProductReview,
   deleteProduct,
 };

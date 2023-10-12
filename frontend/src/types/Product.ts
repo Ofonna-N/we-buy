@@ -1,3 +1,11 @@
+type Review = {
+  user: string;
+  name: string;
+  rating: number;
+  comment: string;
+  createdAt: Date;
+};
+
 type Product = {
   _id: string;
   name: string;
@@ -9,6 +17,7 @@ type Product = {
   countInStock: number;
   rating: number;
   numReviews: number;
+  reviews: Review[];
 };
 
 export default Product;

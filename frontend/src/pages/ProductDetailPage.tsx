@@ -2,18 +2,22 @@ import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import { useParams } from "react-router-dom";
 import List from "@mui/material/List";
 import {
+  Alert,
+  Box,
   Button,
   CircularProgress,
+  Divider,
   FormControl,
   Input,
   ListItem,
   ListItemText,
+  Paper,
   Rating,
   Typography,
 } from "@mui/material";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import useQuerySingleProduct from "../hooks/api-hooks/products/useQuerySingleProduct";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { CartItem } from "../types/Cart";
 import {
   useAppDispatch,
@@ -21,6 +25,11 @@ import {
 } from "../hooks/redux-hooks/appStoreHooks";
 import { cartActions } from "../slices/cartSlice";
 import AppContainer from "../component/page/AppContainer";
+import ProductComment from "./productDetailPage/component/ProductComment";
+import ProductCommentForm from "./productDetailPage/component/ProductCommentForm";
+import CommentReveiw from "./productDetailPage/types/CommentReveiw";
+import useMutateAddReveiw from "../hooks/api-hooks/products/useMutateAddReveiw";
+import AppBackButton from "../component/interactive/clickables/AppBackButton";
 
 const ProductDetailPage = () => {
   const { id } = useParams();
@@ -29,7 +38,13 @@ const ProductDetailPage = () => {
 
   const dispach = useAppDispatch();
   const isAdmin = useAppSelector((state) => state.userSlice.userInfo?.isAdmin);
+  const userId = useAppSelector((state) => state.userSlice.userInfo?._id);
   const { data: product, isLoading, error } = useQuerySingleProduct(id || "");
+  const { mutate: addReview } = useMutateAddReveiw(id || "");
+
+  const hasReviewed = useMemo(() => {
+    return !!product?.reviews.find((review) => review.user === userId);
+  }, [product?.reviews, userId]);
 
   if (isLoading)
     return <CircularProgress sx={{ marginLeft: "2rem", marginTop: "3rem" }} />;
@@ -42,9 +57,17 @@ const ProductDetailPage = () => {
     dispach(cartActions.addToCart({ cartItem }));
   };
 
+  const onAddReview = (data: CommentReveiw) => {
+    addReview(data);
+    // console.log("Add comment", data);
+  };
+
   return (
     <AppContainer>
-      <Grid container spacing={1} mt={"4rem"}>
+      <Box>
+        <AppBackButton />
+      </Box>
+      <Grid container spacing={1} mb={1} mt={2}>
         <Grid {...productDetailCellProps}>
           {/* <Paper></Paper> */}
           <img
@@ -159,6 +182,44 @@ const ProductDetailPage = () => {
           <Paper>Product Meta</Paper>
         </Grid> */}
       </Grid>
+      <Box>
+        <Paper sx={{ padding: 1, marginBottom: 1 }} square>
+          <Typography variant="h5">Reviews</Typography>
+        </Paper>
+        <Box>
+          <List>
+            {product?.reviews && product.reviews.length > 0 ? (
+              product.reviews.map((review, i) => (
+                <ListItem key={i} divider={i !== product.reviews.length - 1}>
+                  <ProductComment
+                    name={review.name}
+                    rating={review.rating}
+                    comment={review.comment}
+                    createdAt={new Date(review?.createdAt).toLocaleDateString()}
+                  />
+                </ListItem>
+              ))
+            ) : (
+              <ListItem>
+                <Alert severity="info" sx={{ width: "100%" }}>
+                  No Reviews
+                </Alert>
+              </ListItem>
+            )}
+          </List>
+          {!isAdmin && !hasReviewed && (
+            <Box>
+              <Divider />
+              <Paper sx={{ padding: 1, marginBottom: 2 }} square>
+                <Typography variant="h5">Write a Customer Review</Typography>
+              </Paper>
+              <Box maxWidth={"30rem"}>
+                <ProductCommentForm onSubmit={onAddReview} />
+              </Box>
+            </Box>
+          )}
+        </Box>
+      </Box>
     </AppContainer>
   );
 };

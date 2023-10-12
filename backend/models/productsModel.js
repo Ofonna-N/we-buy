@@ -1,6 +1,29 @@
 const mongoose = require("mongoose");
 const { type, required } = require("../services/defaults");
 
+const reviewSchema = new mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Types.ObjectId,
+      required,
+      ref: "User",
+    },
+    name: {
+      type,
+      required,
+    },
+    rating: {
+      type: Number,
+      required,
+    },
+    comment: {
+      type,
+      required,
+    },
+  },
+  { timestamps: true }
+);
+
 const productsSchema = new mongoose.Schema(
   {
     name: {
@@ -43,6 +66,7 @@ const productsSchema = new mongoose.Schema(
       type: mongoose.Types.ObjectId,
       required,
     },
+    reviews: [reviewSchema],
   },
   { timestamps: true }
 );

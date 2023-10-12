@@ -16,6 +16,9 @@ router.get("/", productsController.getAllProduct);
 // GET PRODUCT BY ID
 router.get("/:id", productsController.getByIdProduct);
 
+// CREATE PRODUCT REVIEW
+router.post("/:id/reviews", auth, productsController.createProductReview);
+
 // DELETE PRODUCT
 router.delete("/:id", auth, admin, productsController.deleteProduct);
 
