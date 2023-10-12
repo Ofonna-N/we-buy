@@ -182,7 +182,7 @@ const ProductDetailPage = () => {
           <Paper>Product Meta</Paper>
         </Grid> */}
       </Grid>
-      <Box>
+      <Box mb={5}>
         <Paper sx={{ padding: 1, marginBottom: 1 }} square>
           <Typography variant="h5">Reviews</Typography>
         </Paper>
