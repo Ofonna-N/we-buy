@@ -9,6 +9,7 @@ import shippingInfoListener from "./middleware/store/shippingInfoListener";
 import paymentMethodSlice from "./slices/paymentMethodSlice";
 import checkoutStepsSlice from "./slices/checkoutStepsSlice";
 import appSnackBarSlice from "./slices/appSnackBarSlice";
+import productsSearchKeywordSlice from "./slices/productsSearchKeywordSlice";
 
 export const store = configureStore({
   reducer: {
@@ -19,6 +20,7 @@ export const store = configureStore({
     paymentMethodSlice,
     checkoutStepsSlice,
     appSnackBarSlice,
+    productsSearchKeywordSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().prepend([

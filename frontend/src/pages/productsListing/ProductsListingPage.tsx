@@ -4,14 +4,16 @@ import useQueryProducts from "../../hooks/api-hooks/products/useQueryProducts";
 import AppContainer from "../../component/page/AppContainer";
 import AppSpinner from "../../component/loading/AppSpinner";
 import React from "react";
+import { useAppSelector } from "../../hooks/redux-hooks/appStoreHooks";
 
 const ProductsListingPage = () => {
   const [pageNum, setPageNum] = React.useState(1); // [1, 2, 3, 4, 5
+  const keyword = useAppSelector((state) => state.productsSearchKeywordSlice);
   const {
     data: productsResponse,
     isLoading,
     error,
-  } = useQueryProducts(`pageNumber=${pageNum}`);
+  } = useQueryProducts(`pageNumber=${pageNum}&keyword=${keyword}`);
 
   if (isLoading)
     return <AppSpinner sx={{ marginLeft: "2rem", marginTop: "3rem" }} />;
