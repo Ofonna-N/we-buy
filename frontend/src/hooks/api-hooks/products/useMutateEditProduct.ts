@@ -18,6 +18,7 @@ const useMutateEditProduct = (id: string) => {
    */
   const onProductEdited = () => {
     queryClient.refetchQueries(endpointRoutes.PRODUCTS.PRODUCTS);
+    queryClient.refetchQueries(endpointRoutes.PRODUCTS.PRODUCTS + id);
     showSnackBar("Product edited successfully", "success");
   };
 
