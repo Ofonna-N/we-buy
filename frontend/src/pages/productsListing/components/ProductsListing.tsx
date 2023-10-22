@@ -11,7 +11,7 @@ type Props = {
 const ProductsListing = ({ products }: Props) => {
   return (
     <Box>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} sx={{ p: 1 }}>
         {products?.map((product) => {
           return (
             <Grid key={product._id} xs={12} sm={6} md={4} lg={3}>

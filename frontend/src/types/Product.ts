@@ -20,4 +20,10 @@ type Product = {
   reviews: Review[];
 };
 
+export type ProductsResponse = {
+  products: Product[];
+  pageNumber: number;
+  pageCount: number;
+};
+
 export default Product;

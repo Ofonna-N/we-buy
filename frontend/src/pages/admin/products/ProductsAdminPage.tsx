@@ -88,7 +88,7 @@ const ProductsAdminPage = () => {
         }
       />
       <AppProductsTable
-        products={products}
+        products={products?.products || []}
         productError={error}
         productIsLoading={isLoading}
         isAdmin={true}

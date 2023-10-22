@@ -1,9 +1,11 @@
 import endpointRoutes from "../../../constants/EndpointRoutes";
-import Product from "../../../types/Product";
+import { ProductsResponse } from "../../../types/Product";
 import useQueryData from "../useQueryData";
 
-const useQueryProducts = () => {
-  return useQueryData<Product[]>(endpointRoutes.PRODUCTS.PRODUCTS);
+const useQueryProducts = (query?: string) => {
+  return useQueryData<ProductsResponse>(
+    endpointRoutes.PRODUCTS.PRODUCTS + "?" + query
+  );
 };
 
 export default useQueryProducts;

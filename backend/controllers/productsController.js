@@ -49,11 +49,23 @@ const editProduct = async (req, res) => {
 // @desc fetch all products
 // @route GET /api/products
 const getAllProduct = async (req, res) => {
-  const products = await Product.find({});
+  const pageSize = 8;
+  const pageNumber = Number(req.query.pageNumber) || 1;
+  const productsCount = await Product.countDocuments({});
+  const pageCount = Math.ceil(productsCount / pageSize);
+
+  const keyword = req.query.keyword;
+
+  const products = await Product.find(
+    keyword ? { name: { $regex: keyword, $options: "i" } } : {}
+  )
+    .limit(pageSize)
+    .skip(pageSize * (pageNumber - 1));
+  // const products = await Product.find({});
 
   if (!products) return res.status(404).json({ message: "Products not found" });
 
-  return res.json(products);
+  return res.json({ products, pageNumber, pageCount });
 };
 
 // @desc fetch single product
