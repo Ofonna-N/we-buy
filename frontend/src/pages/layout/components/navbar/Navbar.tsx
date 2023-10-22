@@ -11,7 +11,6 @@ import {
   Link,
   Badge,
   Stack,
-  useTheme,
 } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 //hooks
