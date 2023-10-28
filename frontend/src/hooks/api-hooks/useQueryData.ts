@@ -5,11 +5,11 @@ import ms from "ms";
 import { useQuery } from "react-query";
 import ErrorResponse from "../../types/ErrorResponse";
 
-const useQueryData = <T>(endpoint: string) => {
+const useQueryData = <T>(endpoint: string, key?: string) => {
   const apiClient = useMemo(() => new APIClient<T>(endpoint), [endpoint]);
 
   return useQuery<T, AxiosError<ErrorResponse>>({
-    queryKey: [endpoint],
+    queryKey: key ? [endpoint, key] : [endpoint],
     queryFn: async () => {
       const response = await apiClient.get();
       // throw new Error("BOOM");

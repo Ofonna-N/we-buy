@@ -10,11 +10,13 @@ const useMutateData = <T, B>(
   endpoint: string,
   onSuccessFn?: (data: T, variables: B) => void,
   onErrorFn?: (error: Error, variables: B) => void,
-  method?: APIMutateMethods
+  method?: APIMutateMethods,
+  key?: string
 ) => {
   const apiClient = useMemo(() => new APIClient<T>(endpoint), [endpoint]);
 
   return useMutation<T, Error, B>({
+    mutationKey: key ? [endpoint, key] : [endpoint],
     mutationFn: async (body) => {
       let UserResponse = null;
       try {

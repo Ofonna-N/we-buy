@@ -11,8 +11,8 @@ const useMutateDeliverOrder = () => {
     // console.log("ORDER DELIVERED: ", order);
   };
 
-  const onOrderDeliveredError = () => {
-    showSnackBar("Order Deliver Failed", "error");
+  const onOrderDeliveredError = (err: Error) => {
+    showSnackBar(err.message, "error");
 
     // console.log("ORDER DELIVERED ERROR: ", error);
   };

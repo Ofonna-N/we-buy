@@ -8,8 +8,8 @@ const mockUsers = [
   },
   {
     name: "Ella Mai",
-    email: "ellamai@yahoo.com",
-    password: bycript.hashSync("ela1234", 10),
+    email: "ellamaii@yahoo.com",
+    password: bycript.hashSync("ela12345", 10),
     isAdmin: false,
   },
   {

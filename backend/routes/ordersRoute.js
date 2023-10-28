@@ -2,6 +2,7 @@ const express = require("express");
 const ordersController = require("../controllers/ordersController");
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
+const demoUser = require("../middleware/demoUser");
 const router = express.Router();
 
 // register, getAll, logout, authenticate, getProfile, updateProfile, delete, getById
@@ -24,6 +25,7 @@ router.patch(
 router.patch(
   "/deliver",
   auth,
+  demoUser,
   admin,
   ordersController.updateOrderToDeliveredById_Orders
 );

@@ -8,7 +8,7 @@ const useMutateDeleteProduct = () => {
   const queryClient = useQueryClient();
 
   const onProductDeleted = () => {
-    queryClient.refetchQueries(endpointRoutes.PRODUCTS.PRODUCTS);
+    queryClient.refetchQueries("products", { exact: true });
     showSnackBar("Product deleted successfully", "success");
   };
   const onProductDeletedError = (error: Error) => {

@@ -49,7 +49,7 @@ const editProduct = async (req, res) => {
 // @desc fetch all products
 // @route GET /api/products
 const getAllProduct = async (req, res) => {
-  const pageSize = 8;
+  const pageSize = 6;
   const pageNumber = Number(req.query.pageNumber) || 1;
   const productsCount = await Product.countDocuments({});
   const pageCount = Math.ceil(productsCount / pageSize);

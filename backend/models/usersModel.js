@@ -22,6 +22,10 @@ const usersMongooseSchema = new mongoose.Schema(
       required,
       default: false,
     },
+    demoUser: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

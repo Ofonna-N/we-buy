@@ -4,7 +4,8 @@ import useQueryData from "../useQueryData";
 
 const useQueryProducts = (query?: string) => {
   return useQueryData<ProductsResponse>(
-    endpointRoutes.PRODUCTS.PRODUCTS + "?" + query
+    endpointRoutes.PRODUCTS.PRODUCTS + "?" + query,
+    "products"
   );
 };
 

@@ -36,6 +36,20 @@ const SignInForm = () => {
     mutate(data);
   });
 
+  const demoUserLogin = () => {
+    mutate({
+      email: "ellamaii@yahoo.com",
+      password: "ela12345",
+    });
+  };
+
+  const demoAdminLogin = () => {
+    mutate({
+      email: "demoAdmin@yahoo.com",
+      password: "ela12345",
+    });
+  };
+
   return (
     <Box
       sx={{
@@ -70,9 +84,27 @@ const SignInForm = () => {
           Dont have an account?{" "}
           <AppNavLink to={RoutesPaths.REGISTER_ROUTE}>register here</AppNavLink>
         </Typography>
-        <FormControl fullWidth>
+        <FormControl fullWidth sx={{ display: "flex", gap: 1 }}>
           <Button variant="contained" disabled={isLoading} type="submit">
             Submit
+          </Button>
+          <Button
+            variant="contained"
+            disabled={isLoading}
+            type="button"
+            color="success"
+            onClick={demoUserLogin}
+          >
+            Sign in as Demo user
+          </Button>
+          <Button
+            variant="contained"
+            disabled={isLoading}
+            type="button"
+            color="success"
+            onClick={demoAdminLogin}
+          >
+            Sign in as Demo admin
           </Button>
         </FormControl>
         {isLoading && <AppSpinner />}

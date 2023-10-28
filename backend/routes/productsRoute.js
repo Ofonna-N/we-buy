@@ -3,12 +3,13 @@ const router = express.Router();
 const productsController = require("../controllers/productsController");
 const admin = require("../middleware/admin");
 const auth = require("../middleware/auth");
+const demoUser = require("../middleware/demoUser");
 
 // CREATE PRODUCT
-router.post("/", auth, admin, productsController.createProduct);
+router.post("/", auth, demoUser, admin, productsController.createProduct);
 
 // EDIT PRODUCT
-router.put("/:id", auth, admin, productsController.editProduct);
+router.put("/:id", auth, demoUser, admin, productsController.editProduct);
 
 // GET PRODUCTS
 router.get("/", productsController.getAllProduct);
@@ -20,6 +21,6 @@ router.get("/:id", productsController.getByIdProduct);
 router.post("/:id/reviews", auth, productsController.createProductReview);
 
 // DELETE PRODUCT
-router.delete("/:id", auth, admin, productsController.deleteProduct);
+router.delete("/:id", auth, demoUser, admin, productsController.deleteProduct);
 
 module.exports = router;
