@@ -2,7 +2,8 @@ import axios, { AxiosRequestConfig } from "axios";
 import APIResponse from "../types/APIResponse";
 
 const axiosInstance = axios.create({
-  baseURL: "/api",
+  // baseURL: "/api",
+  baseURL: "https://we-buy.onrender.com/api",
 });
 
 export default class APIClient<T> {
