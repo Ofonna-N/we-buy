@@ -6,13 +6,9 @@ if (process.env.NODE_ENV === "production") {
   router.get("/", (_, res) => {
     return res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"));
   });
-  // router.get("/", (_, res) => {
-  //   return res.send("Welcome to we by Api");
-  // });
 } else {
-  // console.log(path);
   router.get("/", (_, res) => {
-    return res.send("Welcome to we by Api");
+    return res.send("Fallback route");
   });
 }
 
