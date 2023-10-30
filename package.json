@@ -5,6 +5,7 @@
   "scripts": {
     "client": "cd frontend && npm run dev",
     "server": "cd backend && npm run dev",
+    "start": "cd backend && npm run start",
     "main": "concurrently \"npm:server\" \"npm:client\"",
     "db:populate": "cd backend && node services/seeder.js",
     "db:depopulate": "cd backend && node services/seeder.js -d",
