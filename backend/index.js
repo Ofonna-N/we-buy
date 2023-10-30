@@ -5,7 +5,6 @@ const app = express();
 const startServer = require("./startups/serverStartup");
 const connectDB = require("./startups/databaseStartup");
 const appDefaultMiddleware = require("./middleware/appDefaultMiddleware");
-const path = require("path");
 
 const homeRoute = require("./routes/homeRoute");
 const productsRoute = require("./routes/productsRoute");
