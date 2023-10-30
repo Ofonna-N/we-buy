@@ -7,7 +7,8 @@
     "server": "cd backend && npm run dev",
     "main": "concurrently \"npm:server\" \"npm:client\"",
     "db:populate": "cd backend && node services/seeder.js",
-    "db:depopulate": "cd backend && node services/seeder.js -d"
+    "db:depopulate": "cd backend && node services/seeder.js -d",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },
   "author": "Ofonna Nweze",
   "license": "ISC",
