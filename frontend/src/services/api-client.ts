@@ -1,9 +1,13 @@
 import axios, { AxiosRequestConfig } from "axios";
 import APIResponse from "../types/APIResponse";
 
+const baseURL =
+  import.meta.env.VITE_APP_ENV == "production"
+    ? "https://we-buy.onrender.com/api"
+    : "/api";
+
 const axiosInstance = axios.create({
-  // baseURL: "/api",
-  baseURL: "https://we-buy.onrender.com/api",
+  baseURL,
 });
 
 export default class APIClient<T> {

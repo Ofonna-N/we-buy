@@ -9,7 +9,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://we-buy.onrender.com",
+        target: "http://localhost:4000",
         changeOrigin: false,
       },
     },
