@@ -1,9 +1,5 @@
-import Box from "@mui/material/Box";
-
-import Divider from "@mui/material/Divider";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import { isRouteErrorResponse, useRouteError } from "react-router-dom";
+import { Box, Paper, Typography, Divider } from "@mui/material";
+import { useRouteError, isRouteErrorResponse } from "react-router-dom";
 import AppContainer from "../component/page/AppContainer";
 
 const ErrorPage = () => {
